@@ -70,6 +70,12 @@ router.post('/', function(req, res, next) {
   res.redirect('post-success');
 });
 
+router.get('/list/:name', function(req, res, next) {
+  const name = req.params.name;
+  const workouts = {};
+  res.render('list-workouts', { name: name })
+});
+
 router.get('/post-success', function(req, res, next) {
   res.render('post-success');
 });
