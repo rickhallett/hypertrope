@@ -5,18 +5,63 @@ block content
         p Listing #{name}'s workouts
     
     each workout in workouts
-        .workout-panel
-            p #{workout.name}
-            p #{workout.date}
-            p #{workout.exercises.lift1.name}
-            p #{workout.exercises.lift1.sets}
-            p #{workout.exercises.lift1.reps}
-            p #{workout.exercises.lift2.name}
-            p #{workout.exercises.lift2.sets}
-            p #{workout.exercises.lift2.reps}
-            p #{workout.exercises.lift3.name}
-            p #{workout.exercises.lift3.sets}
-            p #{workout.exercises.lift3.reps}
-            p #{workout.comments}
+        .card
+            .card-header
+                .card-header-title
+                    p #{workout.date}
+                .card-header-icon
+                    i.fas.fa-dumbbell
+
+            .card-content
+                .media
+                    .media-left
+                        span.tag #{workout.exercises.lift1.name}
+                    .media-content
+                        span.tag sets
+                        span #{workout.exercises.lift1.sets}
+                        span.tag reps
+                        span #{workout.exercises.lift1.reps}
+                    .media-right
+                        i.fas.fa-check-square
+                .media
+                    .media-left
+                        span.tag #{workout.exercises.lift2.name}
+                    .media-content
+                        span.tag sets
+                        span #{workout.exercises.lift2.sets}
+                        span.tag reps
+                        span #{workout.exercises.lift2.reps}
+                    .media-right
+                        span.tag reps
+                .media
+                    .media-left
+                        span.tag #{workout.exercises.lift3.name}
+                    .media-content
+                        span.tag sets
+                        span #{workout.exercises.lift3.sets}
+                        span.tag reps
+                        span #{workout.exercises.lift3.reps}
+                    .media-right
+                        span.tag reps
+            .card-footer
+                .card-footer-item
+        
     .section
         a(href="/") Back to submission form
+
+
+    
+
+    //- .workout-panel
+    //-         p #{workout.name}
+    //-         p #{workout.date}
+    //-         p #{workout.exercises.lift1.name}
+    //-         p #{workout.exercises.lift1.sets}
+    //-         p #{workout.exercises.lift1.reps}
+    //-         p #{workout.exercises.lift2.name}
+    //-         p #{workout.exercises.lift2.sets}
+    //-         p #{workout.exercises.lift2.reps}
+    //-         p #{workout.exercises.lift3.name}
+    //-         p #{workout.exercises.lift3.sets}
+    //-         p #{workout.exercises.lift3.reps}
+    //-         p #{workout.comments}
