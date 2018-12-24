@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const logger = require('morgan');
+const createError = require('http-errors');
 const mongoose = require('mongoose');
 
 const config = require('./config');
@@ -27,6 +28,7 @@ db.once('open', function() {
 const app = express();
 
 const indexRouter = require('./routes/index');
+const messageRouter = require('./routes/messages');
 
 /**
  * MIDDLEWARE / VIEW ENGINE

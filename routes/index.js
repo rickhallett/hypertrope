@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   let workout = new Workout({ 
     name: req.body.name,
-    date: req.body.date,
+    date: req.body.date || new Date(),
     exercises: {
       lift1: {
         name: req.body.lift1,
@@ -61,14 +61,21 @@ router.post('/', function(req, res, next) {
     },
     comments: req.body.comments
   });
-  console.log(workout)
+
   workout.save(function(err) {
     if(err) {
-      console.log(err);
-      res.redirect('/post-failure');
+      res.redirect('post-failure');
     }
   });
-  res.redirect('/post-success');
+  res.redirect('post-success');
+});
+
+router.get('/post-success', function(req, res, next) {
+  res.render('post-success');
+});
+
+router.get('/post-failure', function(req, res, next) {
+  res.render('post-failure');
 });
 
 module.exports = router;
