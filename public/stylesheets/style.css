@@ -1,8 +1,39 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 5px;
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #b8c6db;
+background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+
 }
 
+
+
 a {
-  color: #00B7FF;
+  font-size: 1.1rem;
+  color: rgb(121, 121, 121);
+  margin: 5px;
+}
+
+.width470 {
+  max-width: 380px;
+}
+
+input {
+  max-height: 25px;
+}
+
+select {
+  max-height: 25px;
+}
+
+.main-input {
+  min-height: 32px;
+}
+
+.main-button {
+  min-height: 40px;
+}
+
+.section {
+  padding-top: 10px;
 }

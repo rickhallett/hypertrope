@@ -1,53 +1,71 @@
 extends layout
 
 block content
-  .title
-    h1= title
-    p Welcome to #{title}
+  .section
+    .title
+      h1= title
+    .subtitle
+      p Welcome to #{title}
 
-  .submission-form
-    form(action="/", method="post")
-      label(for="name") Name:
-      input(name="name")
-      label(for="date") Date:
-      input(name="date", type="date")
-      label(for="exercises") Exercises:
-      fieldset
-        legend Exercise 1
-        select(name="lift1")
-          each exercise in menu_opts
-            option(value=exercise.value) #{exercise.name}
-        label(for="sets1") Sets:
-        input(name="sets1")
-        label(for="reps1") Reps:
-        input(name="reps1")
-      fieldset
-        legend Exercise 2
-        select(name="lift2")
-          each exercise in menu_opts
-            option(value=exercise.value) #{exercise.name}
-        label(for="sets2") Sets:
-        input(name="sets2")
-        label(for="reps2") Reps:
-        input(name="reps2")
-      fieldset
-        legend Exercise 3
-        select(name="lift3")
-          each exercise in menu_opts
-            option(value=exercise.value) #{exercise.name}
-        label(for="sets3") Sets:
-        input(name="sets3")
-        label(for="reps3") Reps:
-        input(name="reps3")
-      fieldset
-        legend Comments
-        textarea(name="comments", cols="50", rows="5")
-      input.submit-button(type="submit", value="Submit workout")
+  .section
+    .container.width470
+      form(action="/", method="post")
+        .field.is-grouped
+          span.tag.is-medium Name
+          input.input.main-input(name="name")
+        .field.is-grouped
+          span.tag.is-medium Date:
+          input.input.main-input(name="date", type="date")
 
-  .links
-    a(href="/list/dad") List Dad's Workouts
-    br
-    a(href="/list/mum") List Mum's Workouts
+        .field.is-grouped
+          span.tag Exercise 1
+          .select
+            select(name="lift1")
+              each exercise in menu_opts
+                option(value=exercise.value) #{exercise.name}
+          span.tag Sets:
+          input.input(name="sets1")
+          span.tag Reps:
+          input.input(name="reps1")
+
+        .field.is-grouped
+          span.tag Exercise 2
+          .select
+            select(name="lift2")
+              each exercise in menu_opts
+                option(value=exercise.value) #{exercise.name}
+          span.tag Sets:
+          input.input(name="sets2")
+          span.tag Reps:
+          input.input(name="reps2")
+
+        .field.is-grouped
+          span.tag Exercise 3
+          .select
+            select(name="lift3")
+              each exercise in menu_opts
+                option(value=exercise.value) #{exercise.name}
+          span.tag Sets:
+          input.input(name="sets3")
+          span.tag Reps:
+          input.input(name="reps3")
+
+        .field
+          span.tag.is-medium Comments
+          textarea.textarea(name="comments", cols="50", rows="5")
+
+        input.button.is-light.main-button(type="submit", value="Submit workout")
+
+  .container
+    .section
+      .links
+        a(href="/list/rick") List Rick's Workouts
+        br
+        br
+        a(href="/list/dad") List Dad's Workouts
+        br
+        br
+        a(href="/list/mum") List Mum's Workouts
 
 
   

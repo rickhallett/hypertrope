@@ -7,17 +7,17 @@ const workoutSchema = new mongoose.Schema({
         lift1: {
             name: String,
             sets: Number,
-            Reps: Number
+            reps: Number
         },
         lift2: {
             name: String,
             sets: Number,
-            Reps: Number
+            reps: Number
         },
         lift3: {
             name: String,
             sets: Number,
-            Reps: Number
+            reps: Number
         }
     },
     comments: String

@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   let workout = new Workout({ 
-    name: req.body.name,
+    name: req.body.name.toLowerCase().trim(),
     date: req.body.date || new Date(),
     exercises: {
       lift1: {
@@ -71,9 +71,15 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/list/:name', function(req, res, next) {
-  const name = req.params.name;
-  const workouts = {};
-  res.render('list-workouts', { name: name })
+  const name = req.params.name.toLowerCase();
+  
+  Workout.find({ name: name }, function(err, workouts) {
+    if (err) console.log('Error retrieving workouts');
+    // console.table(workouts)
+    console.log(workouts)
+    res.render('list-workouts', { name: name, workouts: workouts });
+  });
+  
 });
 
 router.get('/post-success', function(req, res, next) {

@@ -1,6 +1,22 @@
 extends layout
 
 block content
-    .title
-        h1= title
+    .subtitle
         p Listing #{name}'s workouts
+    
+    each workout in workouts
+        .workout-panel
+            p #{workout.name}
+            p #{workout.date}
+            p #{workout.exercises.lift1.name}
+            p #{workout.exercises.lift1.sets}
+            p #{workout.exercises.lift1.reps}
+            p #{workout.exercises.lift2.name}
+            p #{workout.exercises.lift2.sets}
+            p #{workout.exercises.lift2.reps}
+            p #{workout.exercises.lift3.name}
+            p #{workout.exercises.lift3.sets}
+            p #{workout.exercises.lift3.reps}
+            p #{workout.comments}
+    .section
+        a(href="/") Back to submission form
