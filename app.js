@@ -1,15 +1,37 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+/**
+ * DEPENDENCEIS
+ */
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const path = require('path');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-var app = express();
+const config = require('./config');
+const options = { useNewUrlParser: true };
 
-// view engine setup
+/**
+ * DATABASE
+ */
+
+mongoose.connect(config.mongoURI, options);
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Database initialised!')
+});
+
+const app = express();
+
+const indexRouter = require('./routes/index');
+
+/**
+ * MIDDLEWARE / VIEW ENGINE
+ */
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -17,10 +39,20 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * ROUTES
+ */
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+/**
+ * ERROR HANDLING
+ */
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
