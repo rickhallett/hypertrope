@@ -12,3 +12,15 @@ footer {
     font-size: 14px;
     color: darkgray;
 }
+
+.margin-20 {
+    margin: 20px;
+}
+
+.top-spacer-1px {
+    margin-top: 1px;
+}
+
+.padding-20 {
+    padding: 20px;
+}
