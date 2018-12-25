@@ -17,6 +17,10 @@ footer {
     margin: 20px;
 }
 
+.no-bottom-margin {
+    margin-bottom: 0px;
+}
+
 .top-spacer-1px {
     margin-top: 1px;
 }
@@ -27,4 +31,23 @@ footer {
 
 .padding-20 {
     padding: 20px;
+}
+
+.to-block {
+    display: block;
+}
+
+.flex-container {
+    display: flex
+}
+
+.flex-vertical {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+.button-center {
+    margin-left: 50px;
 }
