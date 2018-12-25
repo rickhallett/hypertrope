@@ -67,7 +67,7 @@ router.post('/', function(req, res, next) {
       res.redirect('post-failure');
     }
   });
-  res.redirect('post-success');
+  res.redirect(`/list/${req.body.name}`);
 });
 
 router.get('/list/:name', function(req, res, next) {

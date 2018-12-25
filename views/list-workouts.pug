@@ -15,36 +15,41 @@ block content
             .card-content
                 .media
                     .media-left
-                        span.tag #{workout.exercises.lift1.name}
+                        span.tag.is-dark #{workout.exercises.lift1.name}
                     .media-content
                         span.tag sets
                         span #{workout.exercises.lift1.sets}
+                        span.spacer
                         span.tag reps
                         span #{workout.exercises.lift1.reps}
                     .media-right
-                        i.fas.fa-check-square
+                        
                 .media
                     .media-left
-                        span.tag #{workout.exercises.lift2.name}
+                        span.tag.is-dark #{workout.exercises.lift2.name}
                     .media-content
                         span.tag sets
                         span #{workout.exercises.lift2.sets}
+                        span.spacer
                         span.tag reps
                         span #{workout.exercises.lift2.reps}
                     .media-right
-                        span.tag reps
+                        
                 .media
                     .media-left
-                        span.tag #{workout.exercises.lift3.name}
+                        span.tag.is-dark #{workout.exercises.lift3.name}
                     .media-content
                         span.tag sets
                         span #{workout.exercises.lift3.sets}
+                        span.spacer
                         span.tag reps
                         span #{workout.exercises.lift3.reps}
                     .media-right
-                        span.tag reps
+                        
             .card-footer
                 .card-footer-item
+                    p #{workout.comments}
+        
         
     .section
         a(href="/") Back to submission form

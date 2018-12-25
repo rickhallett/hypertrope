@@ -37,3 +37,15 @@ select {
 .section {
   padding-top: 10px;
 }
+
+.card {
+  margin-bottom: 25px;
+}
+
+span.spacer {
+  margin-left: 25px;
+}
+
+span.tag {
+  margin-right: 5px;
+}

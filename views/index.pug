@@ -12,7 +12,7 @@ block content
       form(action="/", method="post")
         .field.is-grouped
           span.tag.is-medium Name
-          input.input.main-input(name="name")
+          input.input.main-input(name="name", required)
         .field.is-grouped
           span.tag.is-medium Date:
           input.input.main-input(name="date", type="date")
@@ -59,13 +59,16 @@ block content
   .container
     .section
       .links
-        a(href="/list/rick") List Rick's Workouts
-        br
-        br
         a(href="/list/dad") List Dad's Workouts
         br
         br
         a(href="/list/mum") List Mum's Workouts
+        br
+        br
+        a(href="/list/dad") List Pufflet's Workouts
+        br
+        br
+        a(href="/list/mum") List Rick's Workouts
 
 
   
