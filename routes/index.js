@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
       name: "Ab Crunches"
     }
   ];
-  res.render('index', { title: 'Project Big Balls', menu_opts: exercises });
+  res.render('index', { title: 'Project; Hypertrophe', menu_opts: exercises });
 });
 
 router.post('/', function(req, res, next) {
