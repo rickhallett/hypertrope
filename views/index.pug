@@ -10,3 +10,22 @@ block content
         | #{quote.text}
     footer
         | #{quote.author}
+
+    button.accordion._box._shadow._dark.top-spacer-20px Login
+    .-panel
+        form._alignCenter
+            label Username
+            input(type="text", name="username")
+            label Password
+            input(type="text", name="password")
+    
+    button.accordion._box._shadow._dark New user? Register here
+    .-panel
+        form._alignCenter
+            label Username
+            input(type="text", name="username")
+            label Password
+            input(type="text", name="password")
+            label Confirm Password
+            input(type="text", name="password")
+
