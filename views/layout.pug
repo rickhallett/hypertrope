@@ -4,8 +4,25 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title= title
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(defer='', src='https://use.fontawesome.com/releases/v5.3.1/js/all.js')
+    link(rel='stylesheet' href='https://rawgit.com/outboxcraft/beauter/master/beauter.min.css')
+    script(src='https://rawgit.com/outboxcraft/beauter/master/beauter.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')    
   body
+    ul#myTopnav2.topnav
+      li
+        a.brand(href='/') Hypertrope
+      li
+        a(href='/login') Login
+      li
+        a(href='#') Show Workouts
+      li
+        a(href='#') Information
+      li.dropdown
+        a(href='#') About
+        .dropdown-content
+          a(href='#') Author
+          a(href='#') Github
+      li.-icon
+        a(href='javascript:void(0);', onclick="topnav('myTopnav2')") ☰
+
     block content

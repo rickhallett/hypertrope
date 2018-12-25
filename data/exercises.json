@@ -1,0 +1,32 @@
+{
+    "exercises" : [
+      {
+        "value": "squat",
+        "name": "Squat"
+      },
+      {
+        "value": "deadlift",
+        "name": "Deadlift"
+      },
+      {
+        "value": "bench",
+        "name": "Bench Press"
+      },
+      {
+        "value": "military",
+        "name": "Military Press"
+      },
+      {
+        "value": "pulldown",
+        "name": "Lat Pull Downs"
+      },
+      {
+        "value": "legraise",
+        "name": "Leg Raises"
+      },
+      {
+        "value": "crunch",
+        "name": "Ab Crunches"
+      }
+    ]
+  }

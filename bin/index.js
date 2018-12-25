@@ -10,7 +10,7 @@ const http = require('http');
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3001');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -23,7 +23,11 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, function(err) {
+  if(!err) {
+    console.log(`Server listening on ${port}`);
+  }
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

@@ -1,72 +1,32 @@
 extends layout
 
 block content
-    .subtitle
-        p Listing #{name}'s workouts
-    
-    each workout in workouts
-        .card
-            .card-header
-                .card-header-title
-                    p #{workout.date}
-                .card-header-icon
-                    i.fas.fa-dumbbell
 
-            .card-content
-                .media
-                    .media-left
-                        span.tag.is-dark #{workout.exercises.lift1.name}
-                    .media-content
-                        span.tag sets
-                        span #{workout.exercises.lift1.sets}
-                        span.spacer
-                        span.tag reps
-                        span #{workout.exercises.lift1.reps}
-                    .media-right
-                        
-                .media
-                    .media-left
-                        span.tag.is-dark #{workout.exercises.lift2.name}
-                    .media-content
-                        span.tag sets
-                        span #{workout.exercises.lift2.sets}
-                        span.spacer
-                        span.tag reps
-                        span #{workout.exercises.lift2.reps}
-                    .media-right
-                        
-                .media
-                    .media-left
-                        span.tag.is-dark #{workout.exercises.lift3.name}
-                    .media-content
-                        span.tag sets
-                        span #{workout.exercises.lift3.sets}
-                        span.spacer
-                        span.tag reps
-                        span #{workout.exercises.lift3.reps}
-                    .media-right
-                        
-            .card-footer
-                .card-footer-item
-                    p #{workout.comments}
-        
-        
-    .section
-        a(href="/") Back to submission form
+	p Listing #{name}'s workouts
+	
+	each workout in workouts
+		p #{workout.date}
+			span #{workout.exercises.lift1.name}
+			span sets
+			span #{workout.exercises.lift1.sets}
+			span
+			span reps
+			span #{workout.exercises.lift1.reps}
 
+			span #{workout.exercises.lift2.name}
+			span sets
+			span #{workout.exercises.lift2.sets}
+			span
+			span reps
+			span #{workout.exercises.lift2.reps}
 
-    
+			span #{workout.exercises.lift3.name}
+			span sets
+			span #{workout.exercises.lift3.sets}
+			span
+			span reps
+			span #{workout.exercises.lift3.reps}
 
-    //- .workout-panel
-    //-         p #{workout.name}
-    //-         p #{workout.date}
-    //-         p #{workout.exercises.lift1.name}
-    //-         p #{workout.exercises.lift1.sets}
-    //-         p #{workout.exercises.lift1.reps}
-    //-         p #{workout.exercises.lift2.name}
-    //-         p #{workout.exercises.lift2.sets}
-    //-         p #{workout.exercises.lift2.reps}
-    //-         p #{workout.exercises.lift3.name}
-    //-         p #{workout.exercises.lift3.sets}
-    //-         p #{workout.exercises.lift3.reps}
-    //-         p #{workout.comments}
+		p #{workout.comments}
+		
+		a(href="/workout/new") Back to submission form

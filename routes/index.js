@@ -2,92 +2,54 @@ const express = require('express');
 const router = express.Router();
 
 const Workout = require('../models/Workout');
+const newWorkout = require('../models/newWorkout');
 
-/* GET home page. */
+/**
+ * 
+Name	Path	HTTP Verb	Purpose	Mongoose Method
+Index	/dogs	GET	List all dogs	Dog.find()
+New	/dogs/new	GET	Show new dog form	N/A
+Create	/dogs	POST	Create a new dog, then redirect somewhere	Dog.create()
+Show	/dogs/:id	GET	Show info about one specific dog	Dog.findById()
+Edit	/dogs/:id/edit	GET	Show edit form for one dog	Dog.findById()
+Update	/dogs/:id	PUT	Update particular dog, then redirect somewhere	Dog.findByIdAndUpdate()
+Destroy	/dogs/:id	DELETE	Delete a particular dog, then redirect somewhere	Dog.findByIdAndRemove()
+ */
+
 router.get('/', function(req, res, next) {
-  const exercises = [
-    {
-      value: "squat",
-      name: "Squat"
-    },
-    {
-      value: "deadlift",
-      name: "Deadlift"
-    },
-    {
-      value: "bench",
-      name: "Bench Press"
-    },
-    {
-      value: "military",
-      name: "Military Press"
-    },
-    {
-      value: "pulldown",
-      name: "Lat Pull Downs"
-    },
-    {
-      value: "legraise",
-      name: "Leg Raises"
-    },
-    {
-      value: "crunch",
-      name: "Ab Crunches"
-    }
-  ];
-  res.render('index', { title: 'Project; Hypertrophe', menu_opts: exercises });
+  res.render('index');
+})
+
+router.get('/login', function(req, res, next) {
+  res.render('login');
 });
 
-router.post('/', function(req, res, next) {
-  let workout = new Workout({ 
-    name: req.body.name.toLowerCase().trim(),
-    date: req.body.date || new Date(),
-    exercises: {
-      lift1: {
-        name: req.body.lift1,
-        sets: req.body.sets1,
-        reps: req.body.reps1
-      },
-      lift2: {
-        name: req.body.lift2,
-        sets: req.body.sets2,
-        reps: req.body.reps2
-      },
-      lift3: {
-        name: req.body.lift3,
-        sets: req.body.sets3,
-        reps: req.body.reps3
-      }
-    },
-    comments: req.body.comments
-  });
+router.get('/workout/new', function(req, res, next) {
+  const exercises = require('../data/exercises.json').exercises;
+  res.render('newWorkout', { title: 'Project Hypertrope', menu_opts: exercises });
+});
 
+router.post('/workout/new', function(req, res, next) {
+  const workout = newWorkout(req);
+  console.log(workout)
   workout.save(function(err) {
     if(err) {
-      res.redirect('post-failure');
+      console.log('Error recieving workouts');
     }
   });
-  res.redirect(`/list/${req.body.name}`);
+  res.redirect(`/workouts/${req.body.name}`);
 });
 
-router.get('/list/:name', function(req, res, next) {
+router.get('/workouts/:name', function(req, res, next) {
   const name = req.params.name.toLowerCase();
   
   Workout.find({ name: name }, function(err, workouts) {
     if (err) console.log('Error retrieving workouts');
-    // console.table(workouts)
-    console.log(workouts)
     res.render('list-workouts', { name: name, workouts: workouts });
   });
   
 });
 
-router.get('/post-success', function(req, res, next) {
-  res.render('post-success');
-});
 
-router.get('/post-failure', function(req, res, next) {
-  res.render('post-failure');
-});
 
 module.exports = router;
