@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Workout = require('../models/Workout');
 const newWorkout = require('../models/newWorkout');
+const constants = require('../data/constants');
 
 /**
  * 
@@ -19,7 +20,7 @@ Destroy	/dogs/:id	DELETE	Delete a particular dog, then redirect somewhere	Dog.fi
 router.get('/', function(req, res, next) {
   const sample = arr => arr[Math.floor(Math.random() * arr.length)];
   const quotes = require('../data/quotes.json').quotes;
-  res.render('index', { quote: sample(quotes) });
+  res.render('index', { quote: sample(quotes), title: constants.SITE_NAME });
 })
 
 router.get('/login', function(req, res, next) {
@@ -28,7 +29,7 @@ router.get('/login', function(req, res, next) {
 
 router.get('/workout/new', function(req, res, next) {
   const exercises = require('../data/exercises.json').exercises;
-  res.render('newWorkout', { title: 'Project Hypertrope', menu_opts: exercises });
+  res.render('newWorkout', { title: constants.SITE_NAME, menu_opts: exercises });
 });
 
 router.post('/workout/new', function(req, res, next) {
