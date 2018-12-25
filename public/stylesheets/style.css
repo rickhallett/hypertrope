@@ -7,3 +7,8 @@ blockquote {
 footer {
     margin-left: 30px;
 }
+
+#myTopnav2 a.link {
+    font-size: 14px;
+    color: darkgray;
+}
