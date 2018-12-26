@@ -5,20 +5,42 @@ const reloadBeauterJS = () => {
     head.appendChild(beauterJS);
 }
 
+const dynamicallyAssignFormDetails = (form, accordian, panel, selectedNumber) => {
+    for(let i = 1; i <= selectedNumber; i++) {
+        let newAccordian = accordian.clone()
+        let newPanel = panel.clone();
+
+        newAccordian.html(`Exercise ${i}`)
+
+        newPanel.find('legend').text(`Exercise ${i} Details`);
+        newPanel.find('select')[0].name = `lift${i}`;
+        let exerciseName = newPanel.find('#exercise-name-1')[0];
+        exerciseName.id = `exercise-name-${i}`
+        let inputSets = newPanel.find('#input-sets-1')[0];
+        inputSets.name = `sets${i}`;
+        inputSets.id = `input-sets-${i}`;
+        let inputReps = newPanel.find('#input-reps-1')[0];
+        inputReps.name = `reps${i}`;
+        inputReps.id = `input-reps-${i}`;
+        let inputWeight = newPanel.find('#input-weight-1')[0];
+        inputWeight.name = `weight${i}`;
+        inputWeight.id = `input-weight-${i}`;
+        
+        form.append(newAccordian);
+        form.append(newPanel);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
     $('#submit-workout')
         .on('click', function(event) {
-            if($('#name') == "");
-                // event.preventDefault();
-                // alert('You must enter a name')
-                $('#name').val('Anonymous')
+            let name = $('#name');
+            if(name == "");
+                name.val('Anonymous')
 
             const exercisePanels = $('#exercise-selectors');
-            
             let inputs = exercisePanels.find('input');
-
-            console.log(inputs)
 
             for(let i = 0; i < inputs.length; i++) {
                 if(inputs[i].value === "")
@@ -27,39 +49,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
     $('#select-number-exercise')
-    .on('change', function(event) {
-        let form = $('#exercise-selectors');
-        const accordian = $('#accordian-button');
-        const panel = $('#accordian-panel');
-        const selectedNumber = $('#select-number-exercise').val();
+        .on('change', function(event) {
+            let form = $('#exercise-selectors');
+            const accordian = $('#accordian-button');
+            const panel = $('#accordian-panel');
+            const selectedNumber = $('#select-number-exercise').val();
 
-        form.html('');
+            form.html('');
 
-        for(let i = 1; i <= selectedNumber; i++) {
-            let newAccordian = accordian.clone()
-            let newPanel = panel.clone();
+            dynamicallyAssignFormDetails(form, accordian, panel, selectedNumber);
 
-            newAccordian.html(`Exercise ${i}`)
-
-            newPanel.find('legend').text(`Exercise ${i} Details`);
-            newPanel.find('select')[0].name = `lift${i}`;
-            let exerciseName = newPanel.find('#exercise-name-1')[0];
-            exerciseName.id = `exercise-name-${i}`
-            let inputSets = newPanel.find('#input-sets-1')[0];
-            inputSets.name = `sets${i}`;
-            inputSets.id = `input-sets-${i}`;
-            let inputReps = newPanel.find('#input-reps-1')[0];
-            inputReps.name = `reps${i}`;
-            inputReps.id = `input-reps-${i}`;
-            let inputWeight = newPanel.find('#input-weight-1')[0];
-            inputWeight.name = `weight${i}`;
-            inputWeight.id = `input-weight-${i}`;
-            
-            form.append(newAccordian);
-            form.append(newPanel);
-        }
-
-        reloadBeauterJS();
+            reloadBeauterJS();
 
         });
 
