@@ -24,4 +24,6 @@ TODO LIST
 
 7. Inputs for bodyweight, weights lifted and calories
 
+8. Align nav items to the right hand side
+
 BUGS

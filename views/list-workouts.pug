@@ -1,32 +1,38 @@
 extends layout
 
+block scripts
+	script(src="/javascripts/listWorkouts.js")
+
 block content
 
 	p Listing #{name}'s workouts
-	
+
 	each workout in workouts
-		p #{workout.date}
-			span #{workout.exercises.lift1.name}
-			span sets
-			span #{workout.exercises.lift1.sets}
-			span
-			span reps
-			span #{workout.exercises.lift1.reps}
-
-			span #{workout.exercises.lift2.name}
-			span sets
-			span #{workout.exercises.lift2.sets}
-			span
-			span reps
-			span #{workout.exercises.lift2.reps}
-
-			span #{workout.exercises.lift3.name}
-			span sets
-			span #{workout.exercises.lift3.sets}
-			span
-			span reps
-			span #{workout.exercises.lift3.reps}
-
-		p #{workout.comments}
+		label.date #{workout.date}
+		table
+			thead
+				tr
+					th Exercise
+					th Sets
+					th Reps
+					th Weight
+			tbody
+				tr
+					td #{workout.exercises.lift1.name}
+					td #{workout.exercises.lift1.sets}
+					td #{workout.exercises.lift1.reps}
+					td n/a
+				tr
+					td #{workout.exercises.lift2.name}
+					td #{workout.exercises.lift2.sets}
+					td #{workout.exercises.lift2.reps}
+					td n/a
+				tr
+					td #{workout.exercises.lift3.name}
+					td #{workout.exercises.lift3.sets}
+					td #{workout.exercises.lift3.reps}
+					td n/a
+	
+		p Comments: #{workout.comments}
 		
-		a(href="/workout/new") Back to submission form
+	a(href="/workout/new") Back to submission form
