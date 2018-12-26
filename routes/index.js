@@ -65,4 +65,8 @@ router.get('/workouts/:name', function(req, res, next) {
   
 });
 
+router.get('/information', function(req, res, next) {
+  res.render('information');
+});
+
 module.exports = router;
