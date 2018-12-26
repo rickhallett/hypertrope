@@ -15,6 +15,7 @@ const options = { useNewUrlParser: true };
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const workoutRouter = require('./routes/workouts')
 
 /**
  * DATABASE
@@ -51,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/login', authRouter);
+app.use('/workout/*', workoutRouter);
 
 /**
  * ERROR HANDLING
