@@ -72,11 +72,14 @@ const workoutSchema = new mongoose.Schema({
 workoutSchema.methods.calculateWork = function() {
     
     let work = 0;
-    for(lift in this.exercises) {
-        if(this.exercises.hasOwnProperty(lift))
-            if(this.exercises[lift].sets !== undefined)
-                work += (this.exercises[lift].sets * this.exercises[lift].reps) * this.exercises[lift].weight
-    }
+
+    Object.keys(this.exercises).forEach(key => {
+        if(this.exercises[key].sets !== undefined)
+            if(this.exercises[key].reps !== undefined)
+            work += (this.exercises[key].sets * this.exercises[key].reps) * this.exercises[key].weight
+            console.log(work);
+    });
+    
     this.totalWork = work;
 };
 
