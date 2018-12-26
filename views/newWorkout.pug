@@ -23,16 +23,21 @@ block content
       fieldset
         legend Submission Options
         label(for="exercise_number") Number of exercises
-        select._full-width(name="exercise_number") 
+        select._full-width#select-number-exercise(name="exercise_number") 
           option(value="1") One exercise
           option(value="2") Two exercises
           option(value="3") Three exercises
           option(value="4") Four exercises
           option(value="5") Five exercises
+          option(value="5") Six exercises
+          option(value="5") Seven exercises
+          option(value="5") Eight exercises
+          option(value="5") Nine exercises
+          option(value="5") Ten exercises
 
     #exercise-selectors
-      button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 1
-      .-panel
+      button#accordian-button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 1
+      .-panel#accordian-panel
         fieldset
           legend Exercise 1 Details
           .row
@@ -49,6 +54,10 @@ block content
             .col.m4.no-padding
               label Reps:
               input._full-width(name="reps1", type="number")
+
+            .col.m4.no-padding
+              label Weight (kg):
+              input._full-width(name="weight1", type="number")
 
       button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 2
       .-panel
@@ -69,6 +78,10 @@ block content
               label Reps:
               input._full-width(name="reps2", type="number")
 
+            .col.m4.no-padding
+              label Weight (kg):
+              input._full-width(name="weight2", type="number")
+
       button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 3
       .-panel
         fieldset
@@ -87,6 +100,10 @@ block content
             .col.m4.no-padding
               label Reps:
               input._full-width(name="reps3", type="number")
+
+            .col.m4.no-padding
+              label Weight (kg):
+              input._full-width(name="weight3", type="number")
         
        
 
@@ -97,6 +114,6 @@ block content
       textarea._full-width(name="comments", placeholder="Enter any workout comments or notes here", rows: 10)
 
     .flex-container.justify-center.margin-20
-      input._alignCenter(type="submit", value="Submit workout")
+      input._alignCenter#submit-workout(type="submit", value="Submit workout")
 
     
