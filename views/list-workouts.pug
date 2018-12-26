@@ -16,24 +16,46 @@ block content
 					th Exercise
 					th Sets
 					th Reps
-					th Weight
+					th Weight (kg)
 			tbody
-				tr
-					td #{workout.exercises.lift1.name}
-					td #{workout.exercises.lift1.sets}
-					td #{workout.exercises.lift1.reps}
-					td n/a
-				tr
-					td #{workout.exercises.lift2.name}
-					td #{workout.exercises.lift2.sets}
-					td #{workout.exercises.lift2.reps}
-					td n/a
-				tr
-					td #{workout.exercises.lift3.name}
-					td #{workout.exercises.lift3.sets}
-					td #{workout.exercises.lift3.reps}
-					td n/a
-	
-		p Comments: #{workout.comments}
+				- if (workout.exercises.lift1.name !== 'n/a')
+					tr
+						td #{workout.exercises.lift1.name}
+						td #{workout.exercises.lift1.sets}
+						td #{workout.exercises.lift1.reps}
+						td #{workout.exercises.lift1.weight}
+
+				- if (workout.exercises.lift2.name !== 'n/a')
+					tr
+						td #{workout.exercises.lift2.name}
+						td #{workout.exercises.lift2.sets}
+						td #{workout.exercises.lift2.reps}
+						td #{workout.exercises.lift2.weight}
+
+				- if (workout.exercises.lift3.name !== 'n/a')
+					tr
+						td #{workout.exercises.lift3.name}
+						td #{workout.exercises.lift3.sets}
+						td #{workout.exercises.lift3.reps}
+						td #{workout.exercises.lift3.weight}
+
+				- if (workout.exercises.lift4.name !== 'n/a')
+					tr
+						td #{workout.exercises.lift4.name}
+						td #{workout.exercises.lift4.sets}
+						td #{workout.exercises.lift4.reps}
+						td #{workout.exercises.lift4.weight}
+
+				- if (workout.exercises.lift4.name !== 'n/a')
+					tr
+						td #{workout.exercises.lift4.name}
+						td #{workout.exercises.lift4.sets}
+						td #{workout.exercises.lift4.reps}
+						td #{workout.exercises.lift4.weight}
+
+		.card._cream
+			label Total Work: #{workout.totalWork}kg
+			label#workout-comments Comments: #{workout.comments}
+		hr
 		
 	a(href="/workout/new") Back to submission form

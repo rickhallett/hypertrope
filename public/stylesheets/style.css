@@ -25,6 +25,14 @@ footer {
     margin: 2px;
 }
 
+table {
+    margin-bottom: 2px;
+}
+
+#workout-comments {
+    margin-bottom: 30px;
+}
+
 
 /* UTILITY CLASSES */
 

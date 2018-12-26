@@ -32,4 +32,6 @@ TODO LIST
 
 11. workout/new date field needs border
 
+12. If the user changes the number of exercises with items in the form filled out, these values are copied into each new accordian panel
+
 BUGS
