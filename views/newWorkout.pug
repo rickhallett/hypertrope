@@ -1,68 +1,110 @@
 extends layout
 
+block scripts
+  script(src=`/javascripts/newWorkout.js`)
+
 block content
-  form(action="/workout/new", method="post")
+  form(action="/workout/new", method="post", id="workout_form")
 
     button.accordion._box._shadow._dark.top-spacer-1px.no-bottom-margin(type="button") Personal Details
     .-panel
+      fieldset
+        legend Personal Details
+        .row
+          .col.m6.no-padding
+            label(for="name") Name:
+            input._full-width(name="name", type="text", placeholder="Enter your name")
+          .col.m6.no-padding
+            label(for="date") Date:
+            input._full-width(name="date", type="date")
 
-      span Name
-      input(name="name")
-
-      span Date:
-      input(name="date", type="date")
-
-    button.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 1
+    button.accordion._box._shadow._dark.no-bottom-margin(type="button") Options
     .-panel
+      fieldset
+        legend Submission Options
+        label(for="exercise_number") Number of exercises
+        select._full-width(name="exercise_number") 
+          option(value="1") One exercise
+          option(value="2") Two exercises
+          option(value="3") Three exercises
+          option(value="4") Four exercises
+          option(value="5") Five exercises
 
-      span Exercise 1
-        select(name="lift1")
-          each exercise in menu_opts
-            option(value=exercise.value) #{exercise.name}
-      span Sets:
-      input(name="sets1")
-      span Reps:
-      input(name="reps1")
+    #exercise-selectors
+      button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 1
+      .-panel
+        fieldset
+          legend Exercise 1 Details
+          .row
+            .col.m4.no-padding
+              label Exercise Options
+              select._full-width(name="lift1")
+                each exercise in menu_opts
+                  option(value=exercise.value) #{exercise.name}
 
-    button.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 2
-    .-panel
+            .col.m4.no-padding
+              label Sets:
+              input._full-width(name="sets1", type="number")
 
-      span Exercise 2
-      .select
-        select(name="lift2")
-          each exercise in menu_opts
-            option(value=exercise.value) #{exercise.name}
-      span Sets:
-      input(name="sets2")
-      span Reps:
-      input(name="reps2")
+            .col.m4.no-padding
+              label Reps:
+              input._full-width(name="reps1", type="number")
 
-    button.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 3
-    .-panel
+      button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 2
+      .-panel
+        fieldset
+          legend Exercise 2 Details
+          .row
+            .col.m4.no-padding
+              label Exercise Options
+              select._full-width(name="lift1")
+                each exercise in menu_opts
+                  option(value=exercise.value) #{exercise.name}
 
-      span Exercise 3
-        select(name="lift3")
-          each exercise in menu_opts
-            option(value=exercise.value) #{exercise.name}
-      span Sets:
-      input(name="sets3")
-      span Reps:
-      input(name="reps3")
+            .col.m4.no-padding
+              label Sets:
+              input._full-width(name="sets2", type="number")
+
+            .col.m4.no-padding
+              label Reps:
+              input._full-width(name="reps2", type="number")
+
+      button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 3
+      .-panel
+        fieldset
+          legend Exercise 3 Details
+          .row
+            .col.m4.no-padding
+              label Exercise Options
+              select._full-width(name="lift1")
+                each exercise in menu_opts
+                  option(value=exercise.value) #{exercise.name}
+
+            .col.m4.no-padding
+              label Sets:
+              input._full-width(name="sets3", type="number")
+
+            .col.m4.no-padding
+              label Reps:
+              input._full-width(name="reps3", type="number")
+        
+       
 
     button.accordion._box._shadow._dark.no-bottom-margin(type="button") Comments
     .-panel
 
-      span Comments
-      textarea(name="comments", cols="50", rows="5")
+      label(for="comments") Comments
+      textarea._full-width(name="comments", placeholder="Enter any workout comments or notes here", rows: 10)
 
     .flex-container.justify-center.margin-20
       input._alignCenter(type="submit", value="Submit workout")
 
-    //- button.accordion._box._shadow._dark  Users
-    //- .-panel
-    //-   a.to-block(href="/list/dad") List Dad's Workouts
-    //-   a.to-block(href="/list/mum") List Mum's Workouts
-    //-   a.to-block(href="/list/dad") List Pufflet's Workouts
-    //-   a.to-block(href="/list/mum") List Rick's Workouts
+    button.accordion._box._shadow._dark(type="button")  Users
+    .-panel
+      a.button.to-block(href="/list/dad") List Dad's Workouts
+      a.button.to-block(href="/list/mum") List Mum's Workouts
+      a.button.to-block(href="/list/emma") List Pufflet's Workouts
+      a.button.to-block(href="/list/rick") List Rick's Workouts
+      a.button.to-block(href="/list/test") List test Workouts
 
-
+    

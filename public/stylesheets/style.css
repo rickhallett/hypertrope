@@ -13,6 +13,25 @@ footer {
     color: darkgray;
 }
 
+.exercise-dropdown input {
+    max-width: 50px;
+}
+
+.col > input {
+    margin: 2px
+}
+
+.col > select {
+    margin: 2px;
+}
+
+
+/* UTILITY CLASSES */
+
+.limit-width-50 {
+    max-width: 50px;
+}
+
 .margin-20 {
     margin: 20px;
 }
@@ -31,6 +50,10 @@ footer {
 
 .padding-20 {
     padding: 20px;
+}
+
+.no-padding {
+    padding: 0px;
 }
 
 .to-block {

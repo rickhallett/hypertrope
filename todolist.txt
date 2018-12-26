@@ -22,5 +22,6 @@ TODO LIST
 
 6. Quote submission (either place quotes in database or have the server read/write from the json file)
 
+7. Inputs for bodyweight, weights lifted and calories
 
 BUGS
