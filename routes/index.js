@@ -25,9 +25,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { quote: sample(quotes), title: constants.SITE_NAME });
 })
 
-router.get('/login', function(req, res, next) {
-  res.render('login');
-});
+// TODO: Move this to seperate routes file
+// router.get('/login', function(req, res, next) {
+//   res.render('login');
+// });
 
 router.get('/workout/new', function(req, res, next) {
   const exercises = require('../data/exercises.json').exercises;
@@ -59,7 +60,5 @@ router.get('/workouts/:name', function(req, res, next) {
   });
   
 });
-
-
 
 module.exports = router;

@@ -13,6 +13,9 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const options = { useNewUrlParser: true };
 
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+
 /**
  * DATABASE
  */
@@ -25,14 +28,11 @@ db.once('open', function() {
   console.log('Database initialised!')
 });
 
-const app = express();
-
-const indexRouter = require('./routes/index');
-const messageRouter = require('./routes/messages');
-
 /**
  * MIDDLEWARE / VIEW ENGINE
  */
+
+const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -43,7 +43,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**
@@ -51,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 
 app.use('/', indexRouter);
+app.use('/login', authRouter);
 
 /**
  * ERROR HANDLING
