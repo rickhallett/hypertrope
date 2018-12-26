@@ -26,4 +26,8 @@ TODO LIST
 
 8. Align nav items to the right hand side
 
+9. Convert all code to ES6
+
+10. Apply best practices for Express and modularity
+
 BUGS

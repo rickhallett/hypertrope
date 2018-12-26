@@ -5,10 +5,11 @@ block scripts
 
 block content
 
-	p Listing #{name}'s workouts
+	.jumbo._dark
+		h4.secondary #{helpers.capitaliseFirstChar(name)}#{"'s workouts"}
 
 	each workout in workouts
-		label.date #{workout.date}
+		label.date.note #{workout.date}
 		table
 			thead
 				tr

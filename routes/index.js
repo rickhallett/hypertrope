@@ -5,6 +5,8 @@ const Workout = require('../models/Workout');
 const newWorkout = require('../models/newWorkout');
 const constants = require('../data/constants');
 
+const utilities = require('../public/javascripts/utilities');
+
 /**
  * 
 Name	Path	HTTP Verb	Purpose	Mongoose Method
@@ -34,21 +36,26 @@ router.get('/workout/new', function(req, res, next) {
 
 router.post('/workout/new', function(req, res, next) {
   const workout = newWorkout(req);
-  console.log(workout)
+
   workout.save(function(err) {
     if(err) {
       console.log('Error recieving workouts');
     }
   });
+  
   res.redirect(`/workouts/${req.body.name}`);
 });
 
 router.get('/workouts/:name', function(req, res, next) {
   const name = req.params.name.toLowerCase();
+
+  const helpers = {
+    capitaliseFirstChar: utilities.capitaliseFirstChar
+  };
   
   Workout.find({ name: name }, function(err, workouts) {
     if (err) console.log('Error retrieving workouts');
-    res.render('list-workouts', { name: name, workouts: workouts });
+    res.render('list-workouts', { name: name, workouts: workouts, helpers: helpers });
   });
   
 });
