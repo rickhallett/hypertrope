@@ -8,9 +8,23 @@ const reloadBeauterJS = () => {
 document.addEventListener('DOMContentLoaded', function() {
 
     $('#submit-workout')
-    .on('click', function(event) {
-        // event.preventDefault();
-    });
+        .on('click', function(event) {
+            if($('#name') == "");
+                // event.preventDefault();
+                // alert('You must enter a name')
+                $('#name').val('Anonymous')
+
+            const exercisePanels = $('#exercise-selectors');
+            
+            let inputs = exercisePanels.find('input');
+
+            console.log(inputs)
+
+            for(let i = 0; i < inputs.length; i++) {
+                if(inputs[i].value === "")
+                    inputs[i].value = 0;
+            }
+        });
     
     $('#select-number-exercise')
     .on('change', function(event) {
@@ -29,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             newPanel.find('legend').text(`Exercise ${i} Details`);
             newPanel.find('select')[0].name = `lift${i}`;
+            let exerciseName = newPanel.find('#exercise-name-1')[0];
+            exerciseName.id = `exercise-name-${i}`
             let inputSets = newPanel.find('#input-sets-1')[0];
             inputSets.name = `sets${i}`;
             inputSets.id = `input-sets-${i}`;
