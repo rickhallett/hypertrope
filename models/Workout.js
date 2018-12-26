@@ -76,8 +76,7 @@ workoutSchema.methods.calculateWork = function() {
     Object.keys(this.exercises).forEach(key => {
         if(this.exercises[key].sets !== undefined)
             if(this.exercises[key].reps !== undefined)
-            work += (this.exercises[key].sets * this.exercises[key].reps) * this.exercises[key].weight
-            console.log(work);
+            work += (this.exercises[key].sets * this.exercises[key].reps) * this.exercises[key].weight;
     });
     
     this.totalWork = work;
