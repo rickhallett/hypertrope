@@ -13,6 +13,9 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const options = { useNewUrlParser: true };
 
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+
 /**
  * DATABASE
  */
@@ -24,9 +27,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('Database initialised!')
 });
-
-const indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
 
 /**
  * MIDDLEWARE / VIEW ENGINE
