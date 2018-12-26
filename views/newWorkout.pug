@@ -18,8 +18,6 @@ block content
             label(for="date") Date:
             input._full-width(name="date", type="date")
 
-    
-
     #exercise-selectors
       button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 1
       .-panel
@@ -47,7 +45,7 @@ block content
           .row
             .col.m4.no-padding
               label Exercise Options
-              select._full-width(name="lift1")
+              select._full-width(name="lift2")
                 each exercise in menu_opts
                   option(value=exercise.value) #{exercise.name}
 
@@ -66,7 +64,7 @@ block content
           .row
             .col.m4.no-padding
               label Exercise Options
-              select._full-width(name="lift1")
+              select._full-width(name="lift3")
                 each exercise in menu_opts
                   option(value=exercise.value) #{exercise.name}
 
