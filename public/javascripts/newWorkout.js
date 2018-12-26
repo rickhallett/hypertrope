@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $('#submit-workout')
     .on('click', function(event) {
-        event.preventDefault();
+        // event.preventDefault();
     });
     
     $('#select-number-exercise')
@@ -27,18 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             newAccordian.html(`Exercise ${i}`)
 
-            console.dir(newPanel);
-
-            // debugger;
             newPanel.find('legend').text(`Exercise ${i} Details`);
             newPanel.find('select')[0].name = `lift${i}`;
-            let inputSets = newPanel.find('#input-sets-1')[0]
+            let inputSets = newPanel.find('#input-sets-1')[0];
             inputSets.name = `sets${i}`;
             inputSets.id = `input-sets-${i}`;
-            let inputReps = newPanel.find('#input-reps-1')[0]
+            let inputReps = newPanel.find('#input-reps-1')[0];
             inputReps.name = `reps${i}`;
             inputReps.id = `input-reps-${i}`;
-            let inputWeight = newPanel.find('#input-weight-1')[0]
+            let inputWeight = newPanel.find('#input-weight-1')[0];
             inputWeight.name = `weight${i}`;
             inputWeight.id = `input-weight-${i}`;
             

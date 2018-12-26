@@ -30,4 +30,6 @@ TODO LIST
 
 10. Apply best practices for Express and modularity
 
+11. workout/new date field needs border
+
 BUGS

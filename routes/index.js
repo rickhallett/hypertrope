@@ -37,14 +37,20 @@ router.get('/workout/new', function(req, res, next) {
 
 router.post('/workout/new', function(req, res, next) {
   const workout = newWorkout(req);
+  workout.calculateWork();
+
+  console.log(workout);
 
   workout.save(function(err) {
     if(err) {
-      console.log('Error recieving workouts');
+      console.log('Error saving workouts');
+      console.log(err);
     }
+
+    res.redirect(`/workouts/${req.body.name}`);
+
   });
   
-  res.redirect(`/workouts/${req.body.name}`);
 });
 
 router.get('/workouts/:name', function(req, res, next) {
