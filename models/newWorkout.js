@@ -2,7 +2,7 @@ const Workout = require('../models/Workout');
 
 module.exports = function(req){
     return new Workout({ 
-        name: req.body.name.toLowerCase().trim(),
+        name: req.user.username,
         date: req.body.date || new Date(),
         exercises: {
           lift1: {

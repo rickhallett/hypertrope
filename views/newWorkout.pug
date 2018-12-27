@@ -13,7 +13,7 @@ block content
         .row
           .col.m6.no-padding
             label(for="name") Name:
-            input#name._full-width(name="name", type="text", placeholder="Enter your name")
+            input#name._full-width(name="name", type="text", value=user.username, disabled="true")
           .col.m6.no-padding
             label(for="date") Date:
             input._full-width(name="date", type="date")

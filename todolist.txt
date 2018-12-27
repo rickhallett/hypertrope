@@ -39,4 +39,9 @@ TODO LIST
 14. Work out how to use node-statsd middleware
 
 15. Slide up lost space gently when alert message disappears
+
+16. Use passports inherent session/user logic, as opposed to passing it into a new render post login
+
+17. Auth error message page/flash messages
+
 BUGS

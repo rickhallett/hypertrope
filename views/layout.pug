@@ -16,21 +16,20 @@ html
     ul#myTopnav2.topnav
       li
         a.brand(href='/') Hypertrope
-      li
-        a.link._disabled(href='/auth/login') Login
-      li
-        a.link(href='/workouts/new') New Workout
-      li
-        a.link._disabled(href='#') Show Workouts
-      li
-        a.link(href='/information') Information
+      - if (user)
+          li
+            a.link(href='/workouts/new') New Workout
+          li
+            a.link(href=`/workouts/${user.username}`) Show Workouts
+          li
+            a.link(href='/information') Information
+          li
+            a.link(href='/auth/logout') Logout
       li.dropdown
         a.link(href='#') About
         .dropdown-content
           a(href='#') Author
           a(href='#') Github
-      li
-        a.link(href='/auth/logout') Logout
       li.-icon
         a(href='javascript:void(0);', onclick="topnav('myTopnav2')") ☰
 

@@ -7,58 +7,53 @@ block content
     .jumbo._dark.top-spacer-1px
         h3.primary Welcome to #{title}
         h5.secondary An app to keep parents and girlfriends in shape.
-        p 
+        p
     
     blockquote
         | #{quote.text}
     footer
         | #{quote.author}
 
-    button.accordion._box._shadow._dark.top-spacer-20px Login
-    .-panel
-        form(action="/auth/login", method="post", id="login_form")._alignCenter
-            fieldset#login-fieldset
-                legend._alignLeft Login
-                .row
-                    .col.m6.no-padding
-                        label Username
-                        input(type="text", name="username", id="login_name" autocomplete="username")
-                    .col.m6.no-padding
-                        label Password
-                        input(type="password", name="password", id="pword_input_1", autocomplete="current-password")
-                    .col.m6.no-padding
-                        input(type="checkbox", onclick="toggleHide('pword_input_1')", id="checkbox_input_1")
-                        label(for="checkbox_input_1") Show password
-                    .col.m6.no-padding
-                        input._alignCenter#login(type="submit", value="Login")
+    - if(!user)
+        button.accordion._box._shadow._dark.top-spacer-20px Login
+        .-panel
+            form(action="/auth/login", method="post", id="login_form")._alignCenter
+                fieldset#login-fieldset
+                    legend._alignLeft Login
+                    .row
+                        .col.m6.no-padding
+                            label Username
+                            input(type="text", name="username", id="login_name" autocomplete="username")
+                        .col.m6.no-padding
+                            label Password
+                            input(type="password", name="password", id="pword_input_1", autocomplete="current-password")
+                        .col.m6.no-padding
+                            input(type="checkbox", onclick="toggleHide('pword_input_1')", id="checkbox_input_1")
+                            label(for="checkbox_input_1") Show password
+                        .col.m6.no-padding
+                            input._alignCenter#login(type="submit", value="Login")
     
-    button.accordion._box._shadow._dark New user? Register here
-    .-panel
-        form(action="/users/register", method="post", id="register_form")._alignCenter
-            fieldset#register-fieldset
-                legend._alignLeft Register
-                .row
-                    .col.m6.no-padding
-                        label Username
-                        input(type="text", name="username", autocomplete="username", id="register-name")
-                    .col.m6.no-padding
-                        label Password
-                        input(type="password", name="password", id="pword_input_2", placeholder="Enter password", autocomplete="new-password")
-                        label Confirm Password
-                    .col.m6.no-padding
-                        input(type="password", name="confirm_password", id="pword_input_3" placeholder="Confirm password", autocomplete="new-password")
-                    .col.m6.no-padding
-                        input(type="checkbox", onclick="toggleHide('pword_input_2', 'pword_input_3')", id="checkbox_input_2")
-                        label(for="checkbox_input_1") Show password
-                        input._alignCenter#register-button(type="submit", value="Register")
-
-
+    - if(!user)
+        button.accordion._box._shadow._dark New user? Register here
+        .-panel
+            form(action="/users/register", method="post", id="register_form")._alignCenter
+                fieldset#register-fieldset
+                    legend._alignLeft Register
+                    .row
+                        .col.m6.no-padding
+                            label Username
+                            input(type="text", name="username", autocomplete="username", id="register-name")
+                        .col.m6.no-padding
+                            label Password
+                            input(type="password", name="password", id="pword_input_2", placeholder="Enter password", autocomplete="new-password")
+                            label Confirm Password
+                        .col.m6.no-padding
+                            input(type="password", name="confirm_password", id="pword_input_3" placeholder="Confirm password", autocomplete="new-password")
+                        .col.m6.no-padding
+                            input(type="checkbox", onclick="toggleHide('pword_input_2', 'pword_input_3')", id="checkbox_input_2")
+                            label(for="checkbox_input_1") Show password
+                            input._alignCenter#register-button(type="submit", value="Register")
     
-    button.accordion._box._shadow._dark(type="button")  Users
-    .-panel
-      a.button.to-block(href="/workouts/dad") List Dad's Workouts
-      a.button.to-block(href="/workouts/mum") List Mum's Workouts
-      a.button.to-block(href="/workouks/emma") List Pufflet's Workouts
-      a.button.to-block(href="/workouts/rick") List Rick's Workouts
-      a.button.to-block(href="/workouts/test") List test Workouts
+ 
+    a.button.to-block(href="/workouts/test") List test Workouts
 

@@ -13,7 +13,8 @@ const utilities = require('../public/javascripts/utilities');
 
 router.get('/new', function(req, res, next) {
   const exercises = require('../data/exercises.json').exercises;
-  res.render('newWorkout', { title: constants.SITE_NAME, menu_opts: exercises });
+  res.locals.user = req.user;
+  res.render('newWorkout', { user: req.user, title: constants.SITE_NAME, menu_opts: exercises });
 });
 
 router.post('/new', function(req, res, next) {
@@ -26,13 +27,13 @@ router.post('/new', function(req, res, next) {
       console.log(err);
     }
     
-    res.redirect(`/workouts/${req.body.name}`);
+    res.redirect(`/workouts/${req.user.username}`);
   });
   
 });
 
 router.get('/:name', function(req, res, next) {
-  const name = req.params.name.toLowerCase();
+  const name = req.user.username;
   
   const helpers = {
     capitaliseFirstChar: utilities.capitaliseFirstChar
