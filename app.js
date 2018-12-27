@@ -24,7 +24,7 @@ const workoutRouter = require('./routes/workouts')
 
 
 const app = express();
-app.set('env', 'development');
+app.set('env', 'production');
 
 /**
  * DATABASE
