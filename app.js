@@ -3,6 +3,7 @@
  */
 
 const express = require('express');
+const http = require('http');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -20,6 +21,8 @@ const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workouts')
 
 const app = express();
+
+app.set('env', 'development');
 
 /**
  * DATABASE
@@ -57,7 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/login', authRouter);
-app.use('/workout/*', workoutRouter);
+app.use('/workouts', workoutRouter);
 
 /**
  * ERROR HANDLING
@@ -77,6 +80,25 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+/**
+ * INITIALISE SERVER
+ */
+
+//Get port from environment and store in Express.
+const port = (process.env.PORT || '3000');
+app.set('port', port);
+
+
+// Create HTTP server.
+const server = http.createServer(app);
+
+// Listen on provided port, on all network interfaces.
+server.listen(port, function(err) {
+  if(!err) {
+    console.log(`Server listening on ${port}`);
+  }
 });
 
 module.exports = app;
