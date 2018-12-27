@@ -48,7 +48,7 @@ app.set('view engine', 'pug');
  */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser(config.sessionSecret));
+// app.use(cookieParser(config.sessionSecret));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('express-session')({
   secret: config.sessionSecret,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true,
 }));
 
 app.use(passport.initialize());

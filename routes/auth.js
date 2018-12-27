@@ -7,7 +7,7 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
   const sample = arr => arr[Math.floor(Math.random() * arr.length)];
   const quotes = require('../data/quotes').quotes;
 
-  res.render('index', { user: req.user, quote: sample(quotes) });
+  res.redirect('/');
 });
 
 router.get('/logout', function(req, res) {
