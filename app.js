@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const config = require('./config');
+const config = require('./secret');
 const options = { useNewUrlParser: true };
 
 const indexRouter = require('./routes/index');
@@ -21,19 +21,30 @@ const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workouts')
 
 const app = express();
-
 app.set('env', 'development');
 
 /**
  * DATABASE
  */
 
-mongoose.connect(config.mongoURI, options);
+const URI = app.get('env') === 'development' ? config.dev_mongoURI : config.mongoURI;
+mongoose.connect(URI, options);
+// mongoose.connect(config.mongoURI,options)
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('Database initialised!')
+  const fs = require('fs');
+  let data;
+  for(line in this) {
+    data += line + '\n';
+  }
+  fs.writeFile('log.txt', data, { flag: 'w+' }, function(err) {
+    if(err) throw err;
+    if(!err) console.log('file created!');
+  });
+  console.log(this.name)
+  console.log('\x1b[33m%s\x1b[0m', `Database: ${this.name} connected successfully`);
 });
 
 /**
@@ -53,6 +64,12 @@ app.use(cookieParser());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use(require('express-session'))({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: false
+// });
 
 /**
  * ROUTES
