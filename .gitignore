@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Config data
-secret.js
+# secret.js
 
 # Runtime data
 pids
