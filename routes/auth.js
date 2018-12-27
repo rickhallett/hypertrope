@@ -4,9 +4,7 @@ const passport = require('passport');
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
   res.locals.user = req.user;
-  const sample = arr => arr[Math.floor(Math.random() * arr.length)];
-  const quotes = require('../data/quotes').quotes;
-
+  req.flash('info', 'Welcome to Hypertrope!');
   res.redirect('/');
 });
 

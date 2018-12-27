@@ -46,4 +46,6 @@ TODO LIST
 
 18. Prevent unauthorised viewing of pages if not logged in
 
+19. Have a dynamic information sheet; calculate TDEE based on user profile information
+
 BUGS

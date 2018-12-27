@@ -2,12 +2,14 @@ extends layout
 
 block scripts
     script(src="/javascripts/passwordObfuscator.js")
+    script(src="/javascripts/flashMessages.js")
 
 block content
     .jumbo._dark.top-spacer-1px
         h3.primary Welcome to #{title}
         h5.secondary An app to keep parents and girlfriends in shape.
-        p
+
+    include _flashAlerts
     
     blockquote
         | #{quote.text}
@@ -56,4 +58,4 @@ block content
     
  
     //- a.button.to-block(href="/workouts/test") List test Workouts
-
+    

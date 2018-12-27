@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const createFlashAlert = (msg, node) => {
+    const createAlert = (msg, node) => {
         let alert = document.createElement('div');
         alert.id = 'login-name-alert';
         alert.classList.add('alert', '_warning', '_shadow');
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const loginName = getElementValueAndTrim('login_name');
         if(loginName === "") {
             event.preventDefault();
-            createFlashAlert('You must provide a login username', loginFieldset);
+            createAlert('You must provide a login username', loginFieldset);
             $('#login-name-alert').fadeOut(3500);
         }
     });
@@ -36,21 +36,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(registerName === "") {
             event.preventDefault();
-            createFlashAlert('You must provide a register username', registerFieldset);
+            createAlert('You must provide a register username', registerFieldset);
             $('#login-name-alert').fadeOut(3500);
             return;
         }
 
         if(passwordBlank(password) || passwordBlank(passwordConfirm)) {
             event.preventDefault()
-            createFlashAlert('You must provide both passwords', registerFieldset);
+            createAlert('You must provide both passwords', registerFieldset);
             $('#login-name-alert').fadeOut(3500);
             return;
         }
 
         if(!passwordsMatch(password, passwordConfirm)) {
             event.preventDefault();
-            createFlashAlert('Your passwords must match', registerFieldset);
+            createAlert('Your passwords must match', registerFieldset);
             $('#login-name-alert').fadeOut(3500);
             return;
         }

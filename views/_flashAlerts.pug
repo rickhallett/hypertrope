@@ -1,0 +1,13 @@
+if(flashMessages.info)
+        each message in flashMessages.info
+            .alert._warning._shadow._box
+                span.-close ×
+                strong :)     
+                | #{message}
+
+if(flashMessages.warn)
+    each message in flashMessages.warn
+        .alert._warning._shadow._box
+            span.-close ×
+            strong :(     
+            | #{message}
