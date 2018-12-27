@@ -3,10 +3,8 @@
  */
 const express = require('express');
 const http = require('http');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
-const favicon = require('serve-favicon');
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const passport = require('passport');

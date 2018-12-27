@@ -29,10 +29,8 @@ router.post('/register', function(req, res, next) {
             successRedirect : '/', // redirect to the secure profile section
             failureRedirect : '/', // redirect back to the signup page if there is an error
             failureFlash : true, // allow flash messages
-            // successFlash: 'Welcome to Hypertrope!'
         });
         handler(req, res, next);
-
     });
 });
 
