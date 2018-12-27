@@ -22,15 +22,14 @@ const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const workoutRouter = require('./routes/workouts')
 
-
 const app = express();
-app.set('env', 'development');
-// app.set('env', 'production');
+// app.set('env', 'development');
+app.set('env', 'production');
 
 /**
  * DATABASE
  */
-const mongoURI = app.get('env') === 'development' ? config.dev_mongoURI : config.mongoURI;
+const mongoURI = app.get('env') === 'development' ? config.dev_mongoURI : process.env.MONGO_URI;
 mongoose.connect(mongoURI, options);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -58,7 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * AUTH MIDDLEWARE
  */
 app.use(require('express-session')({
-  secret: config.sessionSecret,
+  secret: app.get('env') === 'development' ? config.sessionSecret : process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 60000 }
