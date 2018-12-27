@@ -44,4 +44,6 @@ TODO LIST
 
 17. Auth error message page/flash messages
 
+18. Prevent unauthorised viewing of pages if not logged in
+
 BUGS
