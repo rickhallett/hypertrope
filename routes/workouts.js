@@ -15,7 +15,7 @@ const nodeUtils = require('../utils/nodeUtils');
 router.get('/new', nodeUtils.isAuthenticated, function(req, res, next) {
   const exercises = require('../data/exercises.json').exercises;
   res.locals.user = req.user;
-  res.render('newWorkout', { user: req.user, title: constants.SITE_NAME, menu_opts: exercises });
+  res.render('newWorkout', { title: constants.SITE_NAME, menu_opts: exercises });
 });
 
 router.post('/new', nodeUtils.isAuthenticated, function(req, res, next) {
@@ -35,6 +35,7 @@ router.post('/new', nodeUtils.isAuthenticated, function(req, res, next) {
 
 router.get('/:name', nodeUtils.isAuthenticated, function(req, res, next) {
   const name = req.user.username;
+  res.locals.user = req.user;
   
   const helpers = {
     capitaliseFirstChar: utilities.capitaliseFirstChar

@@ -21,10 +21,12 @@ Destroy	/dogs/:id	DELETE	Delete a particular dog, then redirect somewhere	Dog.fi
 router.get('/', function(req, res, next) {
   const sample = arr => arr[Math.floor(Math.random() * arr.length)];
   const quotes = require('../data/quotes.json').quotes;
+  res.locals.user = req.user;
   res.render('index', { quote: sample(quotes), title: constants.SITE_NAME });
 });
 
 router.get('/information', nodeUtils.isAuthenticated, function(req, res, next) {
+  res.locals.user = req.user;
   res.render('information');
 });
 
