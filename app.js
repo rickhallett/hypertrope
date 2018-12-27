@@ -44,7 +44,7 @@ db.once('open', function() {
     if(!err) console.log('file created!');
   });
   console.log(this.name)
-  console.log('\x1b[33m%s\x1b[0m', `Database: ${this.name} connected successfully`);
+  console.log('\x1b[33m%s\x1b[0m', `Database: ${this.name} connected successfully on port ${this.port} @host ${this.host}`);
 });
 
 /**
