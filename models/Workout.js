@@ -70,7 +70,6 @@ const workoutSchema = new mongoose.Schema({
 });
 
 workoutSchema.methods.calculateWork = function() {
-    
     let work = 0;
 
     Object.keys(this.exercises).forEach(key => {
@@ -81,8 +80,6 @@ workoutSchema.methods.calculateWork = function() {
     
     this.totalWork = work;
 };
-
-// console.log(workoutSchema);
 
 const Workout = new mongoose.model('Workout', workoutSchema);
 

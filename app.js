@@ -1,7 +1,6 @@
 /**
  * DEPENDENCEIS
  */
-
 const express = require('express');
 const http = require('http');
 const cookieParser = require('cookie-parser');
@@ -15,6 +14,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const config = require('./secret');
 const options = { useNewUrlParser: true };
+const nodeUtils = require('./utils/nodeUtils');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -26,38 +26,23 @@ app.set('env', 'development');
 /**
  * DATABASE
  */
-
-const URI = app.get('env') === 'development' ? config.dev_mongoURI : config.mongoURI;
-mongoose.connect(URI, options);
-// mongoose.connect(config.mongoURI,options)
-
+const mongoURI = app.get('env') === 'development' ? config.dev_mongoURI : config.mongoURI;
+mongoose.connect(mongoURI, options);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  const fs = require('fs');
-  let data;
-  for(line in this) {
-    data += line + '\n';
-  }
-  fs.writeFile('log.txt', data, { flag: 'w+' }, function(err) {
-    if(err) throw err;
-    if(!err) console.log('file created!');
-  });
-  console.log(this.name)
   console.log('\x1b[33m%s\x1b[0m', `Database: ${this.name} connected successfully on port ${this.port} @host ${this.host}`);
 });
 
 /**
  * VIEW ENGINE
  */
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 /**
  * MIDDLEWARE
  */
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -65,16 +50,29 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(require('express-session'))({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: false
-// });
+/**
+ * AUTH MIDDLEWARE
+ */
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+/**
+ * PASSPORT CONFIG
+ */
+const Account = require('./models/Account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 /**
  * ROUTES
  */
-
 app.use('/', indexRouter);
 app.use('/login', authRouter);
 app.use('/workouts', workoutRouter);
@@ -82,7 +80,6 @@ app.use('/workouts', workoutRouter);
 /**
  * ERROR HANDLING
  */
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -102,7 +99,6 @@ app.use(function(err, req, res, next) {
 /**
  * INITIALISE SERVER
  */
-
 //Get port from environment and store in Express.
 const port = (process.env.PORT || '3000');
 app.set('port', port);
