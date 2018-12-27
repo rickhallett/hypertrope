@@ -31,6 +31,8 @@ if(app.get('env') === 'development') config = require('./secret');
  * DATABASE
  */
 const mongoURI = app.get('env') === 'development' ? config.dev_mongoURI : process.env.MONGO_URI;
+console.log('MONGO_URI:');
+console.log(process.env.MONGO_URI);
 mongoose.connect(mongoURI, options);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
