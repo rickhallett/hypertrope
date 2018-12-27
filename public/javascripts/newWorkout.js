@@ -1,7 +1,7 @@
 const reloadBeauterJS = () => {
     let head = document.getElementsByTagName('head')[0];
     let beauterJS = document.createElement('script');
-    beauterJS.src = `https://rawgit.com/outboxcraft/beauter/master/beauter.min.js?cachebuster=${new Date().getTime()}`;
+    beauterJS.src = `/javascripts/beauter0.3.0.min.js?cachebuster=${new Date().getTime()}`;
     head.appendChild(beauterJS);
 }
 
