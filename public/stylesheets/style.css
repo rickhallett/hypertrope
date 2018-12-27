@@ -33,6 +33,25 @@ table {
     margin-bottom: 30px;
 }
 
+.information {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+}
+
+.sub-text {
+    margin-left: 50px;
+}
+
+.bold {
+    font-weight: 800;
+}
+
+.card {
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 
 /* UTILITY CLASSES */
 

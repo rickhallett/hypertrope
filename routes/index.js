@@ -22,4 +22,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { quote: sample(quotes), title: constants.SITE_NAME });
 });
 
+router.get('/information', function(req, res, next) {
+  res.render('information');
+});
+
 module.exports = router;
