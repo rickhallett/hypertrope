@@ -6,18 +6,19 @@ const newWorkout = require('../models/newWorkout');
 const constants = require('../data/constants');
 
 const utilities = require('../public/javascripts/utilities');
+const nodeUtils = require('../utils/nodeUtils');
 
 // router.get('/', function(req, res, next) {
 //     res.send('what this doin here');
 // });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', nodeUtils.isAuthenticated, function(req, res, next) {
   const exercises = require('../data/exercises.json').exercises;
   res.locals.user = req.user;
   res.render('newWorkout', { user: req.user, title: constants.SITE_NAME, menu_opts: exercises });
 });
 
-router.post('/new', function(req, res, next) {
+router.post('/new', nodeUtils.isAuthenticated, function(req, res, next) {
   const workout = newWorkout(req);
   workout.calculateWork();
   
@@ -32,7 +33,7 @@ router.post('/new', function(req, res, next) {
   
 });
 
-router.get('/:name', function(req, res, next) {
+router.get('/:name', nodeUtils.isAuthenticated, function(req, res, next) {
   const name = req.user.username;
   
   const helpers = {

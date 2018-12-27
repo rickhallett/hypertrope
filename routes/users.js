@@ -25,9 +25,13 @@ router.post('/register', function(req, res) {
             return res.render('index', { account: account, error: err });
         }
 
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+        const handler = passport.authenticate('local', {
+            successRedirect : '/', // redirect to the secure profile section
+            failureRedirect : '/', // redirect back to the signup page if there is an error
+            failureFlash : true // allow flash messages
         });
+        handler(req, res, next);
+
     });
 });
 
