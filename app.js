@@ -76,7 +76,7 @@ passport.deserializeUser(Account.deserializeUser());
  * ROUTES
  */
 app.use('/', indexRouter);
-app.use('/login', authRouter);
+app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/workouts', workoutRouter);
 

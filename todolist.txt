@@ -38,4 +38,5 @@ TODO LIST
 
 14. Work out how to use node-statsd middleware
 
+15. Slide up lost space gently when alert message disappears
 BUGS

@@ -17,7 +17,7 @@ html
       li
         a.brand(href='/') Hypertrope
       li
-        a.link._disabled(href='/login') Login
+        a.link._disabled(href='/auth/login') Login
       li
         a.link(href='/workouts/new') New Workout
       li
@@ -29,6 +29,8 @@ html
         .dropdown-content
           a(href='#') Author
           a(href='#') Github
+      li
+        a.link(href='/auth/logout') Logout
       li.-icon
         a(href='javascript:void(0);', onclick="topnav('myTopnav2')") ☰
 
