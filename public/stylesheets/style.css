@@ -52,6 +52,14 @@ table {
     margin-bottom: 10px;
 }
 
+#submit-register {
+    margin-top: 10px;
+}
+
+#login {
+    margin-top: 10px;
+}
+
 
 /* UTILITY CLASSES */
 

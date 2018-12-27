@@ -18,7 +18,9 @@ const nodeUtils = require('./utils/nodeUtils');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
 const workoutRouter = require('./routes/workouts')
+
 
 const app = express();
 app.set('env', 'development');
@@ -75,6 +77,7 @@ passport.deserializeUser(Account.deserializeUser());
  */
 app.use('/', indexRouter);
 app.use('/login', authRouter);
+app.use('/users', usersRouter);
 app.use('/workouts', workoutRouter);
 
 /**
