@@ -6,9 +6,11 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
-const logger = require('morgan');
+const favicon = require('serve-favicon');
 const createError = require('http-errors');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const config = require('./config');
 const options = { useNewUrlParser: true };
@@ -16,6 +18,8 @@ const options = { useNewUrlParser: true };
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workouts')
+
+const app = express();
 
 /**
  * DATABASE
@@ -30,15 +34,16 @@ db.once('open', function() {
 });
 
 /**
- * MIDDLEWARE / VIEW ENGINE
+ * VIEW ENGINE
  */
-
-const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+/**
+ * MIDDLEWARE
+ */
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -6,6 +6,7 @@ const constants = require('../data/constants');
 
 /**
  * RESTFUL ROUTING
+ * 
 Name	Path	HTTP Verb	Purpose	Mongoose Method
 Index	/dogs	GET	List all dogs	Dog.find()
 New	/dogs/new	GET	Show new dog form	N/A
