@@ -12,8 +12,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
-
-const config = require('./secret');
 const options = { useNewUrlParser: true };
 const nodeUtils = require('./utils/nodeUtils');
 
@@ -25,6 +23,9 @@ const workoutRouter = require('./routes/workouts')
 const app = express();
 // app.set('env', 'development');
 app.set('env', 'production');
+
+let config;
+if(app.get('env') === 'development') config = require('./secret');
 
 /**
  * DATABASE
