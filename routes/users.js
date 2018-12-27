@@ -18,7 +18,7 @@ const Account = require('../models/Account');
 //     });
 // });
 
-router.post('/register', function(req, res) {
+router.post('/register', function(req, res, next) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
             console.log(err);
@@ -28,7 +28,8 @@ router.post('/register', function(req, res) {
         const handler = passport.authenticate('local', {
             successRedirect : '/', // redirect to the secure profile section
             failureRedirect : '/', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
+            failureFlash : true, // allow flash messages
+            // successFlash: 'Welcome to Hypertrope!'
         });
         handler(req, res, next);
 

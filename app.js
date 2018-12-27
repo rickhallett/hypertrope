@@ -11,6 +11,7 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+// const flash = require('connect-flash');
 
 const config = require('./secret');
 const options = { useNewUrlParser: true };
@@ -47,7 +48,7 @@ app.set('view engine', 'pug');
  */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(config.sessionSecret));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -56,13 +57,15 @@ app.use(express.static(path.join(__dirname, 'public')));
  * AUTH MIDDLEWARE
  */
 app.use(require('express-session')({
-  secret: 'keyboard cat',
+  secret: config.sessionSecret,
   resave: false,
   saveUninitialized: false
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// app.use(flash());
 
 /**
  * PASSPORT CONFIG
@@ -71,6 +74,7 @@ const Account = require('./models/Account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+
 
 /**
  * ROUTES
