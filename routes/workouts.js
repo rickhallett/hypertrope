@@ -11,12 +11,12 @@ const utilities = require('../public/javascripts/utilities');
 //     res.send('what this doin here');
 // });
 
-router.get('/', function(req, res, next) {
+router.get('/new', function(req, res, next) {
   const exercises = require('../data/exercises.json').exercises;
   res.render('newWorkout', { title: constants.SITE_NAME, menu_opts: exercises });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/new', function(req, res, next) {
   const workout = newWorkout(req);
   workout.calculateWork();
   
@@ -26,12 +26,12 @@ router.post('/', function(req, res, next) {
       console.log(err);
     }
     
-    res.redirect(`/workout/${req.body.name}`);
+    res.redirect(`/workouts/${req.body.name}`);
   });
   
 });
 
-router.get('/workout/:name', function(req, res, next) {
+router.get('/:name', function(req, res, next) {
   const name = req.params.name.toLowerCase();
   
   const helpers = {
