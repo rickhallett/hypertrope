@@ -11,7 +11,7 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-// const flash = require('connect-flash');
+const flash = require('connect-flash');
 
 const config = require('./secret');
 const options = { useNewUrlParser: true };
@@ -24,7 +24,8 @@ const workoutRouter = require('./routes/workouts')
 
 
 const app = express();
-app.set('env', 'production');
+app.set('env', 'development');
+// app.set('env', 'production');
 
 /**
  * DATABASE
@@ -60,12 +61,13 @@ app.use(require('express-session')({
   secret: config.sessionSecret,
   resave: false,
   saveUninitialized: true,
+  cookie: { maxAge: 60000 }
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(flash());
+app.use(flash());
 
 /**
  * PASSPORT CONFIG

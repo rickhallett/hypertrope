@@ -22,7 +22,10 @@ router.get('/', function(req, res, next) {
   const sample = arr => arr[Math.floor(Math.random() * arr.length)];
   const quotes = require('../data/quotes.json').quotes;
   res.locals.user = req.user;
-  res.render('index', { quote: sample(quotes), title: constants.SITE_NAME });
+  
+  req.flash('info', 'Welcome!');
+
+  res.render('index', { quote: sample(quotes), title: constants.SITE_NAME, flashMessages: req.flash() });
 });
 
 router.get('/information', nodeUtils.isAuthenticated, function(req, res, next) {
