@@ -19,8 +19,8 @@ const usersRouter = require('./routes/users');
 const workoutRouter = require('./routes/workouts')
 
 const app = express();
-// app.set('env', 'development');
-app.set('env', 'production');
+app.set('env', 'development');
+// app.set('env', 'production');
 
 let config;
 if(app.get('env') === 'development') config = require('./secret');
