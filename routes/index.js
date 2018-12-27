@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const constants = require('../data/constants');
-const utilities = require('../public/javascripts/utilities');
+// const utilities = require('../public/javascripts/utilities');
 
 /**
  * RESTFUL ROUTING
