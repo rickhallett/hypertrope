@@ -1,4 +1,33 @@
 extends layout
 
+block scripts
+	script(src="/javascripts/passwordObfuscator.js")
+	script(src="/javascripts/loginAutoFill.js")
+
 block content
-	h3 Login page
+	
+	- if(!user)
+		button.accordion._box._shadow._dark Login
+		.-panel
+			form(action="/auth/login", method="post", id="login_form")._alignCenter
+				fieldset#login-fieldset
+					legend._alignLeft Login
+					.row
+						.col.m6.no-padding
+							label Username
+							input(type="text", name="username", id="login_name" autocomplete="username")
+						.col.m6.no-padding
+							label Password
+							input(type="password", name="password", id="pword_input_1", autocomplete="current-password")
+						.col.m6.no-padding
+							input(type="checkbox", onclick="toggleHide('pword_input_1')", id="checkbox_input_1")
+							label(for="checkbox_input_1") Show password
+						.col.m6.no-padding
+							input._alignCenter#login(type="submit", value="Login")
+
+	blockquote
+		| #{quote.text}
+	footer
+		| #{quote.author}
+
+	include _flashAlerts

@@ -1,0 +1,36 @@
+extends layout
+
+block scripts
+	script(src="/javascripts/passwordObfuscator.js")
+	script(src="/javascripts/loginAutoFill.js")
+
+block content
+
+
+	- if(!user)
+		button.accordion._box._shadow._dark New user? Register here
+		.-panel
+			form(action="/users/register", method="post", id="register_form")._alignCenter
+				fieldset#register-fieldset
+					legend._alignLeft Register
+					.row
+						.col.m6.no-padding
+							label Username
+							input(type="text", name="username", autocomplete="username", id="register-name")
+						.col.m6.no-padding
+							label Password
+							input(type="password", name="password", id="pword_input_2", placeholder="Enter password", autocomplete="new-password")
+							label Confirm Password
+						.col.m6.no-padding
+							input(type="password", name="confirm_password", id="pword_input_3" placeholder="Confirm password", autocomplete="new-password")
+						.col.m6.no-padding
+							input(type="checkbox", onclick="toggleHide('pword_input_2', 'pword_input_3')", id="checkbox_input_2")
+							label(for="checkbox_input_1") Show password
+							input._alignCenter#register-button(type="submit", value="Register")
+	
+	blockquote
+		| #{quote.text}
+	footer
+		| #{quote.author}
+
+	include _flashAlerts
