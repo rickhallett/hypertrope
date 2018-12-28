@@ -15,10 +15,11 @@ const options = { useNewUrlParser: true };
 const nodeUtils = require('./utils/nodeUtils');
 const consoleColors = require('./data/consoleColors');
 
-const indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
-const usersRouter = require('./routes/users');
-const workoutRouter = require('./routes/workouts')
+// const indexRouter = require('./routes/index');
+// const authRouter = require('./routes/auth');
+// const usersRouter = require('./routes/users');
+// const workoutRouter = require('./routes/workouts')
+const godRouter = require('./routes/god');
 
 const app = express();
 app.set('env', 'development');
@@ -82,10 +83,11 @@ passport.deserializeUser(Account.deserializeUser());
 /**
  * ROUTES
  */
-app.use('/', indexRouter);
-app.use('/auth', authRouter);
-app.use('/users', usersRouter);
-app.use('/workouts', workoutRouter);
+// app.use('/', indexRouter);
+// app.use('/auth', authRouter);
+// app.use('/users', usersRouter);
+// app.use('/workouts', workoutRouter);
+app.use('/', godRouter);
 
 /**
  * ERROR HANDLING
@@ -96,7 +98,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
