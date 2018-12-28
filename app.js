@@ -19,7 +19,7 @@ const consoleColors = require('./data/consoleColors');
 // const authRouter = require('./routes/auth');
 // const usersRouter = require('./routes/users');
 // const workoutRouter = require('./routes/workouts')
-const godRouter = require('./routes/god');
+const godRouter = require('./routes/routes');
 
 const app = express();
 app.set('env', 'development');
