@@ -46,11 +46,11 @@ router.get("/logout", userController.logout);
  * WORKOUT ROUTES
  */
 
-router.get('workouts/new', workoutController.getNew);
+router.get('/workouts/new', workoutController.getNew);
 
-router.post('workouts/new', workoutController.postNew);
+router.post('/workouts/new', workoutController.postNew);
 
-router.get('workouts/:name', workoutController.getWorkouts);
+router.get('/workouts/:name', workoutController.getWorkouts);
 
 
 /**
