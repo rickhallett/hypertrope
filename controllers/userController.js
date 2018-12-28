@@ -1,37 +1,17 @@
-const express = require("express");
-const mongoose = require("mongoose");
 const passport = require("passport");
 const Account = require("../models/Account");
-
-const router = express.Router();
-
-const Workout = require("../models/Workout");
-const newWorkout = require("../models/newWorkout");
 const constants = require("../data/constants");
 
-const utilities = require("../public/javascripts/utilities");
-const nodeUtils = require("../utils/nodeUtils");
-const customMiddleware = require('./customMiddlewareController');
-
-function indexHitCounter() {
+const indexHitCounter = () => {
   let counter = 0;
   let methods = {};
 
-  methods.inc = () => {
-    console.log('incremented hit counter');
-    return counter++;
+  return {
+    inc: () => counter++,
+    get: () => counter,
+    reset: () => counter = 0
   };
-
-  methods.get = () => {
-    return counter;
-  }
-
-  methods.reset = () => {
-    counter = 0;
-  }
-
-  return methods;
-}
+};
 
 const indexHitCount = indexHitCounter();
 
@@ -74,23 +54,19 @@ userController.getRegister = function(req, res) {
 
 // Post registration
 userController.postRegister = function(req, res) {
-  console.log('hit postRegister')
   Account.register(
     new Account({ username: req.body.username }),
     req.body.password,
     function(err, user) {
-      console.log('hit callback')
       if (err) {
+        req.flash('warn', 'Unable to register. Contact your administrator');
         return res.render("register");
-        // return res.render('index', {flashMessages: req.flash('warn', 'Unable to login') });
-        // return res.render('index', { user : user });
       }
 
       passport.authenticate("local")(req, res, function() {
         console.log('hit authenticate')
-        //TODO: does this need to be here?
         res.locals.user = req.user;
-
+        req.flash('info', 'You have registered and are now logged in.');
         res.redirect("/");
       });
     }
@@ -108,9 +84,7 @@ userController.getLogin = function(req, res) {
 // Post login
 userController.postLogin = function(req, res) {
   passport.authenticate("local")(req, res, function() {
-    //TODO: does this need to be here?
     res.locals.user = req.user;
-
     res.redirect("/");
   });
 };
