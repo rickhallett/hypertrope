@@ -22,8 +22,8 @@ const consoleColors = require('./data/consoleColors');
 const godRouter = require('./routes/routes');
 
 const app = express();
-app.set('env', 'development');
-// app.set('env', 'production');
+// app.set('env', 'development');
+app.set('env', 'production');
 
 let config;
 if(app.get('env') === 'development') config = require('./secret');
