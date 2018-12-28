@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const constants = require('../data/constants');
+const constants = require("../data/constants");
 // const utilities = require('../public/javascripts/utilities');
-const nodeUtils = require('../utils/nodeUtils');
+const nodeUtils = require("../utils/nodeUtils");
 
 /**
  * RESTFUL ROUTING
@@ -22,26 +22,30 @@ function indexHitCounter() {
   let counter = 0;
   return function() {
     return counter++;
-  }
-};
+  };
+}
 
 const indexHitCount = indexHitCounter();
 
-router.get('/', function(req, res, next) {
+router.get("/", function(req, res, next) {
   const sample = arr => arr[Math.floor(Math.random() * arr.length)];
-  const quotes = require('../data/quotes.json').quotes;
+  const quotes = require("../data/quotes.json").quotes;
 
-  if(req.user && indexHitCount() < 1) {
+  if (req.user && indexHitCount() < 1) {
     res.locals.user = req.user;
-    req.flash('info', 'Wecome to Hypertrope!');
+    req.flash("info", "Wecome to Hypertrope!");
   }
 
-  res.render('index', { quote: sample(quotes), title: constants.SITE_NAME, flashMessages: req.flash() });
+  res.render("index", {
+    quote: sample(quotes),
+    title: constants.SITE_NAME,
+    flashMessages: req.flash()
+  });
 });
 
-router.get('/information', nodeUtils.isAuthenticated, function(req, res, next) {
+router.get("/information", nodeUtils.isAuthenticated, function(req, res, next) {
   res.locals.user = req.user;
-  res.render('information');
+  res.render("information");
 });
 
 module.exports = router;

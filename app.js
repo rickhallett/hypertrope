@@ -10,8 +10,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
+
 const options = { useNewUrlParser: true };
 const nodeUtils = require('./utils/nodeUtils');
+const consoleColors = require('./data/consoleColors');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -24,6 +26,7 @@ app.set('env', 'development');
 
 let config;
 if(app.get('env') === 'development') config = require('./secret');
+const consoleSpacer = '\n\n=======================================================================\n\nServer Console Output:\n';
 
 /**
  * DATABASE
@@ -31,9 +34,9 @@ if(app.get('env') === 'development') config = require('./secret');
 const mongoURI = app.get('env') === 'development' ? config.dev_mongoURI : process.env.MONGO_URI;
 mongoose.connect(mongoURI, options);
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(this, `Error connecting to database ${this.name}`));
 db.once('open', function() {
-  console.log('\x1b[33m%s\x1b[0m', `Database: ${this.name} connected successfully on port ${this.port} @host ${this.host}`);
+  console.log('\x1b[33m%s\x1b[0m', `Database: ${this.name} connected successfully on port ${this.port} @host ${this.host}${consoleSpacer}`);
 });
 
 /**

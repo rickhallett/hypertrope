@@ -2,11 +2,11 @@
 // });
 
 const login = () => {
-    const loginName = document.getElementById('login_name');
-    const password = document.getElementById('pword_input_1');
-    const loginButton = document.getElementById('login');
+  const loginName = document.getElementById("login_name");
+  const password = document.getElementById("pword_input_1");
+  const loginButton = document.getElementById("login");
 
-    loginName.value = 'Rick';
-    password.value = 'admin';
-    loginButton.click();
-}
+  loginName.value = "Rick";
+  password.value = "admin";
+  loginButton.click();
+};

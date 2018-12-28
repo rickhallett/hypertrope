@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 
 /**
  * NODE CONSOLE COLORREFERENCE
@@ -29,30 +29,28 @@ BgCyan = "\x1b[46m"
 BgWhite = "\x1b[47m"
  */
 
-const printObjectToLogFile = (obj) => {
-    let data;
-    let objectKeys = Object.keys(obj)
-    for(key in objectKeys) {
-        data += objectKeys[key] + '\n';
-    }
-  fs.writeFile('log.txt', data, { flag: 'w+' }, function(err) {
-    if(err) throw err;
-    if(!err) console.log('\x1b[35m%s\x1b[0m', 'log.txt was created for object');
+const printObjectToLogFile = obj => {
+  let data;
+  let objectKeys = Object.keys(obj);
+  for (key in objectKeys) {
+    data += objectKeys[key] + "\n";
+  }
+  fs.writeFile("log.txt", data, { flag: "w+" }, function(err) {
+    if (err) throw err;
+    if (!err)
+      console.log("\x1b[35m%s\x1b[0m", "log.txt was created for object");
   });
-}
-
-const isAuthenticated = (req,res,next) => {
-    if(req.user)
-       return next();
-    else
-       return res.status(401).json({
-         error: 'User not authenticated'
-       });
- }
-
-module.exports = {
-    printObjectToLogFile,
-    isAuthenticated
 };
 
-  
+const isAuthenticated = (req, res, next) => {
+  if (req.user) return next();
+  else
+    return res.status(401).json({
+      error: "User not authenticated"
+    });
+};
+
+module.exports = {
+  printObjectToLogFile,
+  isAuthenticated
+};

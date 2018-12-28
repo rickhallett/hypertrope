@@ -1,5 +1,5 @@
-const SITE_NAME = "Hypertrope"
+const SITE_NAME = "Hypertrope";
 
 module.exports = {
-    SITE_NAME
-}
+  SITE_NAME
+};

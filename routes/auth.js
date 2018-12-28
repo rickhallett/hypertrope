@@ -1,16 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport = require('passport');
+const passport = require("passport");
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.locals.user = req.user;
-    res.redirect('/');
+router.post("/login", passport.authenticate("local"), function(req, res) {
+  res.locals.user = req.user;
+  res.redirect("/");
 });
 
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = router;
-
