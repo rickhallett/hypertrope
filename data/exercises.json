@@ -31,6 +31,62 @@
     {
       "value": "crunch",
       "name": "Ab Crunches"
+    },
+    {
+      "value": "row",
+      "name": "Upright Cable Row"
+    },
+    {
+      "value": "bicepcurl",
+      "name": "Bicep Curls"
+    },
+    {
+      "value": "dbflies",
+      "name": "Dumbbell Flies"
+    },
+    {
+      "value": "pressup",
+      "name": "Press Ups"
+    },
+    {
+      "value": "tricepdip",
+      "name": "Tricep Dip"
+    },
+    {
+      "value": "shoulderpress",
+      "name": "Shoulder Press"
+    },
+    {
+      "value": "hipthrust",
+      "name": "Hip Thrusts"
+    },
+    {
+      "value": "legpress",
+      "name": "Leg Press"
+    },
+    {
+      "value": "legextension",
+      "name": "Leg Extension"
+    },
+    {
+      "value": "legcurl",
+      "name": "Leg Curl"
+    },
+    {
+      "value": "pullup",
+      "name": "Pull Up"
+    },
+    {
+      "value": "chinup",
+      "name": "Chin Up"
+    },
+    {
+      "value": "pistolsquat",
+      "name": "Pistol Squats"
+    },
+    {
+      "value": "dumbbellmilitary",
+      "name": "Dumbbell Military Press"
     }
   ]
 }
