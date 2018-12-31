@@ -73,4 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
     reloadBeauterJS();
 
   });
+
+  $('#refresh-new-workout').on('click', function(){
+    window.location.href = '/workouts/new';
+  })
 });
