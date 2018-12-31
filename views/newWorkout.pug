@@ -18,12 +18,14 @@ block content
             label(for="date") Date:
             input._full-width(name="date", type="date")
 
-    button.accordion._box._shadow._dark.no-bottom-margin(type="button") Options
+    button.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise Options
     .-panel
       fieldset
         legend Submission Options
+        label You must choose the number of exercises first.
         label(for="exercise_number") Number of exercises
         select._full-width#select-number-exercise(name="exercise_number") 
+          option(value="0") -- Please choose an option --
           option(value="1") One exercise
           option(value="2") Two exercises
           option(value="3") Three exercises
@@ -35,7 +37,7 @@ block content
           option(value="9") Nine exercises
           option(value="10") Ten exercises
 
-    #exercise-selectors
+    #exercise-selectors._hidden
       button#accordian-button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise 1
       .-panel#accordian-panel
         fieldset

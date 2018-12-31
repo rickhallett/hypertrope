@@ -10,3 +10,12 @@ const login = () => {
   password.value = "admin";
   loginButton.click();
 };
+
+const goToLogin = () => {
+  window.location.href = './login';
+};
+
+const goToWorkout = () => {
+  window.location.href = './workouts/new';
+};
+

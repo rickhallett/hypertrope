@@ -25,7 +25,7 @@ const {
   inspect } = require('./config/winston');
 
 const colors = require('colors');
-const godRouter = require("./routes/routes");
+const router = require("./routes/routes");
 
 const app = express();
 app.set("env", "development");
@@ -122,11 +122,8 @@ app.use(expressWinstonConsoleLogger);
 /**
  * ROUTES
  */
-// app.use('/', indexRouter);
-// app.use('/auth', authRouter);
-// app.use('/users', usersRouter);
-// app.use('/workouts', workoutRouter);
-app.use("/", godRouter);
+
+app.use("/", router);
 
 /**
  * EXPRESS-WINSTON ERROR LOGGER (must be after router)

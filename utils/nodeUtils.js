@@ -50,7 +50,22 @@ const isAuthenticated = (req, res, next) => {
     });
 };
 
+const hitCounter = () => {
+  let counter = 0;
+  
+  return {
+    inc: () => counter++,
+    get: () => counter,
+    reset: () => counter = 0
+  };
+};
+
+const indexHitCount = hitCounter();
+const desktopRestrictCount = hitCounter();
+
 module.exports = {
   printObjectToLogFile,
-  isAuthenticated
+  isAuthenticated,
+  indexHitCount,
+  desktopRestrictCount
 };

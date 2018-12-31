@@ -1,19 +1,7 @@
 const passport = require("passport");
 const Account = require("../models/Account");
 const constants = require("../data/constants");
-
-const indexHitCounter = () => {
-  let counter = 0;
-  let methods = {};
-
-  return {
-    inc: () => counter++,
-    get: () => counter,
-    reset: () => counter = 0
-  };
-};
-
-const indexHitCount = indexHitCounter();
+const { indexHitCount, desktopRestrictCount } = require('../utils/nodeUtils');
 
 /**
  * USER CONTROLLER
@@ -23,6 +11,7 @@ const userController = {};
 
 // Restrict access to root page
 userController.home = function(req, res) {
+  desktopRestrictCount.reset();
   
   const sample = arr => arr[Math.floor(Math.random() * arr.length)];
   const quotes = require("../data/quotes.json").quotes;
@@ -32,7 +21,7 @@ userController.home = function(req, res) {
     indexHitCount.inc();
   }
 
-  if(indexHitCount.get() === 1) {
+  if(indexHitCount.get() === 1 && req.user) {
     req.flash("info", 'Welcome to Hypertrope!');
   }
 
@@ -42,6 +31,17 @@ userController.home = function(req, res) {
     flashMessages: req.flash()
   });
   //   res.render('index', { user : req.user });
+};
+
+userController.desktopRestrict = function(req, res) {
+  desktopRestrictCount.inc();
+  if(desktopRestrictCount.get() > 1) {
+    req.flash('warn', 'You really do need to use a phone for this app.')
+  }
+  if(desktopRestrictCount.get() > 2) {
+    req.flash('warn', 'You can pout all you like. Mobiles only.')
+  }
+  res.render('desktopRestrict', { flashMessages: req.flash()});
 };
 
 // Go to registration page
@@ -86,7 +86,7 @@ userController.postLogin = function(req, res) {
 
   Account.find({ username: req.body.username }, function(err, account){
     if(!account.length) {
-      req.flash('warn', 'This username was not found. Please register.');
+      req.flash('error', 'This username was not found. Please register.');
       res.redirect('login');
     }
 

@@ -64,6 +64,12 @@ table {
   color: rgb(100, 98, 98);
 }
 
+#stop-sign {
+  font-size: 800%;
+  margin-bottom: 30px;
+  color: darkred;
+}
+
 /* UTILITY CLASSES */
 
 .limit-width-50 {

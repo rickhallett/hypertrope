@@ -11,6 +11,7 @@ const dynamicallyAssignFormDetails = (
   panel,
   selectedNumber
 ) => {
+  // debugger;
   for (let i = 1; i <= selectedNumber; i++) {
     let newAccordian = accordian.clone();
     let newPanel = panel.clone();
@@ -38,6 +39,8 @@ const dynamicallyAssignFormDetails = (
     form.append(newAccordian);
     form.append(newPanel);
   }
+  // debugger;
+  form.removeClass('_hidden')
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -55,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   $("#select-number-exercise").on("change", function(event) {
+    // debugger;
     let form = $("#exercise-selectors");
     const accordian = $("#accordian-button");
     const panel = $("#accordian-panel");

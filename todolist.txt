@@ -48,4 +48,6 @@ TODO LIST
 
 19. Have a dynamic information sheet; calculate TDEE based on user profile information
 
+20. Have index increment counter set up as middle ware as opposed to external function.
+
 BUGS
