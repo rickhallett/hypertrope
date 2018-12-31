@@ -3,11 +3,13 @@
  */
 const fs = require("fs");
 const express = require("express");
+const session = require('express-session');
 const http = require("http");
 const bodyParser = require("body-parser");
 const path = require("path");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
+const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
@@ -86,20 +88,29 @@ app.use(morgan('combined', { stream: accessLogStream }));
 /**
  * AUTH MIDDLEWARE
  */
-app.use(
-  require("express-session")({
-    secret:
-      app.get("env") === "development"
-        ? config.sessionSecret
-        : process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: null,
-      expires: false,
-    },
+// app.use(
+//   require("express-session")({
+//     secret:
+//       app.get("env") === "development"
+//         ? config.sessionSecret
+//         : process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       maxAge: null,
+//       expires: false,
+//     },
+//   })
+// );
+
+// app.use(express.session({ store: new MongoStore({ db: config.dev_mongoURI }) }));
+
+app.use(session({
+  secret: config.sessionSecret,
+  store: new MongoStore({ 
+    url: app.get("env") === "development" ? config.dev_mongoURI : config.mongoURI
   })
-);
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
