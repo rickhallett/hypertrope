@@ -25,9 +25,10 @@ block content
 						.col.m6.no-padding
 							input._alignCenter#login(type="submit", value="Login")
 
+	include _flashAlerts
+	
 	blockquote
 		| #{quote.text}
 	footer
 		| #{quote.author}
 
-	include _flashAlerts

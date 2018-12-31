@@ -132,7 +132,7 @@ app.use("/", godRouter);
  * EXPRESS-WINSTON ERROR LOGGER (must be after router)
  */
 
-app.use(expressWinstonErrorLogger);
+// app.use(expressWinstonErrorLogger);
 
 
 /**
@@ -140,12 +140,14 @@ app.use(expressWinstonErrorLogger);
  */
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log('error callback hit'.red)
   next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res) {
   // set locals, only providing error in development
+  console.log('error callback 2 hit'.red)
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 

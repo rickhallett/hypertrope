@@ -83,9 +83,20 @@ userController.getLogin = function(req, res) {
 
 // Post login
 userController.postLogin = function(req, res) {
-  passport.authenticate("local")(req, res, function() {
-    res.locals.user = req.user;
-    res.redirect("/");
+
+  Account.find({ username: req.body.username }, function(err, account){
+    if(!account.length) {
+      req.flash('warn', 'Incorrect username or password');
+      res.redirect('login');
+    }
+
+    let username = account.username;
+    console.log(`username: ${username}`);
+    
+    passport.authenticate("local")(req, res, function() {
+      res.locals.user = req.user;
+      res.redirect("/");
+    });
   });
 };
 
