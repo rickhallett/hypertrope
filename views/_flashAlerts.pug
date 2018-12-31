@@ -11,3 +11,10 @@
 			span.-close ×
 			strong :(				
 			| #{message}
+
+-if(flashMessages.error)
+	each message in flashMessages.error
+		.alert._shadow._box
+			span.-close ×
+			strong :(				
+			| #{message}

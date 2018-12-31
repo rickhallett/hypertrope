@@ -86,19 +86,28 @@ userController.postLogin = function(req, res) {
 
   Account.find({ username: req.body.username }, function(err, account){
     if(!account.length) {
-      req.flash('warn', 'Incorrect username or password');
+      req.flash('warn', 'This username was not found. Please register.');
       res.redirect('login');
     }
 
     let username = account.username;
     console.log(`username: ${username}`);
     
-    passport.authenticate("local")(req, res, function() {
+    passport.authenticate("local", { failureRedirect: '/login',
+                                      failureFlash: 'Invalid username or password.' })
+    (req, res, function() {
       res.locals.user = req.user;
       res.redirect("/");
     });
+
   });
 };
+
+// Alternative method exposed by Passport.js
+// req.login(user, function(err) {
+//   if (err) { return next(err); }
+//   return res.redirect('/users/' + req.user.username);
+// });
 
 // logout
 userController.logout = function(req, res) {
