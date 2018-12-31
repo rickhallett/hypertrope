@@ -60,14 +60,17 @@ document.addEventListener("DOMContentLoaded", function() {
   $("#select-number-exercise").on("change", function(event) {
     // debugger;
     let form = $("#exercise-selectors");
+    let selector = $("#select-number-exercise");
     const accordian = $("#accordian-button");
     const panel = $("#accordian-panel");
-    const selectedNumber = $("#select-number-exercise").val();
+    const selectedNumber = selector.val();
 
     form.html("");
 
     dynamicallyAssignFormDetails(form, accordian, panel, selectedNumber);
+    selector.attr('disabled', true);
 
     reloadBeauterJS();
+
   });
 });
