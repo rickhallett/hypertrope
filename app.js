@@ -14,10 +14,17 @@ const flash = require("connect-flash");
 
 const options = { useNewUrlParser: true };
 const nodeUtils = require("./utils/nodeUtils");
+const appRoot = require("app-root-path");
 const morgan = require("morgan");
-const winston = require('./config/winston');
-const colors = require('colors');
 
+const { 
+  expressWinstonLogger, 
+  expressWinstonConsoleLogger, 
+  expressWinstonErrorLogger, 
+  logfile, 
+  inspect } = require('./config/winston');
+
+const colors = require('colors');
 const godRouter = require("./routes/routes");
 
 const app = express();
@@ -27,7 +34,7 @@ app.set("env", "development");
 let config;
 if (app.get("env") === "development") config = require("./secret");
 const consoleSpacer =
-  "\n\n=======================================================================\n\nServer Console Output:\n";
+  "\n\n> Server Console Output:\n".yellow;
 
 /**
  * DATABASE
@@ -36,21 +43,24 @@ const mongoURI =
   app.get("env") === "development"
     ? config.dev_mongoURI
     : process.env.MONGO_URI;
+
 mongoose.connect(
   mongoURI,
   options
 );
+
 const db = mongoose.connection;
+
 db.on(
   "error",
   console.error.bind(this, `Error connecting to database ${this.name}`)
 );
+
 db.once("open", function() {
   console.log(
-    "\x1b[33m%s\x1b[0m",
-    `Database: ${this.name} connected successfully on port ${this.port} @host ${
+    `\nDatabase: ${this.name} connected successfully on port ${this.port} @host ${
       this.host
-    }${consoleSpacer}`
+    }${consoleSpacer}`.cyan
   );
 });
 
@@ -68,7 +78,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(morgan('combined', { stream: winston.stream }));
+
+// create a write stream (in append mode)
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'express_app.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }));
+
 /**
  * AUTH MIDDLEWARE
  */
@@ -99,14 +113,11 @@ passport.deserializeUser(Account.deserializeUser());
 
 
 /**
- * WINSTON CONSOLE LOGGER (must be before router)
- * success logger
- * info logger
- * error logger
- * trace/silly logger
+ * EXPRESS-WINSTON FILE LOGGER (must be before router)
  */
 
-
+app.use(expressWinstonLogger);
+app.use(expressWinstonConsoleLogger);
 
 /**
  * ROUTES
@@ -118,10 +129,10 @@ passport.deserializeUser(Account.deserializeUser());
 app.use("/", godRouter);
 
 /**
- * WINSTON ERROR LOGGER (must be after router)
+ * EXPRESS-WINSTON ERROR LOGGER (must be after router)
  */
 
-
+app.use(expressWinstonErrorLogger);
 
 
 /**
@@ -138,7 +149,7 @@ app.use(function(err, req, res) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+  logfile.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
 
   // render the error page
   res.status(err.status || 500);
@@ -157,20 +168,14 @@ const server = http.createServer(app);
 
 // Listen on provided port, on all network interfaces.
 server.listen(port, function(err) {
+  if(err) {
+    console.log('\nError setting up server'.red);
+    console.log(err)
+  }
+
   if (!err) {
-    winston.debug(`Server listening on ${port}`);
+    console.log(`\nServer: listening on ${port}`.magenta);
   }
 });
-
-const t = {
-  fds: [1, 2, 3, [1, 2, {name: 'ksksks'}]],
-  fdds: {
-    fdd: {
-      sjssj: {
-        name: 'skdfksdfksdf'
-      }
-    }
-  }
-}
 
 module.exports = app;
