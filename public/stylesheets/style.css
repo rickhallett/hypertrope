@@ -70,6 +70,22 @@ table {
   color: darkred;
 }
 
+#edit-workout-form {
+  margin: 5px;
+}
+
+#edit-workout-submit {
+  margin-bottom: 2px;
+}
+
+#delete-workout-form {
+  margin: 5px
+}
+
+#delete-workout-submit {
+  margin-bottom: 2px;
+}
+
 /* UTILITY CLASSES */
 
 .limit-width-50 {
@@ -78,6 +94,10 @@ table {
 
 .margin-20 {
   margin: 20px;
+}
+
+.margin-10 {
+  margin: 10px;
 }
 
 .no-bottom-margin {
@@ -100,6 +120,10 @@ table {
   padding: 2px;
 }
 
+.no-margin {
+  margin: 2px;
+}
+
 .to-block {
   display: block;
 }
@@ -115,6 +139,11 @@ table {
 .justify-center {
   justify-content: center;
 }
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
 .button-center {
   margin-left: 50px;
 }

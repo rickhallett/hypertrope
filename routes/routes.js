@@ -55,6 +55,14 @@ router.post('/workouts/new', workoutController.postNew);
 
 router.get('/workouts/:name', workoutController.getWorkouts);
 
+router.get('/workouts/:id/edit', workoutController.getEditWorkout);
+// router.get('/workouts/edit', workoutController.getEditWorkout);
+
+router.get('workouts/:id/edit', workoutController.postEditWorkout);
+
+router.post('/workouts/:id/delete', workoutController.deleteWorkout);
+
+
 
 /**
  * INFORMATION ROUTES

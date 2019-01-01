@@ -52,12 +52,31 @@ workoutController.getWorkouts = function(req, res) {
 
   Workout.find({ name: name }, function(err, workouts) {
     if (err) console.log("Error retrieving workouts");
-    res.render("list-workouts", {
+    res.render("listWorkouts", {
       name: name,
       workouts: workouts,
       helpers: helpers
     });
   });
 };
+
+workoutController.getEditWorkout = function(req, res) {
+  const id = req.body.id;
+  Workout.findById(id, function(err, workout) {
+    if(err) {
+      req.flash('error', 'Workout not found');
+    }
+
+    res.render('editWorkout', { workout: workout });
+  })
+};
+
+workoutController.postEditWorkout = function(req, res) {
+
+}
+
+workoutController.deleteWorkout = function(req, res) {
+  
+}
 
 module.exports = workoutController;

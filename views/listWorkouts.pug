@@ -88,9 +88,14 @@ block content
 						td #{workout.exercises.lift10.reps}
 						td #{workout.exercises.lift10.weight}
 
-		.card._cream
+		.card._cream._box
 			label Total Work: #{workout.totalWork}kg
 			label#workout-comments Comments: #{workout.comments}
+		.card._nightblue._box.flex-container.justify-space-around
+			form#edit-workout-form(action="/workouts/#{workout._id}/edit", method="post")
+				input#edit-workout-submit._cream._alignCenter(type="submit", value="Edit")
+			form#delete-workout-form(action="/workouts/#{workout._id}/delete", method="post")
+				input#delete-workout-submit._cream._alignCenter(type="submit", value="Delete")
 		hr
 		
 	a(href="/workouts/new") Back to submission form

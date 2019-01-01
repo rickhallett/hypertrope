@@ -31,8 +31,8 @@ const router = require("./routes/routes");
 
 const app = express();
 
-// process.env.NODE_ENV = 'development';
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
+// process.env.NODE_ENV = 'production';
 
 let config;
 if (process.env.NODE_ENV === "development") config = require("./secret");
@@ -179,7 +179,7 @@ app.use(function(err, req, res) {
 //Get port from environment and store in Express.
 const host = '0.0.0.0';
 const port = process.env.PORT || "3000";
-app.set("port", port);
+
 
 // Create HTTP server.
 const server = http.createServer(app);

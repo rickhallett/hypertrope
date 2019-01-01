@@ -1,0 +1,33 @@
+extends layout
+
+block scripts
+  script(src=`/javascripts/editWorkout.js`)
+
+block content
+  form(action="/workouts/:id/edit", method="post", id="edit_workout_form")
+    button#accordian-button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Edit Your Workout
+      .-panel#accordian-panel
+        fieldset
+          legend Workout Details
+          each lift in workout
+            .row
+              .col.m3.no-padding
+                label lift.name
+              .col.m3.no-padding
+                label Sets:
+                input#input-sets-1._full-width(name="sets", type="number", value=lift.sets)
+
+              .col.m3.no-padding
+                label Reps:
+                input#input-reps-1._full-width(name="reps", type="number", value=lift.reps)
+
+              .col.m3.no-padding
+                label Weight (kg):
+                input#input-weight-1._full-width(name="weight", type="number", value=lift.weight)
+          .row
+            .col.m3.no-padding
+              label Comments
+              textarea._full-width(name="comments", value=workout.comment rows: 10)
+
+    .flex-container.justify-center.margin-20
+      input._alignCenter#edit-workout(type="submit", value="Edit Workout")
