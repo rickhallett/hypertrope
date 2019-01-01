@@ -30,8 +30,8 @@ const colors = require('colors');
 const router = require("./routes/routes");
 
 const app = express();
-app.set("env", "development");
-// app.set('env', 'production');
+// app.set("env", "development");
+app.set('env', 'production');
 
 let config;
 if (app.get("env") === "development") config = require("./secret");
