@@ -30,8 +30,8 @@ const colors = require('colors');
 const router = require("./routes/routes");
 
 const app = express();
-// app.set("env", "development");
-app.set('env', 'production');
+app.set("env", "development");
+// app.set('env', 'production');
 
 let config;
 if (app.get("env") === "development") config = require("./secret");
@@ -112,6 +112,7 @@ app.use(session({
   })
 }));
 
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -173,6 +174,7 @@ app.use(function(err, req, res) {
  * INITIALISE SERVER
  */
 //Get port from environment and store in Express.
+const host = '0.0.0.0';
 const port = process.env.PORT || "3000";
 app.set("port", port);
 
@@ -180,7 +182,7 @@ app.set("port", port);
 const server = http.createServer(app);
 
 // Listen on provided port, on all network interfaces.
-server.listen(port, function(err) {
+server.listen(port, host, function(err) {
   if(err) {
     console.log('\nError setting up server'.red);
     console.log(err)
