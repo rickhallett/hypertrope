@@ -30,19 +30,20 @@ const colors = require('colors');
 const router = require("./routes/routes");
 
 const app = express();
-// app.set("env", "development");
-app.set('env', 'production');
+
+// process.env.NODE_ENV = 'development';
+// process.env.NODE_ENV = 'production';
 
 let config;
-if (app.get("env") === "development") config = require("./secret");
-const consoleSpacer =
-  "\n\n> Server Console Output:\n".yellow;
+if (process.env.NODE_ENV === "development") config = require("./secret");
+
+const consoleSpacer = "\n\n> Server Console Output:\n".yellow;
 
 /**
  * DATABASE
  */
 const mongoURI =
-  app.get("env") === "development"
+  process.env.NODE_ENV === "development"
     ? config.dev_mongoURI
     : process.env.MONGO_URI;
 
@@ -91,7 +92,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 // app.use(
 //   require("express-session")({
 //     secret:
-//       app.get("env") === "development"
+//       process.env.NODE_ENV === "development"
 //         ? config.sessionSecret
 //         : process.env.SESSION_SECRET,
 //     resave: false,
@@ -108,7 +109,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.use(session({
   secret: config.sessionSecret,
   store: new MongoStore({ 
-    url: app.get("env") === "development" ? config.dev_mongoURI : config.mongoURI
+    url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : process.env.MONGO_URI
   })
 }));
 
@@ -161,7 +162,7 @@ app.use(function(err, req, res) {
   // set locals, only providing error in development
   console.log('error callback 2 hit'.red)
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals.error = req.process.env.NODE_ENV === "development" ? err : {};
 
   logfile.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
 
