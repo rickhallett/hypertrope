@@ -32,10 +32,11 @@ const router = require("./routes/routes");
 const app = express();
 
 // process.env.NODE_ENV = 'development';
-// process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'production';
 
 let config;
 if (process.env.NODE_ENV === "development") config = require("./secret");
+// if (process.env.NODE_ENV === "production") config = require("./secret");
 
 const consoleSpacer = "\n\n> Server Console Output:\n".yellow;
 
@@ -107,14 +108,13 @@ app.use(morgan('combined', { stream: accessLogStream }));
 // app.use(express.session({ store: new MongoStore({ db: config.dev_mongoURI }) }));
 
 app.use(session({
-  secret: config.sessionSecret,
+  secret: process.env.NODE_ENV === "development" ? config.sessionSecret : process.env.SESSION_SECRET,
+  // secret: process.env.NODE_ENV === "development" ? config.sessionSecret : config.sessionSecret,
   store: new MongoStore({ 
     url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : process.env.MONGO_URI
+    // url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : mongoURI
   })
 }));
-
-console.log(`process.env.MONGO_URI: ${process.env.NODE_ENV}`);
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -134,8 +134,8 @@ passport.deserializeUser(Account.deserializeUser());
  * EXPRESS-WINSTON FILE LOGGER (must be before router)
  */
 
-app.use(expressWinstonLogger);
-app.use(expressWinstonConsoleLogger);
+// app.use(expressWinstonLogger);
+// app.use(expressWinstonConsoleLogger);
 
 /**
  * ROUTES

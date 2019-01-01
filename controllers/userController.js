@@ -54,6 +54,7 @@ userController.getRegister = function(req, res) {
 
 // Post registration
 userController.postRegister = function(req, res) {
+  
   Account.register(
     new Account({ username: req.body.username }),
     req.body.password,
@@ -91,7 +92,6 @@ userController.postLogin = function(req, res) {
     }
 
     let username = account.username;
-    console.log(`username: ${username}`);
     
     passport.authenticate("local", { failureRedirect: '/login',
                                       failureFlash: 'Invalid username or password.' })
