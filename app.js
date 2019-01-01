@@ -113,6 +113,8 @@ app.use(session({
   })
 }));
 
+console.log(`process.env.MONGO_URI: ${process.env.NODE_ENV}`);
+
 
 app.use(passport.initialize());
 app.use(passport.session());
