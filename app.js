@@ -29,9 +29,9 @@ const router = require("./routes/routes");
 
 const app = express();
 
-// process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "development";
 // process.env.NODE_ENV = "test_production";
-process.env.NODE_ENV = "production";
+// process.env.NODE_ENV = "production";
 
 let config;
 if (
@@ -85,11 +85,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // create a write stream (in append mode)
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "express_app.log"),
-  { flags: "a" }
-);
-app.use(morgan("combined", { stream: accessLogStream }));
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "express_app.log"),
+//   { flags: "a" }
+// );
+// app.use(morgan("combined", { stream: accessLogStream }));
 
 /**
  * AUTH MIDDLEWARE
@@ -139,7 +139,7 @@ passport.deserializeUser(Account.deserializeUser());
  * EXPRESS-WINSTON FILE LOGGER (must be before router)
  */
 
-app.use(expressWinstonLogger);
+// app.use(expressWinstonLogger);
 
 /**
  * ROUTES
@@ -151,7 +151,7 @@ app.use("/", router);
  * EXPRESS-WINSTON ERROR LOGGER (must be after router)
  */
 
-app.use(expressWinstonErrorLogger);
+// app.use(expressWinstonErrorLogger);
 
 /**
  * ERROR HANDLING
