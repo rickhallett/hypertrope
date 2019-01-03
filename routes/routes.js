@@ -43,15 +43,27 @@ router.get("/login", middleWare.quotes, userController.getLogin);
 router.post("/login", userController.postLogin);
 
 // route for logout action
-router.get("/logout", userController.logout);
+router.get(
+  "/logout",
+  [middleWare.quotes, middleWare.isAuthenticated],
+  userController.logout
+);
 
 /**
  * WORKOUT ROUTES
  */
 
-router.get("/workouts/new", workoutController.getNew);
+router.get(
+  "/workouts/new",
+  middleWare.isAuthenticated,
+  workoutController.getNew
+);
 
-router.post("/workouts/new", workoutController.postNew);
+router.post(
+  "/workouts/new",
+  middleWare.isAuthenticated,
+  workoutController.postNew
+);
 
 router.get(
   "/workouts/:name",
@@ -59,17 +71,33 @@ router.get(
   workoutController.getWorkouts
 );
 
-router.get("/workouts/:id/edit", workoutController.getEditWorkout);
+router.get(
+  "/workouts/:id/edit",
+  middleWare.isAuthenticated,
+  workoutController.getEditWorkout
+);
 
-router.post("/workouts/:id/edit", workoutController.postEditWorkout);
+router.post(
+  "/workouts/:id/edit",
+  middleWare.isAuthenticated,
+  workoutController.postEditWorkout
+);
 
-router.post("/workouts/:id/delete", workoutController.deleteWorkout);
+router.post(
+  "/workouts/:id/delete",
+  middleWare.isAuthenticated,
+  workoutController.deleteWorkout
+);
 
 /**
  * INFORMATION ROUTES
  */
 
-router.get("/information", informationController.getInformation);
+router.get(
+  "/information",
+  middleWare.isAuthenticated,
+  informationController.getInformation
+);
 
 console.log("\nLoaded all routes".yellow);
 

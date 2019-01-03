@@ -24,13 +24,14 @@ const {
 const colors = require("colors");
 const helpers = require("./utils/helpers");
 const constants = require("./data/constants");
+const quotes = require("./data/quotes.json").quotes;
 const router = require("./routes/routes");
 
 const app = express();
 
-// process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "development";
 // process.env.NODE_ENV = "test_production";
-process.env.NODE_ENV = "production";
+// process.env.NODE_ENV = "production";
 
 let config;
 if (
@@ -123,6 +124,7 @@ app.use((req, res, next) => {
   res.locals.currentPath = req.path;
   res.locals.title = constants.SITE_NAME;
   res.locals.colors = colors;
+  res.locals.quote = helpers.getRandomQuote;
   next();
 });
 /**

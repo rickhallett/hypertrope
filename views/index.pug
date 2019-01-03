@@ -12,7 +12,8 @@ block content
 	
 	include _flashAlerts
 	
-	blockquote
-		| #{quote.text}
-	footer
-		| #{quote.author}
+	if(quote)
+		blockquote
+			| #{quote.text}
+		footer
+			| #{quote.author}

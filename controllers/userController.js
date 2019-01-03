@@ -1,6 +1,7 @@
 const passport = require("passport");
 const Account = require("../models/Account");
 const { indexHitCount, desktopRestrictCount } = require("../utils/nodeUtils");
+const { getRandomQuote } = require("../utils/helpers");
 
 /**
  * USER CONTROLLER
@@ -66,7 +67,7 @@ userController.postRegister = function(req, res) {
 // Go to login page
 userController.getLogin = function(req, res) {
   res.render("login", {
-    quote: res.sample(res.quotes)
+    quote: res.quote
   });
 };
 
@@ -98,7 +99,11 @@ userController.logout = function(req, res) {
   } else {
     req.flash("warn", "Problem logging out. Please contact administrator");
   }
-  res.redirect("/");
+  res.render("index", {
+    user: null,
+    flashMessages: req.flash(),
+    quote: res.quote
+  });
 };
 
 module.exports = userController;

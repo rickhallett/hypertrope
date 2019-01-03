@@ -67,10 +67,17 @@ sortExercises = exercises => {
   return exercises;
 };
 
+getRandomQuote = () => {
+  sample = arr => arr[Math.floor(Math.random() * arr.length)];
+  const quotes = require("../data/quotes.json").quotes;
+  return sample(quotes);
+};
+
 module.exports = {
   capitaliseFirstChar,
   determineMongoURI,
   determineSessionSecret,
   createExerciseMap,
-  sortExercises
+  sortExercises,
+  getRandomQuote
 };
