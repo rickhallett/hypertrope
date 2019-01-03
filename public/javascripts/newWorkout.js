@@ -40,7 +40,7 @@ const dynamicallyAssignFormDetails = (
     form.append(newPanel);
   }
   // debugger;
-  form.removeClass('_hidden')
+  form.removeClass("_hidden");
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   $("#select-number-exercise").on("change", function(event) {
-    // debugger;
     let form = $("#exercise-selectors");
     let selector = $("#select-number-exercise");
     const accordian = $("#accordian-button");
@@ -68,13 +67,12 @@ document.addEventListener("DOMContentLoaded", function() {
     form.html("");
 
     dynamicallyAssignFormDetails(form, accordian, panel, selectedNumber);
-    selector.attr('disabled', true);
+    selector.attr("disabled", true);
 
     reloadBeauterJS();
-
   });
 
-  $('#refresh-new-workout').on('click', function(){
-    window.location.href = '/workouts/new';
-  })
+  $("#refresh-new-workout").on("click", function() {
+    window.location.href = "/workouts/new";
+  });
 });

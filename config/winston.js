@@ -23,7 +23,6 @@ const customLogOptions = (filename, level) => {
   }
 }
 
-
 const standardExpressFileOptions = (filename, level) => {
   return {
     level: level,

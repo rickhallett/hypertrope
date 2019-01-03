@@ -4,33 +4,31 @@
 const fs = require("fs");
 const express = require("express");
 const http = require("http");
-const session = require('express-session');
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require("path");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
-
-const nodeUtils = require("./utils/nodeUtils");
-const appRoot = require("app-root-path");
 const morgan = require("morgan");
 
-const { 
-  expressWinstonLogger, 
-  expressWinstonConsoleLogger, 
-  expressWinstonErrorLogger, 
-  logfile, 
-  inspect } = require('./config/winston');
+const {
+  expressWinstonLogger,
+  expressWinstonConsoleLogger,
+  expressWinstonErrorLogger,
+  logfile,
+  inspect
+} = require("./config/winston");
 
-const colors = require('colors');
+const colors = require("colors");
 const router = require("./routes/routes");
 
 const app = express();
 
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = "development";
 // process.env.NODE_ENV = 'production';
 
 let config;
@@ -47,15 +45,12 @@ const mongoURI =
     ? config.localMongoURI
     : process.env.MONGO_URI;
 
-console.log(mongoURI.red);
-
 const dbOptions = { useNewUrlParser: true };
 
 mongoose.connect(
   mongoURI,
   dbOptions
 );
-
 
 const db = mongoose.connection;
 
@@ -66,9 +61,9 @@ db.on(
 
 db.once("open", function() {
   console.log(
-    `\nDatabase: ${this.name} connected successfully on port ${this.port} @host ${
-      this.host
-    }${consoleSpacer}`.cyan
+    `\nDatabase: ${this.name} connected successfully on port ${
+      this.port
+    } @host ${this.host}${consoleSpacer}`.cyan
   );
 });
 
@@ -86,13 +81,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(expressWinstonConsoleLogger);
+// app.use(expressWinstonConsoleLogger);
 app.use(expressWinstonLogger);
 app.use(expressWinstonErrorLogger);
 
 // create a write stream (in append mode)
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'express_app.log'), { flags: 'a' })
-app.use(morgan('combined', { stream: accessLogStream }));
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "express_app.log"),
+  { flags: "a" }
+);
+app.use(morgan("combined", { stream: accessLogStream }));
 
 /**
  * AUTH MIDDLEWARE
@@ -114,16 +112,24 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 // app.use(express.session({ store: new MongoStore({ db: config.dev_mongoURI }) }));
 
-app.use(session({
-  secret: process.env.NODE_ENV === "development" ? config.sessionSecret : process.env.SESSION_SECRET,
-  // secret: process.env.NODE_ENV === "development" ? config.sessionSecret : config.sessionSecret,
-  store: new MongoStore({ 
-    url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : process.env.MONGO_URI
-    // url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : mongoURI
-  }),
-  saveUninitialized: false,
-  resave: false
-}));
+app.use(
+  session({
+    secret:
+      process.env.NODE_ENV === "development"
+        ? config.sessionSecret
+        : process.env.SESSION_SECRET,
+    // secret: process.env.NODE_ENV === "development" ? config.sessionSecret : config.sessionSecret,
+    store: new MongoStore({
+      url:
+        process.env.NODE_ENV === "development"
+          ? config.dev_mongoURI
+          : process.env.MONGO_URI
+      // url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : mongoURI
+    }),
+    saveUninitialized: false,
+    resave: false
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -137,7 +143,6 @@ const Account = require("./models/Account");
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
-
 
 /**
  * EXPRESS-WINSTON FILE LOGGER (must be before router)
@@ -158,24 +163,27 @@ app.use("/", router);
 
 // app.use(expressWinstonErrorLogger);
 
-
 /**
  * ERROR HANDLING
  */
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log('error callback hit'.red)
+  console.log("error callback hit".red);
   next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res) {
   // set locals, only providing error in development
-  console.log('error callback 2 hit'.red)
+  console.log("error callback 2 hit".red);
   res.locals.message = err.message;
   res.locals.error = req.process.env.NODE_ENV === "development" ? err : {};
 
-  logfile.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+  logfile.error(
+    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
+      req.method
+    } - ${req.ip}`
+  );
 
   // render the error page
   res.status(err.status || 500);
@@ -186,18 +194,17 @@ app.use(function(err, req, res) {
  * INITIALISE SERVER
  */
 //Get port from environment and store in Express.
-const host = '0.0.0.0';
+const host = "0.0.0.0";
 const port = process.env.PORT || "3000";
-
 
 // Create HTTP server.
 const server = http.createServer(app);
 
 // Listen on provided port, on all network interfaces.
 server.listen(port, host, function(err) {
-  if(err) {
-    console.log('\nError setting up server'.red);
-    console.log(err)
+  if (err) {
+    console.log("\nError setting up server".red);
+    console.log(err);
   }
 
   if (!err) {

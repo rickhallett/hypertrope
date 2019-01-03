@@ -1,17 +1,9 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const passport = require("passport");
-const Account = require("../models/Account");
-
-const router = express.Router();
-
-const Workout = require("../models/Workout");
-const newWorkout = require("../models/newWorkout");
+const { Workout } = require("../models/Workout");
+const createWorkout = require("../models/createWorkout");
 const constants = require("../data/constants");
-
-const utilities = require("../public/javascripts/utilities");
-const nodeUtils = require("../utils/nodeUtils");
-const customMiddleware = require('../controllers/customMiddlewareController');
+const helpers = require("../utils/helpers");
+const customMiddleware = require("../controllers/customMiddlewareController");
 
 /**
  * WORKOUT CONTROLLER
@@ -29,12 +21,12 @@ workoutController.getNew = function(req, res) {
 };
 
 workoutController.postNew = function(req, res) {
-  const workout = newWorkout(req);
+  const workout = createWorkout(req);
   workout.calculateWork();
 
   workout.save(function(err) {
     if (err) {
-      console.log("Error saving workouts");
+      console.log("Error saving workouts".red);
       console.log(err);
     }
 
@@ -43,22 +35,31 @@ workoutController.postNew = function(req, res) {
 };
 
 workoutController.getWorkouts = function(req, res) {
+  let exerciseData = require("../data/exercises.json").exercises;
+  let exerciseMap = {};
+
+  exerciseData.forEach(el => {
+    const { name: viewName, value: dbIdentifier } = el;
+    exerciseMap[dbIdentifier] = viewName;
+  });
+
   const name = req.user.username;
   res.locals.user = req.user;
 
-  const helpers = {
-    capitaliseFirstChar: utilities.capitaliseFirstChar
+  const utils = {
+    capitaliseFirstChar: helpers.capitaliseFirstChar
   };
 
   Workout.find({ name: name }, function(err, workouts) {
     if (err) {
-      req.flash('error', 'Unable to retrieve workouts.');
-      res.render('/', { flashMessages: req.flash() })
+      req.flash("error", "Unable to retrieve workouts.");
+      res.render("/", { flashMessages: req.flash() });
     }
     res.render("listWorkouts", {
       name: name,
       workouts: workouts,
-      helpers: helpers
+      helpers: utils,
+      exerciseMap: exerciseMap
     });
   });
 };
@@ -66,21 +67,17 @@ workoutController.getWorkouts = function(req, res) {
 workoutController.getEditWorkout = function(req, res) {
   const id = req.body.id;
   Workout.findById(id, function(err, workout) {
-    if(err) {
-      req.flash('error', 'Workout not found');
+    if (err) {
+      req.flash("error", "Workout not found");
       res.render(`/workouts/${req.user.username}`);
     }
 
-    res.render('editWorkout', { workout: workout });
-  })
+    res.render("editWorkout", { workout: workout });
+  });
 };
 
-workoutController.postEditWorkout = function(req, res) {
+workoutController.postEditWorkout = function(req, res) {};
 
-}
-
-workoutController.deleteWorkout = function(req, res) {
-  
-}
+workoutController.deleteWorkout = function(req, res) {};
 
 module.exports = workoutController;

@@ -13,11 +13,12 @@ Destroy	/dogs/:id	DELETE	Delete a particular dog, then redirect somewhere	Dog.fi
 
 const express = require("express");
 const router = express.Router();
+const colors = require("colors");
 
-const userController = require('../controllers/userController');
-const workoutController = require('../controllers/workoutController');
-const informationController = require('../controllers/informationController');
-const middleWare = require('../controllers/customMiddlewareController');
+const userController = require("../controllers/userController");
+const workoutController = require("../controllers/workoutController");
+const informationController = require("../controllers/informationController");
+const middleWare = require("../controllers/customMiddlewareController");
 
 /**
  * USER ROUTES
@@ -27,7 +28,7 @@ const middleWare = require('../controllers/customMiddlewareController');
 router.get("/", userController.home);
 
 // render a restriction page if user is not on a mobile
-router.get('/preventDesktops', userController.desktopRestrict)
+router.get("/preventDesktops", userController.desktopRestrict);
 
 // route to register page
 router.get("/register", middleWare.quotes, userController.getRegister);
@@ -44,30 +45,32 @@ router.post("/login", userController.postLogin);
 // route for logout action
 router.get("/logout", userController.logout);
 
-
 /**
  * WORKOUT ROUTES
  */
 
-router.get('/workouts/new', workoutController.getNew);
+router.get("/workouts/new", workoutController.getNew);
 
-router.post('/workouts/new', workoutController.postNew);
+router.post("/workouts/new", workoutController.postNew);
 
-router.get('/workouts/:name', middleWare.isAuthenticated, workoutController.getWorkouts);
+router.get(
+  "/workouts/:name",
+  middleWare.isAuthenticated,
+  workoutController.getWorkouts
+);
 
-router.get('/workouts/:id/edit', workoutController.getEditWorkout);
-// router.get('/workouts/edit', workoutController.getEditWorkout);
+router.get("/workouts/:id/edit", workoutController.getEditWorkout);
 
-router.post('/workouts/:id/edit', workoutController.postEditWorkout);
+router.post("/workouts/:id/edit", workoutController.postEditWorkout);
 
-router.post('/workouts/:id/delete', workoutController.deleteWorkout);
-
-
+router.post("/workouts/:id/delete", workoutController.deleteWorkout);
 
 /**
  * INFORMATION ROUTES
  */
 
-router.get('/information', informationController.getInformation);
+router.get("/information", informationController.getInformation);
+
+console.log("\nLoaded all routes".yellow);
 
 module.exports = router;
