@@ -17,10 +17,8 @@ const morgan = require("morgan");
 
 const {
   expressWinstonLogger,
-  expressWinstonConsoleLogger,
   expressWinstonErrorLogger,
-  logfile,
-  inspect
+  logfile
 } = require("./config/winston");
 
 const colors = require("colors");
@@ -40,9 +38,7 @@ if (
 )
   config = require("./secret");
 
-
 const consoleSpacer = "\n\n> Server Console Output:\n".yellow;
-
 
 /**
  * DATABASE
@@ -97,11 +93,13 @@ app.use(morgan("combined", { stream: accessLogStream }));
  * AUTH MIDDLEWARE
  */
 
+const secret = helpers.determineSessionSecret(config);
+
 app.use(
   session({
-    secret: helpers.determineSessionSecret(process.env.NODE_ENV),
+    secret: secret,
     store: new MongoStore({
-      url: helpers.determineMongoURI(process.env.NODE_ENV)
+      url: mongoURI
     }),
     saveUninitialized: false,
     resave: false

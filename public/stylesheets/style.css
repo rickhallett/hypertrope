@@ -13,6 +13,10 @@ footer {
   color: darkgray;
 }
 
+.is-active {
+  color: orange;
+}
+
 .exercise-dropdown input {
   max-width: 50px;
 }
@@ -79,7 +83,7 @@ table {
 }
 
 #delete-workout-form {
-  margin: 5px
+  margin: 5px;
 }
 
 #delete-workout-submit {
