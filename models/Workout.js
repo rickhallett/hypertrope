@@ -16,26 +16,7 @@ const WorkoutSchema = new Schema({
   comments: String
 });
 
-var inventory = [
-  { name: "apples", quantity: 2 },
-  { name: "bananas", quantity: 0 },
-  { name: "cherries", quantity: 5 }
-];
-
-function isCherries(fruit) {
-  return fruit.name === "cherries";
-}
-
-console.log(inventory.find(isCherries));
-// { name: 'cherries', quantity: 5 }
-
 WorkoutSchema.methods.calculateWork = function() {
-  let work = 0;
-
-  // exerciseName = (el, i, arr) => {
-  //   return exerciseData[name] === name;
-  // }
-
   isDumbbellExercise = name => {
     let isDb = false;
     exerciseData.forEach(el => {
@@ -45,6 +26,8 @@ WorkoutSchema.methods.calculateWork = function() {
     });
     return isDb;
   };
+
+  let work = 0;
 
   this.exercises.forEach(exercise => {
     if (exercise.sets !== undefined && exercise.reps !== undefined) {
