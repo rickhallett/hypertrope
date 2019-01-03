@@ -17,6 +17,10 @@
       "name": "Bench Press"
     },
     {
+      "value": "dbbench",
+      "name": "Dumbbell Bench Press"
+    },
+    {
       "value": "military",
       "name": "Military Press"
     },
