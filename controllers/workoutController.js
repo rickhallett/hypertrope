@@ -51,7 +51,10 @@ workoutController.getWorkouts = function(req, res) {
   };
 
   Workout.find({ name: name }, function(err, workouts) {
-    if (err) console.log("Error retrieving workouts");
+    if (err) {
+      req.flash('error', 'Unable to retrieve workouts.');
+      res.render('/', { flashMessages: req.flash() })
+    }
     res.render("listWorkouts", {
       name: name,
       workouts: workouts,
@@ -65,6 +68,7 @@ workoutController.getEditWorkout = function(req, res) {
   Workout.findById(id, function(err, workout) {
     if(err) {
       req.flash('error', 'Workout not found');
+      res.render(`/workouts/${req.user.username}`);
     }
 
     res.render('editWorkout', { workout: workout });

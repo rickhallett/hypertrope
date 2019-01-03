@@ -32,7 +32,7 @@ const standardExpressFileOptions = (filename, level) => {
     ],
     format: combine(
       // format.splat(),
-      // format.prettyPrint(),
+      format.prettyPrint(),
       format.colorize(),
       format.json()
     ),
@@ -52,9 +52,9 @@ const standardExpressConsoleOptions = (level) => {
     ],
     format: combine(
       // format.splat(),
-      // format.prettyPrint(),
-      // format.colorize(),
-      // format.json(),
+      format.prettyPrint(),
+      format.colorize(),
+      format.json(),
       format.prettyPrint()
     ),
     meta: true, // optional: control whether you want to log the meta data about the request (default to true)
@@ -71,12 +71,12 @@ const standardExpressConsoleOptions = (level) => {
 
 const logPath = {
   express: {
-    info: `${appRoot.path}/express_app.log`,
-    error: `${appRoot.path}/express_error.log`
+    info: `${appRoot.path}/express_app.json`,
+    error: `${appRoot.path}/express_error.json`
   },
   custom: {
-    info: `${appRoot.path}/logs/app.log`,
-    error: `${appRoot.path}/logs/error.log`
+    info: `${appRoot.path}/logs/app.json`,
+    error: `${appRoot.path}/logs/error.json`
   }
 };
 

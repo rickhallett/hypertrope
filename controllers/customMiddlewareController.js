@@ -15,4 +15,17 @@ middleWare.quotes = function(req, res, next) {
   next(null, res);
 };
 
+middleWare.isAuthenticated = (req, res, next) => {
+  if (req.user) {
+    return next();
+  }
+
+  req.flash('warn', 'Please log in to view this resource');
+  res.render('/login', { flashMessages: req.flash() });
+  
+  // return res.status(401).json({
+  //   error: "User not authenticated"
+  // });
+};
+
 module.exports = middleWare;

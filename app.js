@@ -3,8 +3,8 @@
  */
 const fs = require("fs");
 const express = require("express");
-const session = require('express-session');
 const http = require("http");
+const session = require('express-session');
 const bodyParser = require("body-parser");
 const path = require("path");
 const createError = require("http-errors");
@@ -14,7 +14,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
 
-const options = { useNewUrlParser: true };
 const nodeUtils = require("./utils/nodeUtils");
 const appRoot = require("app-root-path");
 const morgan = require("morgan");
@@ -45,13 +44,18 @@ const consoleSpacer = "\n\n> Server Console Output:\n".yellow;
  */
 const mongoURI =
   process.env.NODE_ENV === "development"
-    ? config.dev_mongoURI
+    ? config.localMongoURI
     : process.env.MONGO_URI;
+
+console.log(mongoURI.red);
+
+const dbOptions = { useNewUrlParser: true };
 
 mongoose.connect(
   mongoURI,
-  options
+  dbOptions
 );
+
 
 const db = mongoose.connection;
 
@@ -82,6 +86,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(expressWinstonConsoleLogger);
+app.use(expressWinstonLogger);
+app.use(expressWinstonErrorLogger);
 
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'express_app.log'), { flags: 'a' })
@@ -113,7 +120,9 @@ app.use(session({
   store: new MongoStore({ 
     url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : process.env.MONGO_URI
     // url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : mongoURI
-  })
+  }),
+  saveUninitialized: false,
+  resave: false
 }));
 
 app.use(passport.initialize());

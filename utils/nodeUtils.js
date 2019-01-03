@@ -42,14 +42,6 @@ const printObjectToLogFile = obj => {
   });
 };
 
-const isAuthenticated = (req, res, next) => {
-  if (req.user) return next();
-  else
-    return res.status(401).json({
-      error: "User not authenticated"
-    });
-};
-
 const hitCounter = () => {
   let counter = 0;
   
@@ -65,7 +57,6 @@ const desktopRestrictCount = hitCounter();
 
 module.exports = {
   printObjectToLogFile,
-  isAuthenticated,
   indexHitCount,
   desktopRestrictCount
 };

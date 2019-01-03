@@ -50,4 +50,13 @@ TODO LIST
 
 20. Have index increment counter set up as middle ware as opposed to external function.
 
+
+FROM NODE COURSE
+
+1. Move to dotenv package to manage environmental variables
+
+2. ES6 mongoose global.Promise /promisify for mongo async/await
+
+3. Helpers.js for site wide locals (defined in one place only) (pull in helpers.js in some app.js use function on res.locals.variable )
+
 BUGS
