@@ -91,6 +91,14 @@
     {
       "value": "dumbbellinclinepress",
       "name": "Dumbbell Incline Press"
+    },
+    {
+      "value": "shrugs",
+      "name": "Shrugs"
+    },
+    {
+      "value": "pecdeck",
+      "name": "Pec Deck"
     }
   ]
 }
