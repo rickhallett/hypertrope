@@ -22,10 +22,6 @@ middleWare.isAuthenticated = (req, res, next) => {
 
   req.flash('warn', 'Please log in to view this resource');
   res.render('/login', { flashMessages: req.flash() });
-  
-  // return res.status(401).json({
-  //   error: "User not authenticated"
-  // });
 };
 
 module.exports = middleWare;

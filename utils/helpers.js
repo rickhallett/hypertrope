@@ -37,8 +37,19 @@ determineSessionSecret = config => {
   }
 };
 
+createExerciseMap = exerciseData => {
+  let exerciseMap = {};
+  exerciseData.forEach(el => {
+    const { name: viewName, value: dbIdentifier } = el;
+    exerciseMap[dbIdentifier] = viewName;
+  });
+
+  return exerciseMap;
+};
+
 module.exports = {
   capitaliseFirstChar,
   determineMongoURI,
-  determineSessionSecret
+  determineSessionSecret,
+  createExerciseMap
 };

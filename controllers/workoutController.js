@@ -1,21 +1,17 @@
-const express = require("express");
 const { Workout } = require("../models/Workout");
 const createWorkout = require("../models/createWorkout");
-const constants = require("../data/constants");
 const helpers = require("../utils/helpers");
-const customMiddleware = require("../controllers/customMiddlewareController");
 
 /**
  * WORKOUT CONTROLLER
  */
 
+
 const workoutController = {};
 
 workoutController.getNew = function(req, res) {
   const exercises = require("../data/exercises.json").exercises;
-  res.locals.user = req.user;
   res.render("newWorkout", {
-    title: constants.SITE_NAME,
     menu_opts: exercises
   });
 };
@@ -35,17 +31,11 @@ workoutController.postNew = function(req, res) {
 };
 
 workoutController.getWorkouts = function(req, res) {
-  let exerciseData = require("../data/exercises.json").exercises;
-  let exerciseMap = {};
-
-  exerciseData.forEach(el => {
-    const { name: viewName, value: dbIdentifier } = el;
-    exerciseMap[dbIdentifier] = viewName;
-  });
+  const exerciseMap = res.locals.helpers.createExerciseMap(
+    require("../data/exercises.json").exercises
+  );
 
   const name = req.user.username;
-  res.locals.user = req.user;
-
   const utils = {
     capitaliseFirstChar: helpers.capitaliseFirstChar
   };
@@ -53,7 +43,7 @@ workoutController.getWorkouts = function(req, res) {
   Workout.find({ name: name }, function(err, workouts) {
     if (err) {
       req.flash("error", "Unable to retrieve workouts.");
-      res.render("/", { flashMessages: req.flash() });
+      res.render("/" /*, { flashMessages: req.flash() }*/);
     }
     res.render("listWorkouts", {
       name: name,

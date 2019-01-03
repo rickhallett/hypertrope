@@ -7,7 +7,6 @@ const express = require("express");
 const informationController = {};
 
 informationController.getInformation = function(req, res) {
-  res.locals.user = req.user;
   res.render("information");
 };
 

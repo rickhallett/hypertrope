@@ -23,13 +23,14 @@ const {
 
 const colors = require("colors");
 const helpers = require("./utils/helpers");
+const constants = require("./data/constants");
 const router = require("./routes/routes");
 
 const app = express();
 
-// process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "development";
 // process.env.NODE_ENV = "test_production";
-process.env.NODE_ENV = "production";
+// process.env.NODE_ENV = "production";
 
 let config;
 if (
@@ -111,6 +112,19 @@ app.use(passport.session());
 
 app.use(flash());
 
+/**
+ * CUSTOM MIDDLEWARE (for all requests)
+ */
+
+app.use((req, res, next) => {
+  res.locals.helpers = helpers;
+  res.locals.user = req.user || null;
+  res.locals.flashMessages = req.flash();
+  res.locals.currentPath = req.path;
+  res.locals.title = constants.SITE_NAME;
+  res.locals.colors = colors;
+  next();
+});
 /**
  * PASSPORT CONFIG
  */
