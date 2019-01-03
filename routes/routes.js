@@ -25,7 +25,7 @@ const middleWare = require("../controllers/customMiddlewareController");
  */
 
 // restrict index for logged in user only
-router.get("/", userController.home);
+router.get("/", middleWare.quotes, userController.home);
 
 // render a restriction page if user is not on a mobile
 router.get("/preventDesktops", userController.desktopRestrict);

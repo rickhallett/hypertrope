@@ -1,6 +1,5 @@
 const passport = require("passport");
 const Account = require("../models/Account");
-const constants = require("../data/constants");
 const { indexHitCount, desktopRestrictCount } = require("../utils/nodeUtils");
 
 /**
@@ -13,11 +12,7 @@ const userController = {};
 userController.home = function(req, res) {
   desktopRestrictCount.reset();
 
-  const sample = arr => arr[Math.floor(Math.random() * arr.length)];
-  const quotes = require("../data/quotes.json").quotes;
-
   if (req.user) {
-    // res.locals.user = req.user;
     indexHitCount.inc();
   }
 
@@ -26,11 +21,9 @@ userController.home = function(req, res) {
   }
 
   res.render("index", {
-    quote: sample(quotes)
-    // title: constants.SITE_NAME,
-    // flashMessages: req.flash()
+    quote: res.sample(res.quotes),
+    flashMessages: req.flash()
   });
-  //   res.render('index', { user : req.user });
 };
 
 userController.desktopRestrict = function(req, res) {
@@ -73,7 +66,6 @@ userController.postRegister = function(req, res) {
 // Go to login page
 userController.getLogin = function(req, res) {
   res.render("login", {
-    flashMessages: req.flash(),
     quote: res.sample(res.quotes)
   });
 };
