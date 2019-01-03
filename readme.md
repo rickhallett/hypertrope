@@ -1,21 +1,24 @@
-TODO LIST
+PROJECT TODO LIST
 
 1. Provide validation for submission form
-    - name, drop dpwn
-    - default integers at zero
+
+   - name, drop dpwn
+   - default integers at zero
 
 2. Pages
-    - Home
-    - Login
-    - List
-    - Edit workout
-    - Delete workout
-    - Flash messages library
-    - D3 chart
+
+   - Home
+   - Login
+   - List
+   - Edit workout
+   - Delete workout
+   - Flash messages library
+   - D3 chart
 
 3. Routes
-    - Seperate into seperate files
-    
+
+   - Seperate into seperate files
+
 4. Error log middleware
 
 5. Authentication middleware
@@ -51,7 +54,6 @@ TODO LIST
 20. Have index increment counter set up as middle ware as opposed to external function.
 
 21. When sorting the exercise data, hard remove 'n/a', sort the remainder, then concatenate with 'n/a' leading
-
 
 FROM NODE COURSE
 

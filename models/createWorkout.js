@@ -9,30 +9,14 @@ constructExercise = ({ name, sets, reps, weight }) => {
   });
 };
 
-// constructExerciseArray = req => {
-//   const exercises =[1]
-//   exercises.forEach((_, i) => {
-//     exercises.push(
-//       constructExercise({
-//         name: req.body[`lift${i}`],
-//         sets: req.body[`sets${i}`],
-//         reps: req.body[`reps${i}`],
-//         weight: req.body[`weight${i}`]
-//       })
-//     );
-//   });
-
-//   return exercises;
-// };
-
 constructExerciseArrayV2 = req => {
   const exercises = [];
   const storedKeys = [];
   let liftCount = 1;
-  
+
   Object.keys(req.body).map(key => {
     let numberStrippedKey = key.slice(0, 4);
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 15; i++) {
       if (
         req.body[`${numberStrippedKey}${i}`] &&
         `${numberStrippedKey}${i}` === `lift${liftCount}` &&

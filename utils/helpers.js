@@ -47,9 +47,30 @@ createExerciseMap = exerciseData => {
   return exerciseMap;
 };
 
+sortExercises = exercises => {
+  exercises.sort((a, b) =>
+    a.name.toUpperCase().slice(0, 1) < b.name.toUpperCase().slice(0, 1) ? -1 : 1
+  );
+
+  let indexOfNA;
+  exercises.forEach((exercise, index) => {
+    if (exercise.value === "n/a") {
+      indexOfNA = index;
+    }
+  });
+
+  let first = exercises[0];
+  let na = exercises[indexOfNA];
+  exercises[0] = na;
+  exercises[indexOfNA] = first;
+
+  return exercises;
+};
+
 module.exports = {
   capitaliseFirstChar,
   determineMongoURI,
   determineSessionSecret,
-  createExerciseMap
+  createExerciseMap,
+  sortExercises
 };

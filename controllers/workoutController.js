@@ -6,13 +6,15 @@ const helpers = require("../utils/helpers");
  * WORKOUT CONTROLLER
  */
 
-
 const workoutController = {};
 
 workoutController.getNew = function(req, res) {
   const exercises = require("../data/exercises.json").exercises;
+
+  const sortedExercises = helpers.sortExercises(exercises);
+
   res.render("newWorkout", {
-    menu_opts: exercises
+    menu_opts: sortedExercises
   });
 };
 

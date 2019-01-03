@@ -87,6 +87,10 @@
     {
       "value": "dumbbellmilitary",
       "name": "Dumbbell Military Press"
+    },
+    {
+      "value": "dumbbellinclinepress",
+      "name": "Dumbbell Incline Press"
     }
   ]
 }
