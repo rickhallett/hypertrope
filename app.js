@@ -27,9 +27,9 @@ const router = require("./routes/routes");
 
 const app = express();
 
-process.env.NODE_ENV = "development";
+// process.env.NODE_ENV = "development";
 // process.env.NODE_ENV = "test_production";
-// process.env.NODE_ENV = "production";
+process.env.NODE_ENV = "production";
 
 let config;
 if (
