@@ -65,7 +65,6 @@ userController.postRegister = function(req, res) {
       }
 
       passport.authenticate("local")(req, res, function() {
-        console.log('hit authenticate')
         res.locals.user = req.user;
         req.flash('info', 'You have registered and are now logged in.');
         res.redirect("/");

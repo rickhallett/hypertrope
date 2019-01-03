@@ -9,7 +9,6 @@ block content
 		h4.secondary #{helpers.capitaliseFirstChar(name)}#{"'s workouts"}
 
 	each workout in workouts
-		- console.log(workout)
 		label.date.note #{workout.date}
 		table._full-width
 			thead
