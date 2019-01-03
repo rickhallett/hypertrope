@@ -24,27 +24,31 @@ const {
 } = require("./config/winston");
 
 const colors = require("colors");
+const helpers = require("./utils/helpers");
 const router = require("./routes/routes");
 
 const app = express();
 
 process.env.NODE_ENV = "development";
-// process.env.NODE_ENV = 'production';
+// process.env.NODE_ENV = "test_production";
+// process.env.NODE_ENV = "production";
 
 let config;
-if (process.env.NODE_ENV === "development") config = require("./secret");
-// if (process.env.NODE_ENV === "production") config = require("./secret");
+if (
+  process.env.NODE_ENV === "development" ||
+  process.env.NODE_ENV === "test_production"
+)
+  config = require("./secret");
+
 
 const consoleSpacer = "\n\n> Server Console Output:\n".yellow;
+
 
 /**
  * DATABASE
  */
-const mongoURI =
-  process.env.NODE_ENV === "development"
-    ? config.localMongoURI
-    : process.env.MONGO_URI;
 
+const mongoURI = helpers.determineMongoURI(config);
 const dbOptions = { useNewUrlParser: true };
 
 mongoose.connect(
@@ -81,9 +85,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(expressWinstonConsoleLogger);
-app.use(expressWinstonLogger);
-app.use(expressWinstonErrorLogger);
 
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(
@@ -95,36 +96,12 @@ app.use(morgan("combined", { stream: accessLogStream }));
 /**
  * AUTH MIDDLEWARE
  */
-// app.use(
-//   require("express-session")({
-//     secret:
-//       process.env.NODE_ENV === "development"
-//         ? config.sessionSecret
-//         : process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       maxAge: null,
-//       expires: false,
-//     },
-//   })
-// );
-
-// app.use(express.session({ store: new MongoStore({ db: config.dev_mongoURI }) }));
 
 app.use(
   session({
-    secret:
-      process.env.NODE_ENV === "development"
-        ? config.sessionSecret
-        : process.env.SESSION_SECRET,
-    // secret: process.env.NODE_ENV === "development" ? config.sessionSecret : config.sessionSecret,
+    secret: helpers.determineSessionSecret(process.env.NODE_ENV),
     store: new MongoStore({
-      url:
-        process.env.NODE_ENV === "development"
-          ? config.dev_mongoURI
-          : process.env.MONGO_URI
-      // url: process.env.NODE_ENV === "development" ? config.dev_mongoURI : mongoURI
+      url: helpers.determineMongoURI(process.env.NODE_ENV)
     }),
     saveUninitialized: false,
     resave: false
@@ -148,8 +125,7 @@ passport.deserializeUser(Account.deserializeUser());
  * EXPRESS-WINSTON FILE LOGGER (must be before router)
  */
 
-// app.use(expressWinstonLogger);
-// app.use(expressWinstonConsoleLogger);
+app.use(expressWinstonLogger);
 
 /**
  * ROUTES
@@ -161,7 +137,7 @@ app.use("/", router);
  * EXPRESS-WINSTON ERROR LOGGER (must be after router)
  */
 
-// app.use(expressWinstonErrorLogger);
+app.use(expressWinstonErrorLogger);
 
 /**
  * ERROR HANDLING
