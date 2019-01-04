@@ -13,6 +13,11 @@ footer {
   color: darkgray;
 }
 
+.app-info {
+  color: grey;
+  padding: 10px;
+}
+
 .exercise-dropdown input {
   max-width: 50px;
 }
@@ -86,6 +91,9 @@ table {
   margin-bottom: 2px;
 }
 
+.exercise-name-label {
+}
+
 /* UTILITY CLASSES */
 
 .limit-width-50 {
@@ -110,6 +118,10 @@ table {
 
 .top-spacer-20px {
   margin-top: 20px;
+}
+
+.bottom-spacer-20px {
+  margin-bottom: 20px;
 }
 
 .padding-20 {

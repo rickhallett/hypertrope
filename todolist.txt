@@ -1,5 +1,13 @@
 TODO LIST
 
+Unique Selling Points...?
+- There is often a fitness enthusiast in a friend/family dynamic
+- This enthusiast often encourages others to get fitter
+- These others often lack the knowledge to do some
+- Most people would like a personal trainer, but not everyone can afford one
+- This app enables the enthusiast to register as a trainer, and sign up his family/friends by email. He can then monitor their progress and help them out, through in-app notifications and/or emails.
+- The app will enable workout recording, results monitoring, tailored nutrition guidance, workout instruction (videos etc)
+
 2. Pages
     - D3 chart
 
