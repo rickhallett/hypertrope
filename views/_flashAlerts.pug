@@ -1,6 +1,6 @@
 -if(flashMessages.info)
 	each message in flashMessages.info
-		.alert._warning._shadow._box
+		.alert._info._shadow._box
 			span.-close ×
 			strong :)				
 			| #{message}
@@ -14,7 +14,14 @@
 
 -if(flashMessages.error)
 	each message in flashMessages.error
-		.alert._shadow._box
+		.alert._danger._shadow._box
 			span.-close ×
 			strong :(				
+			| #{message}
+
+-if(flashMessages.success)
+	each message in flashMessages.success
+		.alert._success._shadow._box
+			span.-close ×
+			strong :)				
 			| #{message}

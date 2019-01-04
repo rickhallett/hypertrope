@@ -43,7 +43,7 @@ workoutController.getWorkouts = function(req, res) {
   Workout.find({ name: name }, function(err, workouts) {
     if (err) {
       req.flash("error", "Unable to retrieve workouts.");
-      res.render("/" /*, { flashMessages: req.flash() }*/);
+      res.render("/");
     }
     res.render("listWorkouts", {
       name: name,
@@ -89,6 +89,8 @@ workoutController.postEditWorkout = function(req, res) {
   const updatedWorkout = createWorkout(req);
   updatedWorkout.calculateWork();
 
+  console.log(updatedWorkout);
+
   Workout.updateOne({ id: id }, { updatedWorkout }, function(err) {
     if (err) {
       console.log("There was a problem updating the workout.".red);
@@ -99,7 +101,7 @@ workoutController.postEditWorkout = function(req, res) {
     }
 
     if (!err) {
-      req.flash("info", "Workout updated successfully!");
+      req.flash("success", "Workout updated successfully!");
     }
 
     res.redirect(`/workouts/${req.user.username}`);
@@ -119,7 +121,7 @@ workoutController.deleteWorkout = function(req, res) {
     }
 
     if (!err) {
-      req.flash("info", "Workout deleted!");
+      req.flash("success", "Workout deleted!");
     }
 
     res.redirect(`/workouts/${req.user.username}`);

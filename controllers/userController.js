@@ -18,7 +18,7 @@ userController.home = function(req, res) {
   }
 
   if (indexHitCount.get() === 1 && req.user) {
-    req.flash("info", "Welcome to Hypertrope!");
+    req.flash("success", "Welcome to Hypertrope!");
   }
 
   res.render("index", {
@@ -52,12 +52,12 @@ userController.postRegister = function(req, res) {
     req.body.password,
     function(err, user) {
       if (err) {
-        req.flash("warn", "Unable to register. Contact your administrator");
+        req.flash("error", "Unable to register. Contact your administrator");
         return res.render("register");
       }
 
       passport.authenticate("local")(req, res, function() {
-        req.flash("info", "You have registered and are now logged in.");
+        req.flash("success", "You have registered and are now logged in.");
         res.redirect("/");
       });
     }
@@ -95,9 +95,9 @@ userController.logout = function(req, res) {
   req.logout();
   if (!req.user) {
     indexHitCount.reset();
-    req.flash("info", "You have logged out successfully");
+    req.flash("success", "You have logged out successfully");
   } else {
-    req.flash("warn", "Problem logging out. Please contact administrator");
+    req.flash("error", "Problem logging out. Please contact administrator");
   }
   res.render("index", {
     user: null,
