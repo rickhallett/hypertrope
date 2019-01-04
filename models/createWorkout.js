@@ -1,4 +1,6 @@
 const { Exercise, Workout } = require("./Workout");
+const helpers = require('../utils/helpers');
+const constants = require('../data/constants');
 
 constructExercise = ({ name, sets, reps, weight }) => {
   return new Exercise({
@@ -9,27 +11,14 @@ constructExercise = ({ name, sets, reps, weight }) => {
   });
 };
 
-keyIsPresent = (obj, key) => (obj[key] ? obj[key] : null);
-
-Store = () => {
-  let storage = [];
-
-  return {
-    get: () => storage,
-    has: item => storage.includes(item),
-    add: item => storage.push(item),
-    reset: () => (storage = [])
-  };
-};
-
 constructExerciseArray = req => {
   const exercises = [];
-  const storedKeys = Store();
+  const storedKeys = helpers.Store();
   let liftCount = 1;
 
   Object.keys(req.body).map(key => {
     let numberStrippedKey = key.slice(0, 4);
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= constants.MAX_EXERCISES; i++) {
       let keyWord = `${numberStrippedKey}${i}`;
       if (
         req.body[keyWord] &&

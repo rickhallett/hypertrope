@@ -5,29 +5,54 @@ block scripts
 
 block content
   form(action="/workouts/:id/edit", method="post", id="edit_workout_form")
-    button#edit-panel-button.accordion._box._shadow._dark.no-bottom-margin(type="button") Edit Your Workout
-    .-panel#edit-panel
-      fieldset
-        legend Workout Details
-        each lift in workout.exercises
-          .row
-            .col.m3.no-padding
-              label= exerciseMap[lift.name]
-            .col.m3.no-padding
-              label Sets:
-              input#input-sets-1._full-width(name="sets", type="number", value=lift.sets)
+    //- button#edit-panel-button.accordion._box._shadow._dark.no-bottom-margin(type="button") Edit Your Workout
+    //- .-panel#edit-panel
+    legend Edit Workout Details
+    .row.card._cream._box.bottom-spacer-20px
+      .col.m3
+        label.date= helpers.trimDate(workout.date)
+    .row.card._cream._box.bottom-spacer-20px
+      .col.m3
+        label(for="date") Edit Date:
+        input._full-width(name="date", type="date")
 
-            .col.m3.no-padding
-              label Reps:
-              input#input-reps-1._full-width(name="reps", type="number", value=lift.reps)
-
-            .col.m3.no-padding
-              label Weight (kg):
-              input#input-weight-1._full-width(name="weight", type="number", value=lift.weight)
+    each lift, index in workout.exercises
+      button.exercise-dropdown.accordion._box._shadow._dark.no-bottom-margin(type="button") Exercise #{index + 1}
+      .-panel
+        legend Exercise #{index + 1} Details
         .row
-          .col.m3.no-padding
-            label Comments
-            textarea._full-width(name="comments", value=workout.comment rows: 10)
+          .col.m4.no-padding
+            label Exercise Options
+            select#exercise-name-3._full-width(name=`lift${index + 1}`, value=lift.name)
+              each exercise in menu_opts
+                - if(exercise.value === lift.name)
+                  option(value=exercise.value, selected="selected") #{exercise.name}
+                - else 
+                  option(value=exercise.value) #{exercise.name}
 
-    .flex-container.justify-center.margin-20
-      input._alignCenter#edit-workout(type="submit", value="Edit Workout")
+
+        .row.bottom-spacer-20px
+          //- .col.m3.no-padding
+            //- label.exercise-name-label= exerciseMap[lift.name]
+
+          .col.m3.no-padding
+            label Sets:
+            input#input-sets-1._full-width(name=`sets${index + 1}`, type="number", value=lift.sets)
+
+          .col.m3.no-padding
+            label Reps:
+            input#input-reps-1._full-width(name=`reps${index + 1}`, type="number", value=lift.reps)
+
+          .col.m3.no-padding
+            label Weight (kg):
+            input#input-weight-1._full-width(name=`weight${index + 1}`, type="number", value=lift.weight)
+
+            //- hr
+            
+      //- .row
+        .col.m3.no-padding
+          label Comments
+          textarea._full-width(name="comments", value=workout.comment rows: 10)
+
+    //- .flex-container.justify-center.margin-20
+      input._alignCenter#edit-workout(type="submit", value="Edit Workout", name=workout._id)

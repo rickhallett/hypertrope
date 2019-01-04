@@ -32,7 +32,7 @@ block content
 			label#workout-comments Comments: #{workout.comments}
 		.card._nightblue._box.flex-container.justify-space-around
 			form#edit-workout-form(action=`/workouts/${workout._id}/edit`, method="get")
-				input#edit-workout-submit._cream._alignCenter(type="submit", value="Edit", name=workout.id)
+				input#edit-workout-submit._cream._alignCenter(type="submit", value="Edit", name=workout._id)
 			form#delete-workout-form(action=`/workouts/${workout.id}/delete`, method="post")
 				input#delete-workout-submit._cream._alignCenter(type="submit", value="Delete", name=workout.id)
 		hr
