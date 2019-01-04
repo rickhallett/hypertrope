@@ -49,7 +49,7 @@ block content
     .row
       .col.m3
         label Comments
-        textarea._full-width(name="comments", value=workout.comment rows: 10)
+        textarea._full-width(name="comments" rows: 10)= workout.comments
 
     .flex-container.justify-center.margin-20
       input._alignCenter#edit-workout(type="submit", value="Edit Workout")
