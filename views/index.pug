@@ -6,14 +6,15 @@ block scripts
 block content
 	.jumbo._dark.top-spacer-1px
 		h3.primary Welcome to #{title}
-		h5.secondary An app to keep friends and family in shape.
+		h5.secondary Catalyse how people look, feel and perform
 		- if(!user)
 			h6.info-text Click the nav menu to login/register
 
-	.jumbo._dark.top-spacer-1px
-		h6.app-info Are you an exercise enthusiast? Do your friends and family want to get in shape, but lack the knowlege? Do you think you could help them?
+	- if(!user)
+		.jumbo._dark.top-spacer-1px
+			h6.app-info Are you an exercise enthusiast? Do your friends and family want to get in shape, but lack the knowlege? Do you think you could help them?
 
-		h6.app-info Hypertrope enables you to sign up as a trainer, and invite your crew to the workout table. Design their workouts, track their progress, send them notifications/tips and lead them to greatness.
+			h6.app-info Hypertrope enables you to sign up as a trainer, and invite your crew to the workout table. Design their workouts, track their progress, send them notifications/tips and lead them to greatness.
 	
 	include _flashAlerts
 	
