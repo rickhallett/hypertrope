@@ -67,11 +67,50 @@ sortExercises = exercises => {
   return exercises;
 };
 
+getSortedExercises = () => {
+  const exercises = require("../data/exercises.json").exercises;
+  return sortExercises(exercises);
+};
+
 getRandomQuote = () => {
   sample = arr => arr[Math.floor(Math.random() * arr.length)];
   const quotes = require("../data/quotes.json").quotes;
   return sample(quotes);
 };
+
+keyIsPresent = (obj, key) => (obj[key] ? obj[key] : null);
+
+Store = () => {
+  let storage = [];
+
+  return {
+    get: () => storage,
+    has: item => storage.includes(item),
+    add: item => storage.push(item),
+    reset: () => (storage = [])
+  };
+};
+
+trimDate = date => date.toDateString();
+
+const exerciseSelectorTextArray = [
+  "-- Please choose an option--",
+  "One exercise",
+  "Two exercises",
+  "Three exercises",
+  "Four exercises",
+  "Five exercises",
+  "Six exercises",
+  "Seven exercises",
+  "Eight exercises",
+  "Nine exercises",
+  "Ten exercises",
+  "Eleven exercises",
+  "Twelve exercises",
+  "Thirteen exercises",
+  "Fourteen exercises",
+  "Fifteen exercises"
+];
 
 module.exports = {
   capitaliseFirstChar,
@@ -79,5 +118,10 @@ module.exports = {
   determineSessionSecret,
   createExerciseMap,
   sortExercises,
-  getRandomQuote
+  getSortedExercises,
+  getRandomQuote,
+  keyIsPresent,
+  Store,
+  trimDate,
+  exerciseSelectorTextArray
 };
