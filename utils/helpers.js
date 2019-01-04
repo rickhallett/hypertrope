@@ -93,6 +93,25 @@ Store = () => {
 
 trimDate = date => date.toDateString();
 
+const exerciseSelectorTextArray = [
+  "-- Please choose an option--",
+  "One exercise",
+  "Two exercises",
+  "Three exercises",
+  "Four exercises",
+  "Five exercises",
+  "Six exercises",
+  "Seven exercises",
+  "Eight exercises",
+  "Nine exercises",
+  "Ten exercises",
+  "Eleven exercises",
+  "Twelve exercises",
+  "Thirteen exercises",
+  "Fourteen exercises",
+  "Fifteen exercises"
+];
+
 module.exports = {
   capitaliseFirstChar,
   determineMongoURI,
@@ -103,5 +122,6 @@ module.exports = {
   getRandomQuote,
   keyIsPresent,
   Store,
-  trimDate
+  trimDate,
+  exerciseSelectorTextArray
 };
