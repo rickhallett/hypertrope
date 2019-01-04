@@ -111,28 +111,12 @@ workoutController.postEditWorkout = function(req, res) {
       res.redirect(`/workouts/${req.user.username}`);
     });
   });
-
-  // Workout.updateOne({ id: id }, { updatedWorkout }, function(findError) {
-  //   if (findError) {
-  //     console.log("There was a problem updating the workout.".red);
-  //     req.flash(
-  //       "error",
-  //       "There was a problem deleting this workout. Please contact the site administrator."
-  //     );
-  //   }
-
-  //   if (!err) {
-  //     req.flash("success", "Workout updated successfully!");
-  //   }
-
-  //   res.redirect(`/workouts/${req.user.username}`);
-  // });
 };
 
 workoutController.deleteWorkout = function(req, res) {
   const id = req.params.id;
 
-  Workout.deleteOne({ id: id }, function(err) {
+  Workout.findOneAndDelete({ _id: id }, function(err) {
     if (err) {
       console.log("There was a problem deleting the workout".red);
       req.flash(
