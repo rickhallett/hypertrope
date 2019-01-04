@@ -57,18 +57,25 @@ workoutController.getWorkouts = function(req, res) {
 };
 
 workoutController.getEditWorkout = function(req, res) {
-  const id = req.body.id;
+  const id = req.params.id;
+
+  const exerciseMap = res.locals.helpers.createExerciseMap(
+    require("../data/exercises.json").exercises
+  );
+
   Workout.findById(id, function(err, workout) {
     if (err) {
       req.flash("error", "Workout not found");
       res.render(`/workouts/${req.user.username}`);
     }
 
-    res.render("editWorkout", { workout: workout });
+    res.render("editWorkout", { workout: workout, exerciseMap: exerciseMap });
   });
 };
 
-workoutController.postEditWorkout = function(req, res) {};
+workoutController.postEditWorkout = function(req, res) {
+  const id = req.params.id;
+};
 
 workoutController.deleteWorkout = function(req, res) {};
 

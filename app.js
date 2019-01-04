@@ -13,25 +13,24 @@ const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 
-const {
-  expressWinstonLogger,
-  expressWinstonErrorLogger,
-  logfile
-} = require("./config/winston");
+// const {
+//   expressWinstonLogger,
+//   expressWinstonErrorLogger,
+//   logfile
+// } = require("./config/winston");
 
 const colors = require("colors");
 const helpers = require("./utils/helpers");
 const constants = require("./data/constants");
-const quotes = require("./data/quotes.json").quotes;
 const router = require("./routes/routes");
 
 const app = express();
 
-// process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "development";
 // process.env.NODE_ENV = "test_production";
-process.env.NODE_ENV = "production";
+// process.env.NODE_ENV = "production";
 
 let config;
 if (
