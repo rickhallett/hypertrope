@@ -77,35 +77,56 @@ workoutController.getEditWorkout = function(req, res) {
 
 workoutController.postEditWorkout = function(req, res) {
   const id = req.params.id;
-
-  // constructExerciseArray = ({ name, sets, reps, weight }) => {
-
-  // }
-
-  // constructWorkoutObject = (req) => {
-
-  // }
-
   const updatedWorkout = createWorkout(req);
   updatedWorkout.calculateWork();
 
-  console.log(updatedWorkout);
-
-  Workout.updateOne({ id: id }, { updatedWorkout }, function(err) {
-    if (err) {
+  Workout.findById(id, function(findError, workout) {
+    if (findError) {
       console.log("There was a problem updating the workout.".red);
       req.flash(
         "error",
-        "There was a problem deleting this workout. Please contact the site administrator."
+        "There was a problem finding this workout. Please contact the site administrator."
       );
+      res.redirect(`/workouts/${req.user.username}`);
     }
 
-    if (!err) {
-      req.flash("success", "Workout updated successfully!");
-    }
+    workout._id = id;
+    workout.name = updatedWorkout.name;
+    workout.date = updatedWorkout.date;
+    workout.exercises = updatedWorkout.exercises;
+    workout.totalWork = updatedWorkout.totalWork;
+    workout.comments = updatedWorkout.comments;
 
-    res.redirect(`/workouts/${req.user.username}`);
+    workout.save(function(saveError) {
+      if (saveError) {
+        console.log("There was a problem saving the workout.".red);
+        req.flash(
+          "error",
+          "There was a problem updating this workout. Please contact the site administrator."
+        );
+        res.redirect(`/workouts/${req.user.username}`);
+      }
+
+      req.flash("success", "Workout updated!");
+      res.redirect(`/workouts/${req.user.username}`);
+    });
   });
+
+  // Workout.updateOne({ id: id }, { updatedWorkout }, function(findError) {
+  //   if (findError) {
+  //     console.log("There was a problem updating the workout.".red);
+  //     req.flash(
+  //       "error",
+  //       "There was a problem deleting this workout. Please contact the site administrator."
+  //     );
+  //   }
+
+  //   if (!err) {
+  //     req.flash("success", "Workout updated successfully!");
+  //   }
+
+  //   res.redirect(`/workouts/${req.user.username}`);
+  // });
 };
 
 workoutController.deleteWorkout = function(req, res) {

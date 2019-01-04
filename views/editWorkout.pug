@@ -4,7 +4,7 @@ block scripts
   script(src=`/javascripts/editWorkout.js`)
 
 block content
-  form(action="/workouts/:id/edit", method="post", id="edit_workout_form")
+  form(action=`/workouts/${workout._id}/edit`, method="post", id="edit_workout_form")
     button.top-spacer-1px.accordion._box._shadow._dark.no-bottom-margin(type="button") Edit Workout Details
     .-panel#edit-panel
       fieldset
@@ -52,4 +52,4 @@ block content
         textarea._full-width(name="comments", value=workout.comment rows: 10)
 
     .flex-container.justify-center.margin-20
-      input._alignCenter#edit-workout(type="submit", value="Edit Workout", name=workout._id)
+      input._alignCenter#edit-workout(type="submit", value="Edit Workout")

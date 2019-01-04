@@ -8,6 +8,8 @@ block content
 	.jumbo._dark
 		h4.secondary #{helpers.capitaliseFirstChar(name)}#{"'s workouts"}
 
+	include _flashAlerts
+
 	each workout in workouts
 		label.date.note #{workout.date}
 		table._full-width
@@ -32,9 +34,9 @@ block content
 			label#workout-comments Comments: #{workout.comments}
 		.card._nightblue._box.flex-container.justify-space-around
 			form#edit-workout-form(action=`/workouts/${workout._id}/edit`, method="get")
-				input#edit-workout-submit._cream._alignCenter(type="submit", value="Edit", name=workout._id)
+				input#edit-workout-submit._cream._alignCenter(type="submit", value="Edit")
 			form#delete-workout-form(action=`/workouts/${workout.id}/delete`, method="post")
-				input#delete-workout-submit._cream._alignCenter(type="submit", value="Delete", name=workout.id)
+				input#delete-workout-submit._cream._alignCenter(type="submit", value="Delete")
 		hr
 
 	.flex-container.justify-center
