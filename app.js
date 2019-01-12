@@ -21,8 +21,6 @@ const router = require('./routes/routes');
 const { keyConfig, serverConfig } = require('./config');
 
 const app = express();
-
-
 const consoleSpacer = '\n\n> Server Console Output:\n'.yellow;
 
 /**
