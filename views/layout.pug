@@ -15,8 +15,6 @@ html
 
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
-
     ul#myTopnav2.topnav
       li
         a.brand(href='/') Hypertrope
@@ -24,19 +22,19 @@ html
         - if (user.username === 'mynameisdad')
           li
             a.link(href='/happy') ?
-      li
-        a.link(href='/workouts/new') New Workout
-      li
-        a.link(href=`/workouts/${user.username}`) Show Workouts
-      li
-        a.link(href='/information') Information
-      li
-        a.link(href='/logout') Logout
+        li
+          a.link(href='/workouts/new') New Workout
+        li
+          a.link(href=`/workouts/${user.username}`) Show Workouts
+        li
+          a.link(href='/information') Information
+        li
+          a.link(href='/logout') Logout
       - if (!user)
-      li
-        a.link(href='/login') Login
-      li
-        a.link(href='/register') Register
+        li
+          a.link(href='/login') Login
+        li
+          a.link(href='/register') Register
       li.dropdown
         a.link(href='#') About
         .dropdown-content
@@ -44,3 +42,7 @@ html
           a(href='https://github.com/rickhallett') Github
       li.-icon
         a(href='javascript:void(0);', onclick="topnav('myTopnav2')") ☰
+
+    block content
+
+    script(src='/javascripts/beauter0.3.0.min.js')
