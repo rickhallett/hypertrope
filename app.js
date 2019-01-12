@@ -157,22 +157,20 @@ app.use("/", router);
  */
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log("error callback hit".red);
   next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res) {
   // set locals, only providing error in development
-  console.log("error callback 2 hit".red);
   res.locals.message = err.message;
   res.locals.error = req.process.env.NODE_ENV === "development" ? err : {};
 
-  logfile.error(
-    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
-      req.method
-    } - ${req.ip}`
-  );
+  // logfile.error(
+  //   `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
+  //     req.method
+  //   } - ${req.ip}`
+  // );
 
   // render the error page
   res.status(err.status || 500);

@@ -1,6 +1,6 @@
 /**
  * RESTFUL ROUTING
- * 
+ *
 Name	Path	HTTP Verb	Purpose	Mongoose Method
 Index	/dogs	GET	List all dogs	Dog.find()
 New	/dogs/new	GET	Show new dog form	N/A
@@ -98,6 +98,19 @@ router.get(
   middleWare.isAuthenticated,
   informationController.getInformation
 );
+
+/**
+ * BIRTHDAY ROUTE
+ */
+
+router.get('/happy', (req, res) => {
+   if(req.user.username === 'mynameisdad') {
+       res.render('happyBirthday');
+   } else {
+       req.flash('error', 'It is not your birthday, chump!');
+       res.render('index');
+   }
+});
 
 console.log("\nLoaded all routes".yellow);
 

@@ -1,0 +1,71 @@
+extends layout
+
+block scripts
+
+block content
+    - if(user.username === 'mynameisdad')
+        .jumbo._warning.top-spacer-1px
+            h3.primary._orange Happy Birthday, Dad!
+            h5.secondary I hope you find today whatever it is you most need.
+
+        .card(style='x')
+            .-content._alignCenter
+                | It didn't seem right to at least not offer
+                | a reflection regarding last week. Celebrating
+                | your years seems inextricably linked with my
+                | own, and so I chose this. Because it is true,
+                | and the ending is as it should be.
+
+                br
+                br
+
+
+        .card
+            .-content._alignCenter
+                br
+                strong A Hymn To God the Father
+                br
+                small By John Donne
+                br
+                br
+                | Wilt thou forgive that sin where I begun,
+                br
+                | Which was my sin, though it were done before?
+                br
+                | Wilt thou forgive that sin, through which I run,
+                br
+                | And do run still, though still I do deplore?
+                br
+                | When thou hast done, thou hast not done,
+                br
+                | For I have more.
+                br
+                br
+                | Wilt thou forgive that sin which I have won
+                br
+                | Others to sin, and made my sin their door?
+                br
+                | Wilt thou forgive that sin which I did shun
+                br
+                | A year or two, but wallow'd in, a score?
+                br
+                | When thou hast done, thou hast not done,
+                br
+                | For I have more.
+                br
+                br
+                | I have a sin of fear, that when I have spun
+                br
+                | My last thread, I shall perish on the shore;
+                br
+                | But swear by thyself, that at my death thy Son
+                br
+                | Shall shine as he shines now, and heretofore;
+                br
+                | And, having done that, thou hast done;
+                br
+                | I fear no more
+
+            img(src='/images/my_crucifixion.png')
+            ._alignCenter
+                small (This is indeed my tattoo...)
