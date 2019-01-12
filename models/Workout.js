@@ -19,7 +19,7 @@ const WorkoutSchema = new Schema({
     comments: String,
 });
 
-WorkoutSchema.methods.calculateWork = () => {
+WorkoutSchema.methods.calculateWork = function() {
     const isDumbbellExercise = (name) => {
         let isDb = false;
         exerciseData.forEach((el) => {

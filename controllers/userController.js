@@ -1,6 +1,6 @@
 const passport = require('passport');
 const Account = require('../models/Account');
-const { indexHitCount, desktopRestrictCount } = require('../utils/nodeUtils');
+const {indexHitCount, desktopRestrictCount} = require('../utils/nodeUtils');
 
 /**
  * USER CONTROLLER
@@ -9,7 +9,7 @@ const { indexHitCount, desktopRestrictCount } = require('../utils/nodeUtils');
 const userController = {};
 
 // Restrict access to root page
-userController.home = function(req, res) {
+userController.home = function (req, res) {
     desktopRestrictCount.reset();
 
     if (req.user) {
@@ -34,7 +34,7 @@ userController.desktopRestrict = (req, res) => {
     if (desktopRestrictCount.get() > 2) {
         req.flash('warn', 'You can pout all you like. Mobiles only.');
     }
-    res.render('desktopRestrict', { flashMessages: req.flash() });
+    res.render('desktopRestrict', {flashMessages: req.flash()});
 };
 
 // Go to registration page
@@ -45,9 +45,9 @@ userController.getRegister = (req, res) => {
 };
 
 // Post registration
-userController.postRegister = function (req, res) {
+userController.postRegister = (req, res) => {
     Account.register(
-        new Account({ username: req.body.username }),
+        new Account({username: req.body.username}),
         req.body.password,
         (err) => {
             if (err) {
@@ -78,18 +78,20 @@ userController.getLogin = (req, res) => {
 
 // Post login
 userController.postLogin = (req, res) => {
-    Account.find({ username: req.body.username }, (err, account) => {
+    Account.find({username: req.body.username}, (err, account) => {
         if (!account.length) {
             req.flash('error', 'This username was not found. Please register.');
-            res.redirect('login');
+            res.redirect('/login');
         }
 
-        passport.authenticate('local', {
-            failureRedirect: '/login',
-            failureFlash: 'Invalid username or password.',
-        })(req, res, () => {
-            res.redirect('/');
-        });
+        if (account.length) {
+            passport.authenticate('local', {
+                failureRedirect: '/login',
+                failureFlash: 'Invalid username or password.',
+            })(req, res, () => {
+                res.redirect('/');
+            });
+        }
     });
 };
 

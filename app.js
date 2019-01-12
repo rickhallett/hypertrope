@@ -17,6 +17,7 @@ const colors = require('colors');
 const helpers = require('./utils/helpers');
 const constants = require('./data/constants');
 const router = require('./routes/routes');
+const errorHandlers = require('./controllers/errorHandlers');
 
 const { keyConfig, serverConfig } = require('./config');
 
@@ -117,20 +118,35 @@ app.use('/', router);
  * ERROR HANDLING
  */
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-    next(createError(404));
-});
+// app.use((req, res, next) => {
+//     next(createError(404));
+// });
+//
+// // error handler
+// app.use((err, req, res) => {
+//     // set locals, only providing error in development
+//     res.locals.message = err.message;
+//     res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
+//
+//     // render the error page
+//     res.status(err.status || 500);
+//     res.render('error');
+// });
 
-// error handler
-app.use((err, req, res) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
+// If that above routes didnt work, we 404 them and forward to error handler
+app.use(errorHandlers.notFound);
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
+// One of our error handlers will see if these errors are just validation errors
+app.use(errorHandlers.flashValidationErrors);
+
+// Otherwise this was a really bad error we didn't expect! Shoot eh
+if (process.env.NODE_ENV === 'development.local') {
+    /* Development Error Handler - Prints stack trace */
+    app.use(errorHandlers.developmentErrors);
+}
+
+// production error handler
+app.use(errorHandlers.productionErrors);
 
 /**
  * INITIALISE SERVER

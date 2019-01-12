@@ -39,7 +39,7 @@ router.get('/register', middleWare.quotes, userController.getRegister);
 router.post('/register', userController.postRegister);
 
 // route to login page
-router.get('/login',middleWare.quotes, userController.getLogin);
+router.get('/login', middleWare.quotes, userController.getLogin);
 
 // route for login action
 router.post('/login', userController.postLogin);
