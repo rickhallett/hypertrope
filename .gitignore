@@ -11,7 +11,7 @@ express_error.json
 
 
 # Config data
-keys.js
+config/keys.js
 log.txt
 
 # Runtime data
