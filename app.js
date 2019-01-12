@@ -43,7 +43,7 @@ db.on(
     console.error.bind(this, `Error connecting to database ${this.name}`)
 );
 
-db.once('open', () => {
+db.once('open', function() {
     console.log(
         `\nDatabase: ${this.name} connected successfully on port ${
             this.port
