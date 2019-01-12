@@ -10,14 +10,17 @@ html
     script(src='/javascripts/jQuery3.3.1.js')
     script(src="/javascripts/preventDesktops.js")
     script(src="/javascripts/navbar.js")
-    
+
     block scripts
 
-    link(rel='stylesheet', href='/stylesheets/style.css')    
+    link(rel='stylesheet', href='/stylesheets/style.css')
   body
     ul#myTopnav2.topnav
       li
         a.brand(href='/') Hypertrope
+      - if (user.username === 'mynameisdad')
+        li
+          a.link(href='/happy') ?
       - if (user)
           li
             a.link(href='/workouts/new') New Workout
