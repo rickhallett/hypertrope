@@ -1,9 +1,9 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const trimDate = date => date.innerText.substring(0, 15);
+document.addEventListener('DOMContentLoaded',() => {
+    const trimDate = (date) => date.innerText.substring(0, 15);
 
-  const dateHTML = document.getElementsByClassName("date");
-  for (let i = 0; i < dateHTML.length; i++) {
-    let currentDate = dateHTML[i];
-    currentDate.innerText = trimDate(currentDate);
-  }
+    const dateHTML = document.getElementsByClassName('date');
+    for (let i = 0; i < dateHTML.length; i++) {
+        const currentDate = dateHTML[i];
+        currentDate.innerText = trimDate(currentDate);
+    }
 });
