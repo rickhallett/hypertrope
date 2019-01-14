@@ -23,6 +23,8 @@ html
           li
             a.link(href='/happy') ?
         li
+          a.link(href=`/users/${user.username}/show`) Profile
+        li
           a.link(href='/workouts/new') New Workout
         li
           a.link(href=`/workouts/${user.username}`) Show Workouts
@@ -46,3 +48,7 @@ html
     block content
 
     script(src='/javascripts/beauter0.3.0.min.js')
+
+    .card(style="height:40px")._box._dark._alignCenter.no-bottom-margin
+      small
+        a(href='/https://github.com/rickhallett') Rick Hallett © 2019

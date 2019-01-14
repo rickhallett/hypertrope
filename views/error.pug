@@ -1,11 +1,9 @@
 extends layout
 
 block content
-  .container._danger.padding-20
-    h4 Error
-    h6.primary= message
-    h6.secondary= error.status
-    - if (error.stack)
-      pre #{error.stack}
+  .container._danger.padding-20.max-width-350
+    h2= status
+    p= message
+    //pre.error!= stackHighlighted
 
     a(href="/") Back to main page

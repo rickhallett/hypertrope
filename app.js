@@ -1,12 +1,13 @@
 /**
  * DEPENDENCEIS
  */
+require('dotenv').config({ path: 'variables.env' });
+
 const express = require('express');
 const http = require('http');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
-const createError = require('http-errors');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
@@ -19,8 +20,6 @@ const constants = require('./data/constants');
 const router = require('./routes/routes');
 const errorHandlers = require('./controllers/errorHandlers');
 
-const { keyConfig, serverConfig } = require('./config');
-
 const app = express();
 const consoleSpacer = '\n\n> Server Console Output:\n'.yellow;
 
@@ -31,7 +30,7 @@ const consoleSpacer = '\n\n> Server Console Output:\n'.yellow;
 const dbOptions = { useNewUrlParser: true };
 
 mongoose.connect(
-    keyConfig.determineMongoURI(),
+    process.env.MONGO_URI,
     dbOptions
 );
 
@@ -71,9 +70,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
     session({
-        secret: keyConfig.determineSessionSecret(),
+        secret: process.env.SESSION_KEY,
         store: new MongoStore({
-            url: keyConfig.determineMongoURI(),
+            url: process.env.MONGO_URI,
         }),
         saveUninitialized: false,
         resave: false,
@@ -117,21 +116,6 @@ app.use('/', router);
 /**
  * ERROR HANDLING
  */
-// catch 404 and forward to error handler
-// app.use((req, res, next) => {
-//     next(createError(404));
-// });
-//
-// // error handler
-// app.use((err, req, res) => {
-//     // set locals, only providing error in development
-//     res.locals.message = err.message;
-//     res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
-//
-//     // render the error page
-//     res.status(err.status || 500);
-//     res.render('error');
-// });
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
@@ -152,8 +136,8 @@ app.use(errorHandlers.productionErrors);
  * INITIALISE SERVER
  */
 
-const port = serverConfig.determinePort();
-const host = serverConfig.determineHost();
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 // Create HTTP server.
 const server = http.createServer(app);

@@ -52,6 +52,28 @@ router.get(
 );
 
 /**
+ * USER ROUTES
+ */
+
+router.get(
+    '/users/:name/show',
+    middleWare.isAuthenticated,
+    userController.showProfile
+);
+
+router.get(
+    '/users/:name/edit',
+    middleWare.isAuthenticated,
+    userController.getEditProfile
+);
+
+router.post(
+    '/users/:name/edit',
+    middleWare.isAuthenticated,
+    userController.postEditProfile
+);
+
+/**
  * WORKOUT ROUTES
  */
 

@@ -1,0 +1,19 @@
+extends layout
+
+block scripts
+
+block content
+
+    .jumbo._dark
+        h4.secondary #{helpers.capitaliseFirstChar(name)}#{"'s Profile"}
+
+    include _flashAlerts
+
+    label Profile Details
+    table._full-width
+        thead
+            tr
+
+        tbody
+            tr
+                td Total Work (kg) #{totalKg}

@@ -15,6 +15,7 @@
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.3",
     "debug": "~2.6.9",
+    "dotenv": "^6.2.0",
     "express": "~4.16.0",
     "express-session": "^1.10.1",
     "express-winston": "^3.0.1",
@@ -29,6 +30,7 @@
     "pug": "2.0.0-beta11",
     "serve-favicon": "^2.2.0",
     "should": "~2.1.0",
+    "underscore": "^1.9.1",
     "winston": "^3.1.0"
   },
   "devDependencies": {

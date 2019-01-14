@@ -11,8 +11,10 @@ express_error.json
 
 
 # Config data
-config/keys.js
+# config/keys.js
+config/secret.js
 log.txt
+*.env
 
 # Runtime data
 pids

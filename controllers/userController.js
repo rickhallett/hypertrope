@@ -1,6 +1,8 @@
 const passport = require('passport');
+const _ = require('underscore');
 const Account = require('../models/Account');
-const {indexHitCount, desktopRestrictCount} = require('../utils/nodeUtils');
+const { Workout } = require('../models/Workout');
+const { indexHitCount, desktopRestrictCount } = require('../utils/nodeUtils');
 
 /**
  * USER CONTROLLER
@@ -9,7 +11,7 @@ const {indexHitCount, desktopRestrictCount} = require('../utils/nodeUtils');
 const userController = {};
 
 // Restrict access to root page
-userController.home = function (req, res) {
+userController.home = (req, res) => {
     desktopRestrictCount.reset();
 
     if (req.user) {
@@ -34,7 +36,7 @@ userController.desktopRestrict = (req, res) => {
     if (desktopRestrictCount.get() > 2) {
         req.flash('warn', 'You can pout all you like. Mobiles only.');
     }
-    res.render('desktopRestrict', {flashMessages: req.flash()});
+    res.render('desktopRestrict', { flashMessages: req.flash() });
 };
 
 // Go to registration page
@@ -47,7 +49,7 @@ userController.getRegister = (req, res) => {
 // Post registration
 userController.postRegister = (req, res) => {
     Account.register(
-        new Account({username: req.body.username}),
+        new Account({ username: req.body.username }),
         req.body.password,
         (err) => {
             if (err) {
@@ -78,10 +80,11 @@ userController.getLogin = (req, res) => {
 
 // Post login
 userController.postLogin = (req, res) => {
-    Account.find({username: req.body.username}, (err, account) => {
+    Account.find({ username: req.body.username }, (err, account) => {
         if (!account.length) {
             req.flash('error', 'This username was not found. Please register.');
-            res.redirect('/login');
+            // TODO: can return exit callback function?
+            return res.redirect('/login');
         }
 
         if (account.length) {
@@ -109,6 +112,28 @@ userController.logout = (req, res) => {
         flashMessages: req.flash(),
         quote: res.quote,
     });
+};
+
+userController.showProfile = (req, res) => {
+    const { username } = req.user;
+    const findTotalKg = (workouts) =>
+        _.reduce(workouts, (memo, reading) => memo + reading.totalWork, 0);
+    Workout.find({ name: username }, (err, workouts) => {
+        if (err) {
+            req.flash('error', 'Unable to retrieve workouts.');
+            res.render('/');
+        }
+        const totalKg = findTotalKg(workouts);
+        res.render('userProfile', { username, totalKg });
+    });
+};
+
+userController.getEditProfile = (req, res) => {
+    res.redirect('/');
+};
+
+userController.postEditProfile = (req, res) => {
+    res.redirect('/');
 };
 
 module.exports = userController;
