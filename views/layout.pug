@@ -14,7 +14,7 @@ html
     block scripts
 
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+  body.flex-body
     ul#myTopnav2.topnav
       li
         a.brand(href='/') Hypertrope
@@ -45,10 +45,11 @@ html
       li.-icon
         a(href='javascript:void(0);', onclick="topnav('myTopnav2')") ☰
 
-    block content
+    .flex-grow-1
+      block content
 
     script(src='/javascripts/beauter0.3.0.min.js')
 
-    .card(style="height:40px")._box._dark._alignCenter.no-bottom-margin
+    .card#footer(style="height:40px")._box._dark._alignCenter.no-bottom-margin
       small
         a(href='/https://github.com/rickhallett') Rick Hallett © 2019
