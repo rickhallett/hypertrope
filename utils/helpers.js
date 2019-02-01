@@ -16,23 +16,21 @@ const createExerciseMap = (exerciseData) => {
 };
 
 const sortExercises = (exercises) => {
-    exercises.sort((a, b) =>
+    let placeholder;
+    const withoutNA = exercises.filter((exercise) => {
+        if (exercise.value === 'n/a') {
+            placeholder = exercise;
+            return false;
+        }
+        return exercise;
+    });
+
+    withoutNA.sort((a, b) =>
         a.name.toUpperCase().slice(0, 1) < b.name.toUpperCase().slice(0, 1) ? -1 : 1
     );
 
-    let indexOfNA;
-    exercises.forEach((exercise, index) => {
-        if (exercise.value === 'n/a') {
-            indexOfNA = index;
-        }
-    });
-
-    const first = exercises[0];
-    const na = exercises[indexOfNA];
-    exercises[0] = na;
-    exercises[indexOfNA] = first;
-
-    return exercises;
+    if (placeholder) withoutNA.unshift(placeholder).slice();
+    return withoutNA.slice();
 };
 
 const getSortedExercises = () => {
@@ -41,7 +39,7 @@ const getSortedExercises = () => {
 };
 
 const getRandomQuote = () => {
-    const sample = arr => arr[Math.floor(Math.random() * arr.length)];
+    const sample = (arr) => arr[Math.floor(Math.random() * arr.length)];
     const { quotes } = require('../data/quotes.json');
     return sample(quotes);
 };
