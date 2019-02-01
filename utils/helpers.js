@@ -7,12 +7,22 @@ const capitaliseFirstChar = (string) => {
 
 const createExerciseMap = (exerciseData) => {
     const exerciseMap = {};
-    exerciseData.forEach(el => {
+    exerciseData.forEach((el) => {
         const { name: viewName, value: dbIdentifier } = el;
         exerciseMap[dbIdentifier] = viewName;
     });
 
     return exerciseMap;
+};
+
+const createTypeMap = (exerciseData) => {
+    const typeMap = {};
+    exerciseData.forEach((el) => {
+        const { value: exerciseName, type } = el;
+        typeMap[exerciseName] = type;
+    });
+
+    return typeMap;
 };
 
 const sortExercises = (exercises) => {
@@ -26,10 +36,12 @@ const sortExercises = (exercises) => {
     });
 
     withoutNA.sort((a, b) =>
-        a.name.toUpperCase().slice(0, 1) < b.name.toUpperCase().slice(0, 1) ? -1 : 1
+        a.name.toUpperCase().slice(0, 1) < b.name.toUpperCase().slice(0, 1)
+            ? -1
+            : 1
     );
 
-    if (placeholder) withoutNA.unshift(placeholder).slice();
+    if (placeholder) withoutNA.unshift(placeholder);
     return withoutNA.slice();
 };
 
@@ -86,4 +98,5 @@ module.exports = {
     Store,
     trimDate,
     exerciseSelectorTextArray,
+    createTypeMap,
 };

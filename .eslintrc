@@ -19,7 +19,9 @@
         "jest": true
 },
     "rules": {
-    "no-plusplus": "off",
+        "global-require": "off",
+        "no-irregular-whitespace": "off",
+        "no-plusplus": "off",
     "no-debugger": 0,
         "no-alert": 0,
         "no-await-in-loop": 0,

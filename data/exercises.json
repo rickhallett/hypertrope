@@ -3,157 +3,194 @@
     {
       "value": "n/a",
       "name": "n/a",
-      "db": false
+      "db": false,
+      "type": "n/a"
     },
     {
       "value": "squat",
       "name": "Squat",
-      "db": false
+      "db": false,
+      "type": "legs"
     },
     {
       "value": "deadlift",
       "name": "Deadlift",
-      "db": false
+      "db": false,
+      "type": "back"
     },
     {
       "value": "bench",
       "name": "Bench Press",
-      "db": false
+      "db": false,
+      "type": "chest"
     },
     {
       "value": "dbbench",
       "name": "Dumbbell Bench Press",
-      "db": true
+      "db": true,
+      "type": "chest"
     },
     {
       "value": "military",
       "name": "Military Press",
-      "db": false
+      "db": false,
+      "type": "shoulders"
     },
     {
       "value": "pulldown",
       "name": "Lat Pull Downs",
-      "db": false
+      "db": false,
+      "type": "back"
     },
     {
       "value": "legraise",
       "name": "Leg Raises",
-      "db": false
+      "db": false,
+      "type": "abs"
     },
     {
       "value": "crunch",
       "name": "Ab Crunches",
-      "db": false
+      "db": false,
+      "type": "abs"
     },
     {
       "value": "row",
       "name": "Upright Cable Row",
-      "db": false
+      "db": false,
+      "type": "back"
     },
     {
       "value": "dbrow",
       "name": "Dumbbell Row",
-      "db": true
+      "db": true,
+      "type": "back"
     },
     {
       "value": "row",
       "name": "Barbell Row",
-      "db": false
+      "db": false,
+      "type": "back"
     },
     {
       "value": "bicepcurl",
       "name": "Bicep Curls",
-      "db": false
+      "db": false,
+      "type": "arms"
     },
     {
       "value": "dbbicepcurl",
       "name": "Dumbbell Bicep Curls",
-      "db": true
+      "db": true,
+      "type": "arms"
     },
     {
       "value": "dbflies",
       "name": "Dumbbell Flies",
-      "db": false
+      "db": false,
+      "type": "chest"
     },
     {
       "value": "pressup",
       "name": "Press Ups",
-      "db": false
+      "db": false,
+      "type": "chest"
     },
     {
       "value": "tricepdip",
       "name": "Tricep Dip",
-      "db": true
+      "db": true,
+      "type": "chest"
     },
     {
       "value": "shoulderpress",
       "name": "Shoulder Press",
-      "db": true
+      "db": true,
+      "type": "shoulders"
     },
     {
       "value": "hipthrust",
       "name": "Hip Thrusts",
-      "db": true
+      "db": true,
+      "type": "legs"
     },
     {
       "value": "legpress",
       "name": "Leg Press",
-      "db": true
+      "db": true,
+      "type": "legs"
     },
     {
       "value": "legextension",
       "name": "Leg Extension",
-      "db": true
+      "db": true,
+      "type": "legs"
     },
     {
       "value": "legcurl",
       "name": "Leg Curl",
-      "db": true
+      "db": true,
+      "type": "legs"
     },
     {
       "value": "pullup",
       "name": "Pull Up",
-      "db": true
+      "db": true,
+      "type": "back"
     },
     {
       "value": "chinup",
       "name": "Chin Up",
-      "db": true
+      "db": true,
+      "type": "back"
     },
     {
       "value": "pistolsquat",
       "name": "Pistol Squats",
-      "db": true
+      "db": true,
+      "type": "legs"
     },
     {
       "value": "dumbbellmilitary",
       "name": "Dumbbell Military Press",
-      "db": true
+      "db": true,
+      "type": "shoulders"
     },
     {
       "value": "inclinebench",
       "name": "Incline Bench Press",
-      "db": false
+      "db": false,
+      "type": "chest"
     },
     {
       "value": "dumbbellinclinepress",
       "name": "Dumbbell Incline Press",
-      "db": true
+      "db": true,
+      "type": "chest"
     },
     {
       "value": "shrugs",
       "name": "Shrugs",
-      "db": false
+      "db": false,
+      "type": "shoulders"
     },
     {
       "value": "dbshrugs",
       "name": "Dumbbell Shrugs",
-      "db": true
+      "db": true,
+      "type": "shoulders"
     },
     {
       "value": "pecdeck",
       "name": "Pec Deck",
-      "db": false
+      "db": false,
+      "type": "chest"
+    },
+    {
+      "value": "inclinedbench",
+      "name": "Incline Dumbbell Bench",
+      "db": true,
+      "type": "chest"
     }
   ]
 }

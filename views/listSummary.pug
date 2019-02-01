@@ -1,0 +1,26 @@
+extends layout
+
+block scripts
+    script(src="/javascripts/listSummary.js")
+
+block content
+
+    .jumbo._dark
+        h4.secondary #{helpers.capitaliseFirstChar(name)}#{"'s Summary"}
+
+    include _flashAlerts
+
+    each workout in workouts
+        label.date.note #{helpers.trimDate(workout.date)}
+        table._full-width
+            thead
+                tr
+                    th Workout Type
+                    th Total Work (kg)
+            tbody
+                tr
+                    td #{helpers.capitaliseFirstChar(workout.info.type)}
+                    td #{workout.totalWork}
+
+    .flex-container.justify-center
+        a(href="/workouts/new") Back to Submission Form

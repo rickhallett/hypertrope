@@ -113,6 +113,12 @@ router.post(
     workoutController.deleteWorkout
 );
 
+router.get(
+    '/workouts/:name/summary',
+    middleWare.isAuthenticated,
+    workoutController.listSummary
+);
+
 /**
  * INFORMATION ROUTES
  */

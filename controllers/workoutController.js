@@ -131,4 +131,73 @@ workoutController.deleteWorkout = (req, res) => {
     });
 };
 
+workoutController.listSummary = (req, res) => {
+    const name = req.user.username;
+    const utils = {
+        capitaliseFirstChar: helpers.capitaliseFirstChar,
+        trimDate: helpers.trimDate,
+    };
+
+    const typeMap = res.locals.helpers.createTypeMap(
+        require('../data/exercises.json').exercises
+    );
+
+    const findType = (exercise) => {
+        const { name: exerciseName } = exercise;
+        return typeMap[exerciseName];
+    };
+
+    const countTypes = (workouts) => {
+        const workoutHasTypes = [];
+        workouts.forEach((workout) => {
+            const typeCounter = {
+                chest: 0,
+                legs: 0,
+                back: 0,
+                shoulders: 0,
+                abs: 0,
+            };
+            workout.exercises.forEach((exercise) => {
+                typeCounter[findType(exercise)]++;
+            });
+            workoutHasTypes.push(typeCounter);
+        });
+        return workoutHasTypes;
+    };
+
+    const findWorkoutType = (typeCounts) => {
+        const highest = { type: '', count: 0 };
+        for (const key of Object.keys(typeCounts)) {
+            if (typeCounts[key] > highest.count) {
+                highest.type = key;
+                highest.count = typeCounts[key];
+            }
+        }
+        return highest;
+    };
+
+    const mergeWorkoutsWithTypes = (workouts, typeCounts) => {
+        workouts.forEach((workout, i) => {
+            Object.assign(workout, {
+                info: findWorkoutType(typeCounts[i]),
+            });
+        });
+    };
+
+    Workout.find({ name }, (err, workouts) => {
+        if (err) {
+            req.flash('error', 'Unable to retrieve workouts.');
+            res.render('/');
+        }
+
+        mergeWorkoutsWithTypes(workouts, countTypes(workouts));
+
+        res.render('listSummary', {
+            name,
+            workouts,
+            helpers: utils,
+        });
+    });
+};
+
 module.exports = workoutController;
